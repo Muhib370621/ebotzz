@@ -23,14 +23,12 @@ class HomeScreen2 extends StatelessWidget {
             children: [
               // CustomInputField(controller: controller,label: "Search on ebotzz",),
               const CustomAppBar(),
-
               CustomInputField(controller: controller,label: "search your items here",suffixIcon: Icon(Icons.search),),
               const SizedBox(height: 20,),
               Row(
                 children: const [
                   SizedBox(width: 24,),
                   Text("Your Recenly Viewd Items",style: TextStyle(color: Colors.black,fontSize: 22,fontWeight: FontWeight.bold),),
-
                 ],
               ),
               const SizedBox(height: 10,),

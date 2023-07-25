@@ -11,7 +11,7 @@ export '../../../widgets/textswidget.dart';
 export 'package:ebotzz/controllers/splash_screen_controller.dart';
 export "package:flutter/material.dart";
 export "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
-export 'package:ebotzz/screens/home_screen/home_screen.dart';
+export 'package:ebotzz/screens/home_screen/productDetailScreen.dart';
 export 'package:ebotzz/screens/Cart.dart';
 export 'package:ebotzz/screens/profile.dart';
 export 'package:ebotzz/screens/wishlist.dart';

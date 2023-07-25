@@ -8,7 +8,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-import '../widgets/ordersData.dart';
+import '../../widgets/ordersData.dart';
+// import '../../widgets/vendorScreenDrawer.dart';
+import '../../widgets/vendorWidgets/vendorScreenDrawer.dart';
+
+
 
 class VendorDashBoard extends StatelessWidget {
   var DataMap = {
@@ -40,6 +44,10 @@ class VendorDashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black54,
+      ),
+      drawer: VendorScreenDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(

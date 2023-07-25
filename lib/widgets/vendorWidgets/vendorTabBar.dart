@@ -1,11 +1,12 @@
 import 'package:ebotzz/screens/onBoarding/simpleSignupView.dart';
 import 'package:ebotzz/screens/vendorBuyScreen.dart';
-import 'package:ebotzz/screens/vendorDashBoard.dart';
 import 'package:ebotzz/screens/vendorSignupView.dart';
 import 'package:ebotzz/screens/vendorTradeScreen.dart';
 import 'package:ebotzz/screens/vendorWithdrawScreen.dart';
 
-import '../utils/imports.dart';
+import '../../screens/vendorScreens/vendorDashBoard.dart';
+import '../../utils/imports.dart';
+
 
 class VendorTabBar extends StatelessWidget {
   const VendorTabBar({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class VendorTabBar extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(35),
+          preferredSize: const Size.fromHeight(50),
           child: AppBar(
             leading: Container(),
             elevation: 0,

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(color: blackColor, centerTitle: true)
         ),
       ),
-      child: SplashScreen(),
+      child: SignUPScreen(),
       designSize: Size(393, 851),
     );
   }
