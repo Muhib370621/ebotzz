@@ -19,6 +19,7 @@ class VendorTabBar extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(35),
           child: AppBar(
+            leading: Container(),
             elevation: 0,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -52,7 +53,7 @@ class VendorTabBar extends StatelessWidget {
             ),
           ),
         ),
-        body:  const TabBarView(
+        body:   TabBarView(
           children: [
             VendorDashBoard(),
             VendorTradeScreen(),

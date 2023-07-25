@@ -36,15 +36,17 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  pie_chart:
   flutter_screenutil: ^5.5.4
   persistent_bottom_nav_bar: ^5.0.2
   carousel_slider: ^4.1.1
-  responsive_sizer:
+#  responsive_sizer:
   lottie: ^2.0.0
   sidebarx: ^0.14.0
   simple_animations: ^4.0.1
   native_device_orientation: ^1.1.4
   flutter_svg: ^2.0.5
+  fl_chart:
 
 dev_dependencies:
   flutter_test:

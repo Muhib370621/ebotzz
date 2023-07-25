@@ -10,14 +10,13 @@ class VendorScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child:Column(
-          children: [
+          children: const [
             CustomAppBar(),
-            VendorTabBar()
-
+            SizedBox(height: 10,),
+            Expanded(child: VendorTabBar())
           ],
         ),
       ),
-
     );
   }
 }
