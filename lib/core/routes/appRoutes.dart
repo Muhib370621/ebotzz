@@ -1,7 +1,7 @@
 
 import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/screens/authentication/screens/signup_screen.dart';
-import 'package:ebotzz/screens/signupTabView.dart';
+// import 'package:ebotzz/screens/signupTabView.dart';
 // import 'package:ebotzz/screens/onBoarding/signup.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 

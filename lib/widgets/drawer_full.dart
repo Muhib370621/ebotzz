@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
+import 'package:ebotzz/screens/vendorScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -92,7 +93,7 @@ class DrawerScreen extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => AllProductScreen());
+              Get.to(() => VendorScreen());
             },
           ),
           ListTile(

@@ -25,9 +25,6 @@ class SimpleSignupView extends StatelessWidget {
               CustomInputField(controller: controller1,label: "name",),
               // SizedBox(height: 5,),
               CustomInputField(controller: controller2,label: "email",),
-              // SizedBox(height: 5,),
-
-              // SizedBox(height: 5,),
 
               CustomInputField(controller: controller4,label:"password"),
               SizedBox(height: 10,),
@@ -41,8 +38,6 @@ class SimpleSignupView extends StatelessWidget {
                     )
                 );
               },)
-
-
 
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:ebotzz/services/mainScreenItems.dart';
 import 'package:ebotzz/utils/imports.dart';
+import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +11,9 @@ class HomeScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    TextEditingController controller2 = TextEditingController();
+    TextEditingController controller3= TextEditingController();
+    TextEditingController controller4= TextEditingController();
     return  Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -144,8 +148,88 @@ class HomeScreen2 extends StatelessWidget {
               ),
               SizedBox(height: 20,),
 
+              GridView.builder(
+                scrollDirection: Axis.vertical,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 3 / 2,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 10),
+                  itemCount: 6,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: SizedBox(
+                          width: 150,
+                          child: Image.asset("assets/images/img.png"),
+
+                          ),
+                      ),
+                    );
+                  }),
+
+              SizedBox(height: 30.h,),
+              Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text("Daily Deals",style: TextStyle(fontSize: 24.sp,fontWeight: FontWeight.bold,color: Colors.black),)),
+              SizedBox(height: 10.h,),
+
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(10, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Container(
+                        width: 200,
+                        height: 230,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.grey)
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height:150,
+                              width: 200,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image(image: NetworkImage("https://images.unsplash.com/photo-1606041011872-596597976b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGUlMjBpcGhvbmV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"),fit: BoxFit.cover,),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Iphone 14"),
+                                  Text("blac/blue"),
+                                  Text("2000 usd"),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
 
 
+              SizedBox(height: 40.h,),
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Text("Explore Now",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp,color: Colors.black),),
+              ),
+              SizedBox(height: 20.h,),
               Column(
                 children: List.generate(4, (index) {
                   return Padding(
@@ -173,6 +257,41 @@ class HomeScreen2 extends StatelessWidget {
                 }),
               ),
 
+             SizedBox(height: 50.h,),
+             Column(
+               children: [
+                 Text("Need help? Contact us "),
+                 SizedBox(height: 300.h,width: 500.h,child: Image.asset("assets/images/us.png"),),
+
+                 Container(
+                   width: 400.w,
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(20)
+                   ),
+                   child: Column(
+                     children: [
+                       CustomInputField(controller:controller2,label: "First name", ),
+                       CustomInputField(controller:controller3,label: "Last name", ),
+                       CustomInputField(controller:controller4,label: "Email aAddress",),
+                       CustomInputField(controller:controller4,label: "Your Message", ),
+                       CustomActionButton(buttonText: "Submit",isIcon: false,onTap: (){
+                         Get.snackbar("Successfully", "Successfully Submitted",
+                             colorText: Colors.white,
+                             snackPosition: SnackPosition.BOTTOM,
+                             backgroundColor: Colors.green,
+                             icon: const Icon(
+                               Icons.check,
+                               color: Colors.white,
+                             ));
+
+                       },)
+                       
+                     ],
+                   ),
+
+                 )
+               ],
+             )
 
 
 
