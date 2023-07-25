@@ -10,8 +10,8 @@ class DrawercustomHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return UserAccountsDrawerHeader(
         decoration: BoxDecoration(color: Color(0xffE41E5C)),
-        accountName: Text('Talha Rana'),
-        accountEmail: Text('mtalharana@gmail.com'),
+        accountName: Text('Fayyaz Ali'),
+        accountEmail: Text('fayyaz12235@gmail.com'),
         arrowColor: Colors.black,
         currentAccountPicture: CircleAvatar(
           backgroundColor: Colors.white,

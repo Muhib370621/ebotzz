@@ -47,6 +47,7 @@ class VendorDashBoard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black54,
+        title: Text("Dashboard screen"),
       ),
       drawer: VendorScreenDrawer(),
       body: SingleChildScrollView(
