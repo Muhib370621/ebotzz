@@ -2,9 +2,9 @@ import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/customImage.dart';
-import '../../widgets/textswidget.dart';
-import '../utils/imports.dart';
+import '../../../widgets/customImage.dart';
+import '../../../widgets/textswidget.dart';
+import '../../utils/imports.dart';
 
 class VendorSignupView extends StatelessWidget {
   const VendorSignupView({Key? key}) : super(key: key);

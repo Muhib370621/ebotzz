@@ -36,35 +36,64 @@ class HomeScreen2 extends StatelessWidget {
 
                 children: [
                   const SizedBox(width: 20,),
-                  Container(
-                    color: Colors.white,
-                    width: 160,
-                    height: 250,
-                    // color: Colors.pink,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 130,height: 140,child:Image(image: NetworkImage(MainScreenItems.recentlyViewdItems[0]["image"]!),fit: BoxFit.cover,)  ),
-                        Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
-                        Text(MainScreenItems.recentlyViewdItems[0]["color"].toString()),
-                        Text(MainScreenItems.recentlyViewdItems[0]["price"].toString(),style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
-                      ],
+                  InkWell(
+                    child: Container(
+                      color: Colors.white,
+                      width: 160,
+                      height: 250,
+                      // color: Colors.pink,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 130,height: 140,child:Image(image: NetworkImage(MainScreenItems.recentlyViewdItems[0]["image"]!),fit: BoxFit.cover,)  ),
+                          Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                          Text(MainScreenItems.recentlyViewdItems[0]["color"].toString()),
+                          Text(MainScreenItems.recentlyViewdItems[0]["price"].toString(),style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
+                        ],
+                      ),
                     ),
+                    onTap: (){
+                      Get.to(DashboardProductDetailScreen(products:
+                      ProductModel(
+                        id: 2,
+                        title: "Nike Boots",
+                        description: "This is blaah blaaah blaaah",
+                        price: 250.0,
+                        quantity: 1,
+                        img:"assets/images/boots.jpg",
+                      )
+                      ));
+                    },
                   ),
                   const SizedBox(width: 10,),
-                  Container(color: Colors.white,
-                    width: 160,
-                    height: 250,
-                    // color: Colors.pink,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 120,height: 140,child:Image(image: NetworkImage(MainScreenItems.recentlyViewdItems[1]["image"]!),fit: BoxFit.cover,) ),
-                        Text(MainScreenItems.recentlyViewdItems[1]["name"].toString()),
-                        Text(MainScreenItems.recentlyViewdItems[1]["color"].toString()),
-                        Text(MainScreenItems.recentlyViewdItems[1]["price"].toString(),style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
-                      ],
+                  InkWell(
+                    child: Container(color: Colors.white,
+                      width: 160,
+                      height: 250,
+                      // color: Colors.pink,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 120,height: 140,child:Image(image: NetworkImage(MainScreenItems.recentlyViewdItems[1]["image"]!),fit: BoxFit.cover,) ),
+                          Text(MainScreenItems.recentlyViewdItems[1]["name"].toString()),
+                          Text(MainScreenItems.recentlyViewdItems[1]["color"].toString()),
+                          Text(MainScreenItems.recentlyViewdItems[1]["price"].toString(),style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
+                        ],
+                      ),
                     ),
+                    onTap: (){
+                      Get.to(DashboardProductDetailScreen(products:
+                      ProductModel(
+                        id: 3,
+                        title: "Apple Watch",
+                        description: "This is blaah blaaah blaaah",
+                        price: 250.0,
+                        quantity: 1,
+                        img:"assets/images/watch.jpg",
+                      )
+                      ))
+                      ;
+                    },
                   ),
                 ],
               ),
@@ -86,37 +115,51 @@ class HomeScreen2 extends StatelessWidget {
                   children: List.generate(10, (index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Container(
-                        width: 200,
-                        height: 230,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.grey)
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                        SizedBox(
-                          height:150,
+                      child: InkWell(
+                        child: Container(
                           width: 200,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image(image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjFDhQOorpTVrB-yDLq10ccJw1AEx1FhZgsQ&usqp=CAU"),fit: BoxFit.cover,),
+                          height: 230,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.grey)
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 5),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
-                              Text(MainScreenItems.recentlyViewdItems[0]["color"].toString()),
-                              Text(MainScreenItems.recentlyViewdItems[0]["price"].toString()),
+                          SizedBox(
+                            height:150,
+                            width: 200,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image(image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjFDhQOorpTVrB-yDLq10ccJw1AEx1FhZgsQ&usqp=CAU"),fit: BoxFit.cover,),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                Text(MainScreenItems.recentlyViewdItems[0]["color"].toString()),
+                                Text(MainScreenItems.recentlyViewdItems[0]["price"].toString()),
+                              ],
+                            ),
+                          )
                             ],
                           ),
-                        )
-                          ],
                         ),
+                        onTap: (){
+                          Get.to(DashboardProductDetailScreen(products:
+                          ProductModel(
+                            id: 1,
+                            title: "Nike Shoes",
+                            description: "This is blaah blaaah blaaah",
+                            price: 250.0,
+                            quantity: 1,
+                            img:"assets/images/images.jpg",
+                          )
+                          ));
+                        },
                       ),
                     );
                   }),
@@ -158,16 +201,30 @@ class HomeScreen2 extends StatelessWidget {
                   itemBuilder: (BuildContext ctx, index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: SizedBox(
-                          width: 150,
-                          child: Image.asset("assets/images/img.png"),
+                      child: InkWell(
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: SizedBox(
+                            width: 150,
+                            child: Image.asset("assets/images/img.png"),
 
-                          ),
+                            ),
+                        ),
+                        onTap: (){
+                          Get.to(DashboardProductDetailScreen(products:
+                          ProductModel(
+                            id: 4,
+                            title: "Apple Watch",
+                            description: "This is blaah blaaah blaaah",
+                            price: 250.0,
+                            quantity: 1,
+                            img:"assets/images/img.png",
+                          )
+                          ));
+                        },
                       ),
                     );
                   }),
@@ -191,29 +248,44 @@ class HomeScreen2 extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.grey)
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height:150,
-                              width: 200,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image(image: NetworkImage("https://images.unsplash.com/photo-1606041011872-596597976b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGUlMjBpcGhvbmV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"),fit: BoxFit.cover,),
+                        child: InkWell(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height:150,
+                                width: 200,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image(image: NetworkImage("https://images.unsplash.com/photo-1606041011872-596597976b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXBwbGUlMjBpcGhvbmV8ZW58MHx8MHx8fDA%3D&w=1000&q=80"),fit: BoxFit.cover,),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 5),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Iphone 14"),
-                                  Text("blac/blue"),
-                                  Text("2000 usd"),
-                                ],
-                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Iphone 14"),
+                                    Text("blac/blue"),
+                                    Text("2000 usd"),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          onTap: (){
+                            Get.to(DashboardProductDetailScreen(products:
+                            ProductModel(
+                              id: 4,
+                              title: "Iphone",
+                              description: "This is blaah blaaah blaaah",
+                              price: 250.0,
+                              quantity: 1,
+                              img:"assets/images/iphone.jpg",
                             )
-                          ],
+
+                            ));
+                          },
                         ),
                       ),
                     );

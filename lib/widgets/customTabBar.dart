@@ -1,5 +1,5 @@
 import 'package:ebotzz/screens/onBoarding/simpleSignupView.dart';
-import 'package:ebotzz/screens/vendorSignupView.dart';
+import 'package:ebotzz/screens/vendorScreens/vendorSignupView.dart';
 
 import '../utils/imports.dart';
 

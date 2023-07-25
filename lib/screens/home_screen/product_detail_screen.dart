@@ -8,12 +8,12 @@ import '../../utils/imports.dart';
 import '../../widgets/counter_button.dart';
 
 class DashboardProductDetailScreen extends StatelessWidget {
+
   final ProductModel products;
   TradingController tradingController = Get.put(TradingController());
   ProductController controller = Get.put(ProductController());
   DashboardProductDetailScreen({Key? key, required this.products})
       : super(key: key);
-
   PreferredSizeWidget _appBar(BuildContext context) {
     return AppBar(
       backgroundColor: whiteColor,
