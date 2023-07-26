@@ -1,5 +1,8 @@
 import 'package:ebotzz/screens/onBoarding/simpleSignupView.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorBuyScreen.dart';
+import 'package:ebotzz/screens/vendorScreens/vendorProductScreens/addproduct.dart';
+import 'package:ebotzz/screens/vendorScreens/vendorProductScreens/export.dart';
+import 'package:ebotzz/screens/vendorScreens/vendorProductScreens/import.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorWithdraw.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorSignupView.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorTradeScreen.dart';
@@ -14,7 +17,7 @@ class VendorTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -39,27 +42,25 @@ class VendorTabBar extends StatelessWidget {
               indicatorWeight: 0.5.h,
               tabs: const [
                 Tab(
-                  text: "Dashboard",
+                  text: "Add New",
                 ),
                 Tab(
-                  text: "Trade",
+                  text: "Import",
                 ),
                 Tab(
-                  text: "Buy",
+                  text: "Export",
                 ),
-                Tab(
-                  text: "Withdraw",
-                ),
+
               ],
             ),
           ),
         ),
-        body:   TabBarView(
+        body:   const TabBarView(
           children: [
-            VendorDashBoard(),
-            VendorTradeScreen(),
-            VendorBuyScreen(),
-            VendorWithdraw()
+            AddProduct(),
+            ImportScreen(),
+            ExportScreen(),
+            // VendorWithdraw()
             // Icon(Icons.directions_car, size: 350,color: Colors.black,),
           ],
         ),

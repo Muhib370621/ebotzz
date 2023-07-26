@@ -84,20 +84,6 @@ class VendorScreenDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              Icons.analytics_outlined,
-              color: Color(0xffE41E5C),
-            ),
-            title: Text(
-              'Analytics',
-              style: TextStyle(color: Colors.black),
-            ),
-            onTap: () {
-              Get.to(VendorAnalytics());
-            },
-          ),
-
-          ListTile(
-            leading: Icon(
               Icons.settings,
               color: Color(0xffE41E5C),
             ),
