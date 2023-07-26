@@ -189,45 +189,47 @@ class HomeScreen2 extends StatelessWidget {
               ),
               SizedBox(height: 20,),
 
-              GridView.builder(
-                scrollDirection: Axis.vertical,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 3 / 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 10),
-                  itemCount: 6,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext ctx, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: InkWell(
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: SizedBox(
-                            width: 150,
-                            child: Image.asset("assets/images/img.png"),
+              Container(
+                child: GridView.builder(
+                  scrollDirection: Axis.vertical,
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 10),
+                    itemCount: 6,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: InkWell(
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: SizedBox(
+                              width: 150,
+                              child: Image.asset("assets/images/img.png"),
 
-                            ),
+                              ),
+                          ),
+                          onTap: (){
+                            Get.to(DashboardProductDetailScreen(products:
+                            ProductModel(
+                              id: 4,
+                              title: "Apple Watch",
+                              description: "This is blaah blaaah blaaah",
+                              price: 250.0,
+                              quantity: 1,
+                              img:"assets/images/img.png",
+                            )
+                            ));
+                          },
                         ),
-                        onTap: (){
-                          Get.to(DashboardProductDetailScreen(products:
-                          ProductModel(
-                            id: 4,
-                            title: "Apple Watch",
-                            description: "This is blaah blaaah blaaah",
-                            price: 250.0,
-                            quantity: 1,
-                            img:"assets/images/img.png",
-                          )
-                          ));
-                        },
-                      ),
-                    );
-                  }),
+                      );
+                    }),
+              ),
 
               SizedBox(height: 30.h,),
               Padding(
