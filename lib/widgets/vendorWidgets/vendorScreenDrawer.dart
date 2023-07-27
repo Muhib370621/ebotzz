@@ -1,3 +1,4 @@
+import 'package:ebotzz/screens/vendorScreens/auctionScreen.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorAnalytics.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorOrders.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorProducts.dart';
@@ -67,6 +68,19 @@ class VendorScreenDrawer extends StatelessWidget {
             ),
             onTap: () {
               Get.to(() => VendorOrders());
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.shop_2_outlined,
+              color: Color(0xffE41E5C),
+            ),
+            title: Text(
+              'Auction',
+              style: TextStyle(color: Colors.black),
+            ),
+            onTap: () {
+              Get.to(() => AuctionScreen());
             },
           ),
           ListTile(
