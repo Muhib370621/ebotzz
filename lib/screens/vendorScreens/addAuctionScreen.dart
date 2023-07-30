@@ -159,7 +159,6 @@ class AddAuctionScreen extends StatelessWidget {
                             padding:  EdgeInsets.symmetric(horizontal: 5.w,vertical: 20.h),
                             child: Center(child: const CustomActionButton(buttonText: "Add Auction Product", isIcon: false,)),
                           )
-
                         ],
                       ),
                     )
