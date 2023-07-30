@@ -29,7 +29,7 @@ class VendorOrders extends StatelessWidget {
             ),
             SizedBox(height: 30.h,),
 
-            CustomActionButton(buttonText: "Apply",isIcon: false,),
+            CustomActionButton(buttonText: "Apply",isIcon: false, isLoading: false,),
             SizedBox(height: 30.h,),
 
             Container(

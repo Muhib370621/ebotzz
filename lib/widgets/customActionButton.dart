@@ -7,12 +7,13 @@ class CustomActionButton extends StatelessWidget {
     Key? key,
     required this.buttonText,
     this.onTap,
-    this.isIcon,
+    this.isIcon, required this.isLoading,
 
   }) : super(key: key);
   final String buttonText;
   final void Function()? onTap;
   final bool? isIcon;
+  final bool isLoading;
 
 
   @override
@@ -48,14 +49,20 @@ class CustomActionButton extends StatelessWidget {
                 ? MainAxisAlignment.center
                 : MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                buttonText,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+              Visibility(
+                visible: isLoading==false,
+                child: Text(
+                  buttonText,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
+              Visibility(
+                visible: isLoading==true,
+                  child: const CircularProgressIndicator(color: Colors.white,))
             ],
           ),
         ),

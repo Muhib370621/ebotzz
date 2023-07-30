@@ -46,7 +46,10 @@ dependencies:
   simple_animations: ^4.0.1
   native_device_orientation: ^1.1.4
   flutter_svg: ^2.0.5
+  woosignal: ^3.8.0
+  http: ^1.1.0
   fl_chart:
+
 
 dev_dependencies:
   flutter_test:

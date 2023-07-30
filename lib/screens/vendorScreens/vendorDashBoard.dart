@@ -1,12 +1,8 @@
 import 'package:ebotzz/utils/imports.dart';
-import 'package:ebotzz/widgets/customLineChart.dart';
 import 'package:ebotzz/widgets/dashboardHeading.dart';
 import 'package:ebotzz/widgets/productsData.dart';
 // import 'package:ebotzz/widgets/ordersData.dart';
 import 'package:ebotzz/widgets/salesData.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
 
 import '../../widgets/ordersData.dart';
 import '../../widgets/vendorWidgets/vendorScreenDrawer.dart';

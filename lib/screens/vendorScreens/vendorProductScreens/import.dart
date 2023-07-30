@@ -109,7 +109,7 @@ class ImportScreen extends StatelessWidget {
             ),
           ),
 
-          CustomActionButton(buttonText: "Next",isIcon: false,),
+          CustomActionButton(buttonText: "Next",isIcon: false, isLoading: false,),
           SizedBox(height: 30.h,),
           PagerRow(fillIndex: 1)
         ],

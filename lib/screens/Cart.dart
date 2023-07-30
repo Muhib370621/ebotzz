@@ -5,7 +5,6 @@
 import 'package:ebotzz/utils/imports.dart';
 
 import '../widgets/bottom_bar.dart';
-
 import '../widgets/cart_list_view.dart';
 import '../widgets/counter_button.dart';
 import '../widgets/empty_widget.dart';

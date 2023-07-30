@@ -66,7 +66,7 @@ class AuctionScreen extends StatelessWidget {
             ),
             CustomActionButton(
               buttonText: "Apply",
-              isIcon: false,
+              isIcon: false, isLoading: false,
             ),
             SizedBox(
               height: 10.h,
@@ -97,7 +97,7 @@ class AuctionScreen extends StatelessWidget {
                       SizedBox(height: 20.h,),
                       CustomActionButton(buttonText: "Add Auction",isIcon: false,onTap: (){
                         Get.to(AddAuctionScreen());
-                      },)
+                      }, isLoading: false,)
                     ],
                   ),
                 ),
@@ -160,7 +160,7 @@ class AuctionScreen extends StatelessWidget {
                                           child: Container(
                                         child: CustomActionButton(
                                       buttonText: 'Delete',
-                                      isIcon: false,
+                                      isIcon: false, isLoading: false,
                                         ),
                                       )),
                                       SizedBox(
@@ -170,7 +170,7 @@ class AuctionScreen extends StatelessWidget {
                                           child: Container(
                                         child: CustomActionButton(
                                           buttonText: 'Update',
-                                          isIcon: false,
+                                          isIcon: false, isLoading: false,
                                         ),
                                       )),
                                     ],

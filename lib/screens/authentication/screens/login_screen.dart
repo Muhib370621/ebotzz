@@ -146,7 +146,7 @@ class LoginScreen extends StatelessWidget {
 
                           Get.to(BottomNavBar());
                         },
-                        isIcon: false,
+                        isIcon: false, isLoading: false,
                       )
                     ],
                   )),

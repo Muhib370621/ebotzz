@@ -1,15 +1,19 @@
+import 'package:ebotzz/controllers/signUpController.dart';
+import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/services/mainScreenItems.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen2 extends StatelessWidget {
   const HomeScreen2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final ProductController productController = Get.put(ProductController());
+    final SignUpController signUpController = Get.put(SignUpController());
+    // final SignUpController signUpController = Get.put(SignUpController());
+
     TextEditingController controller = TextEditingController();
     TextEditingController controller2 = TextEditingController();
     TextEditingController controller3= TextEditingController();
@@ -25,6 +29,10 @@ class HomeScreen2 extends StatelessWidget {
               const CustomAppBar(),
               CustomInputField(controller: controller,label: "search your items here",suffixIcon: Icon(Icons.search),),
               const SizedBox(height: 20,),
+              ElevatedButton(onPressed: (){
+                CustomerServices().getAllProducts();
+              }, child: Container(height: 20,width: 90, color: Colors.black,)),
+              Text(productController.productList.length.toString()),
               Row(
                 children: const [
                   SizedBox(width: 24,),
@@ -356,8 +364,8 @@ class HomeScreen2 extends StatelessWidget {
                                color: Colors.white,
                              ));
 
-                       },)
-                       
+                       }, isLoading: false,)
+
                      ],
                    ),
 

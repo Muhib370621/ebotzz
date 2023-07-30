@@ -13,16 +13,16 @@ class CustomInputField extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: controller,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "$label is Required";
-          } else if (!RegExp(r'\S+@\S+\.\S+')
-              .hasMatch(value)) {
-            return "Please enter a valid $label";
-          }
-        },
-        autovalidateMode:
-        AutovalidateMode.onUserInteraction,
+        // validator: (value) {
+        //   if (value!.isEmpty) {
+        //     return "$label is Required";
+        //   } else if (!RegExp(r'\S+@\S+\.\S+')
+        //       .hasMatch(value)) {
+        //     return "Please enter a valid $label";
+        //   }
+        // },
+        // autovalidateMode:
+        // AutovalidateMode.onUserInteraction,
 
         decoration: InputDecoration(
           suffixIcon: suffixIcon,

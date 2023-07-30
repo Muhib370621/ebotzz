@@ -1,20 +1,55 @@
 // ignore_for_file: must_be_immutable, avoid_unnecessary_containers, prefer_const_constructors, body_might_complete_normally_nullable, sized_box_for_whitespace, deprecated_member_use
 
 import 'package:flutter_svg/svg.dart';
+import 'package:woosignal/models/response/product.dart';
 
 import '../../../utils/imports.dart';
 import '../../../widgets/customTabBar.dart';
+import 'package:woosignal/woosignal.dart';
 
-class SignUPScreen extends StatelessWidget {
+class SignUPScreen extends StatefulWidget {
   SignUPScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUPScreen> createState() => _SignUPScreenState();
+}
+
+class _SignUPScreenState extends State<SignUPScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // _getProducts();
+    super.initState();
+  }
   TextEditingController emailControllerr = TextEditingController();
+
   TextEditingController passwordControllerr = TextEditingController();
+
   TextEditingController nameController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
+
   bool isVisible = true;
+
   bool isView = true;
+
   bool loading = false;
+
+  // / EXAMPLE GET PRODUCTS
+  // _getProducts() async {
+  //
+  //   // Step 1 - Initialize WooSignal
+  //   await WooSignal.instance.init(appKey: "EPxLkbNSpfUjldxDhFWxYtUatkoSfhXPWybjFLvC");
+  //
+  //   // Step 2 - Call an API
+  //   var products = await WooSignal.instance.getProducts();
+  //
+  //   print(products[0].description); // prints a product name
+  // }
+
+
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

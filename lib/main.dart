@@ -1,7 +1,5 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
-import 'package:ebotzz/screens/splash_screen/splash_screen.dart';
-import 'package:ebotzz/screens/trading_offers.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/services.dart';
 

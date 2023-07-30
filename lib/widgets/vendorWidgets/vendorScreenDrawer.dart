@@ -2,15 +2,9 @@ import 'package:ebotzz/screens/vendorScreens/auctionScreen.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorAnalytics.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorOrders.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorProducts.dart';
-
 import 'package:ebotzz/screens/vendorScreens/vendorSetting.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorStaff.dart';
-
 import 'package:ebotzz/screens/vendorScreens/vendorWithdraw.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorTradeScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../screens/vendorScreens/vendorDashBoard.dart';
 

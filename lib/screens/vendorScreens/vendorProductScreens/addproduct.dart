@@ -48,7 +48,7 @@ class AddProduct extends StatelessWidget {
             ),
           ),
           SizedBox(height: 25.h,),
-          Center(child: CustomActionButton(buttonText: "Apply",isIcon: false,))
+          Center(child: CustomActionButton(buttonText: "Apply",isIcon: false, isLoading: false,))
 
         ],
       ),

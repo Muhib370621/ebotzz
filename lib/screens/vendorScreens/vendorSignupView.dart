@@ -1,9 +1,6 @@
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:flutter/material.dart';
 
-import '../../../widgets/customImage.dart';
-import '../../../widgets/textswidget.dart';
 import '../../utils/imports.dart';
 
 class VendorSignupView extends StatelessWidget {
@@ -41,7 +38,7 @@ class VendorSignupView extends StatelessWidget {
                       width: 300,height: 300,child: Lottie.asset("assets/json/successIcon.json"),
                     )
                 );
-              },),
+              }, isLoading: false,),
               SizedBox(height: 10,)
 
 

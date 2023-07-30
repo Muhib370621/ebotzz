@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, duplicate_ignore, use_key_in_widget_constructors, must_be_immutable
 
 import 'package:ebotzz/controllers/tradingcontroller.dart';
-import 'package:ebotzz/models/yourproduct.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/statuscard.dart';
 
