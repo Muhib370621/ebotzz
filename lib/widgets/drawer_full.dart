@@ -23,7 +23,7 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.local_laundry_service,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
             ),
             title: Text(
               'Consumer Electronics',
@@ -36,7 +36,8 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.diamond,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
+
             ),
             title: Text(
               'Fashion',
@@ -49,7 +50,8 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.home,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
+
             ),
             title: Text(
               'Home',
@@ -62,7 +64,8 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.emoji_events,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
+
             ),
             title: Text(
               'Sports',
@@ -75,7 +78,8 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.factory,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
+
             ),
             title: Text(
               'Industrial Equipment',
@@ -88,7 +92,8 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.sell,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
+
             ),
             title: Text(
               'sell on ebotzz',
@@ -101,7 +106,8 @@ class DrawerScreen extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.logout,
-              color: Color(0xffE41E5C),
+              color: Colors.black,
+
             ),
             title: Text(
               'Logout',

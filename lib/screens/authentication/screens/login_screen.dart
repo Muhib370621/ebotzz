@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
+import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 
 import '../../../utils/imports.dart';
@@ -135,6 +136,7 @@ class LoginScreen extends StatelessWidget {
                       CustomActionButton(
                         buttonText: "Login",
                         onTap: () {
+                          // CustomerServices.loginCustomer(emailController.text,passwordController.text )
                           Get.snackbar("Successfully", "Login Successfully!",
                               colorText: Colors.white,
                               snackPosition: SnackPosition.BOTTOM,
@@ -143,7 +145,6 @@ class LoginScreen extends StatelessWidget {
                                 Icons.check,
                                 color: Colors.white,
                               ));
-
                           Get.to(BottomNavBar());
                         },
                         isIcon: false, isLoading: false,

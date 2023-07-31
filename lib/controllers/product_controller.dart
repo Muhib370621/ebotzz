@@ -7,17 +7,22 @@ import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/productCategoryModel.dart';
+
 class ProductController extends GetxController {
   RxList<ProductModel> cartProduct = <ProductModel>[].obs;
   RxList<ProductModel> favoriteProductList = <ProductModel>[].obs;
   RxList<ProductModel> allproduct = <ProductModel>[].obs;
   RxList<ProductModel> tradingproduct = <ProductModel>[].obs;
+  RxList<ProductCategoryModel> categoryList= <ProductCategoryModel>[].obs;
   RxDouble totalPrice = 0.0.obs;
 
   @override
   void onInit() {
     // TODO: implement onInit
     getAllProducts();
+    getCategories();
+
     super.onInit();
   }
 
@@ -69,24 +74,17 @@ class ProductController extends GetxController {
     update();
   }
 
-  List<dynamic> productList = <dynamic>[].obs;
   List<Map<String, dynamic>> totalData = <Map<String, dynamic>>[].obs;
 
 
-  Future<List<ProductApiModel>?>getAllProducts(
-      // String name,
-      // String email,
-      // String password,
-      // String confirmPass,
-      ) async {
+  Future<List<ProductApiModel>?>getAllProducts() async {
     try {
       isLoading.value = true;
       var result = await CustomerServices().getAllProducts();
       if (kDebugMode) {
         print("Result: " + result.toString());
       }
-      // completeData.value = result;
-      productList = result;
+
       isLoading.value = false;
       return result;
     } on SocketException {
@@ -101,4 +99,29 @@ class ProductController extends GetxController {
       // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
     }
   }
-}
+
+  Future<List<ProductCategoryModel>?> getCategories() async {
+    try {
+      isLoading.value = true;
+      var result = await CustomerServices().getCategory();
+      if (kDebugMode) {
+        print("Result: " + result.toString());
+      }
+      isLoading.value = false;
+      return result;
+    } on SocketException {
+      isLoading.value = false;
+      // Prompts.showDialog(
+      //     middleText: "Internet connection failure!", title: 'Oops');
+    } on Exception {
+      isLoading.value = false;
+      // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
+    } catch (e) {
+      isLoading.value = false;
+      // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
+    }
+  }
+
+
+  }
+

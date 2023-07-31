@@ -109,7 +109,6 @@ class DashboardProductDetailScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(products.img),
-
               // Hero(
               //   tag: index,
               //   child: Image.asset(
@@ -118,6 +117,24 @@ class DashboardProductDetailScreen extends StatelessWidget {
               //   ),
               // ),
             ),
+            SizedBox(height: 10.h,),
+            Row(
+              children: [
+                Expanded(
+                    child: GetBuilder(
+                      init: ProductController(),
+                      builder: (controller) {
+                        return CounterButton(
+                          label: products.quantity,
+                          onIncrementSelected: () =>
+                              controller.increaseItem(products),
+                          onDecrementSelected: () =>
+                              controller.decreaseItem(products),
+                        );
+                      },
+                    ))
+              ],
+            ).fadeAnimation(1.0),
             SizedBox(height: 20.h,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -190,10 +207,9 @@ class DashboardProductDetailScreen extends StatelessWidget {
             children: [
               productImageSlider(height),
               Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                padding: const EdgeInsets.only(top: 10, bottom: 10,left: 10,right: 10),
                 child: Column(
                   children: [
-
                     Center(
                       child: Text(products.title,
                               style: h2Style, textAlign: TextAlign.end)
@@ -202,29 +218,25 @@ class DashboardProductDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                      child: GetBuilder(
-                        init: ProductController(),
-                        builder: (controller) {
-                          return CounterButton(
-                            label: products.quantity,
-                            onIncrementSelected: () =>
-                                controller.increaseItem(products),
-                            onDecrementSelected: () =>
-                                controller.decreaseItem(products),
-                          );
-                        },
-                      ))
-                ],
-              ).fadeAnimation(1.0),
 
-              Text(products.description,
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.black45))
-                  .fadeAnimation(0.8),
+              SizedBox(height: 20.h,),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(products.description,
+                          maxLines: 5,
+                          overflow: TextOverflow.ellipsis,
+                    style:  TextStyle(color: Colors.grey.shade700,fontWeight: FontWeight.bold,fontSize: 16.sp),)
+                      .fadeAnimation(0.8),
+                  SizedBox(height: 8.h,),
+                  Text("price : "+products.price.toString()+" USD ",
+                          maxLines: 5,
+                          overflow: TextOverflow.ellipsis,
+                          style:  TextStyle(color: Colors.grey.shade700,fontWeight: FontWeight.bold,fontSize: 20.sp),)
+                      .fadeAnimation(0.8),
+                ],
+              ),
               const SizedBox(height: 20),
 
             ],

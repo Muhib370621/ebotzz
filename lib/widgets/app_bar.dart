@@ -43,8 +43,10 @@ class CustomAppBar extends StatelessWidget {
                     padding: const EdgeInsets.all(3.0),
                     child: Icon(Icons.menu_rounded,size: 28.sp,),
                   ))),
-          SizedBox(width: 10.w),
-          assetImage('assets/images/logo1.png', width: 100.h, height: 50.w),
+          SizedBox(width: 100.w),
+          assetImage('assets/images/newTopLogo.jpg', width: 100.h, height: 50.w),
+          SizedBox(width: 102 .w,),
+          Icon(Icons.notifications_outlined,size: 28.sp,color: Colors.grey.shade800,),
           Spacer(),
           // InkWell(
           //   onTap: () {

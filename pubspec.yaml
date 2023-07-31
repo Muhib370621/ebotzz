@@ -40,14 +40,12 @@ dependencies:
   flutter_screenutil: ^5.5.4
   persistent_bottom_nav_bar: ^5.0.2
   carousel_slider: ^4.1.1
-#  responsive_sizer:
   lottie: ^2.0.0
   sidebarx: ^0.14.0
   simple_animations: ^4.0.1
   native_device_orientation: ^1.1.4
   flutter_svg: ^2.0.5
-  woosignal: ^3.8.0
-  http: ^1.1.0
+  http:
   fl_chart:
 
 
