@@ -69,7 +69,8 @@ class ProductController extends GetxController {
     update();
   }
 
-  List<ProductApiModel> productList = <ProductApiModel>[].obs;
+  List<dynamic> productList = <dynamic>[].obs;
+  List<Map<String, dynamic>> totalData = <Map<String, dynamic>>[].obs;
 
 
   Future<List<ProductApiModel>?>getAllProducts(

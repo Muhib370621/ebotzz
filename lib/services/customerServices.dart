@@ -19,7 +19,6 @@ class CustomerServices {
     //   // "passwordConf": confirmPass,
     //   // "role": "Manager",
     // });
-    final ProductController productController = Get.put(ProductController());
 
     /// Request
     var response = await http.get(
@@ -34,11 +33,15 @@ class CustomerServices {
       print("Called API: $url");
       // print("PHONE: $phone");
       print("Status Code: ${response.statusCode}");
+      final ProductController productController = Get.put(ProductController());
+      productController.totalData=List<Map<String, dynamic>>.from(json.decode(response.body));
+      print("products"+  productController.totalData.toString());
       print("Response Body: ${response.body}");
+
     }
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      productController.productList= productApiModelFromJson(response.body);
+      // productController.productList= productApiModelFromJson(response.body);
       // Prompts.showSuccess("Congrats!", "Successfully Signed Up.");
       // Get.offAllNamed(RouteNames.loginScreen);
       // Get.defaultDialog(
@@ -48,6 +51,7 @@ class CustomerServices {
       //       width: 300,height: 300,child: Lottie.asset("assets/json/successIcon.json"),
       //     )
       // );
+
       return productApiModelFromJson(response.body);
     }
     if (response.statusCode == 400) {

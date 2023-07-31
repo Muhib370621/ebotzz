@@ -13,7 +13,6 @@ class DashboardProductDetailScreen extends StatelessWidget {
 
   final ProductModel products;
   TradingController tradingController = Get.put(TradingController());
-  ProductController controller = Get.put(ProductController());
   DashboardProductDetailScreen({Key? key, required this.products})
       : super(key: key);
   PreferredSizeWidget _appBar(BuildContext context) {
@@ -48,6 +47,8 @@ class DashboardProductDetailScreen extends StatelessWidget {
   }
 
   Widget bottomBar() {
+    ProductController controller = Get.put(ProductController());
+
     return Container(
       padding: const EdgeInsets.all(15),
       height: 90,
@@ -97,16 +98,17 @@ class DashboardProductDetailScreen extends StatelessWidget {
   }
 
   Widget productImageSlider(double height) {
+    ProductController controller = Get.put(ProductController());
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
-      height: height * 0.5,
+      padding: const EdgeInsets.all(10),
+      // height: height * 0.5,
       child: Padding(
         padding: const EdgeInsets.only(left: 15),
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: assetImage(products.img),
+              child: Image.network(products.img),
 
               // Hero(
               //   tag: index,
