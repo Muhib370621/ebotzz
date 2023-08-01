@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
 import 'package:ebotzz/models/signUpModel.dart';
 import 'package:ebotzz/services/urlSchemes.dart';
@@ -18,12 +19,15 @@ class CustomerServices {
     var response = await http.get(
       Uri.parse(url),
     );
+    final ProductController productController = Get.put(ProductController());
+    productController.totalData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
+    productController.isLoading.value = false;
+
     if (kDebugMode) {
       print("Called API: $url");
       // print("PHONE: $phone");
       print("Status Code: ${response.statusCode}");
-      final ProductController productController = Get.put(ProductController());
-      productController.totalData=List<Map<String, dynamic>>.from(json.decode(response.body));
+
       print("products"+  productController.totalData.toString());
       print("Response Body: ${response.body}");
 
@@ -43,6 +47,9 @@ class CustomerServices {
       throw Exception('Something went wrong');
     }
   }
+
+
+
   Future<List<ProductCategoryModel>> getCategory() async {
 
     String url = UrlSchemes.baseUrl("products/categories");
@@ -52,11 +59,44 @@ class CustomerServices {
     if (kDebugMode) {
       print("Called API: $url");
       // print("PHONE: $phone");
+      final ProductController productController = Get.put(ProductController());
+      productController.totalCategoryData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
+      productController.isLoading.value = false;
+
       print("Response Body: ${response.body}");
     }
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       return productCategoryModelFromJson(response.body);
+    }
+    if (response.statusCode == 400) {
+    }
+    if (response.statusCode == 401) {
+      throw Exception('Failed to send!');
+    }
+    if (response.statusCode == 500) {
+      throw Exception('Internal Server Error!');
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
+  Future<List<OrderStatus>> getOrderStatus() async {
+
+    String url = UrlSchemes.baseUrl("orders");
+    var response = await http.get(
+      Uri.parse(url),
+    );
+    if (kDebugMode) {
+      print("Called API: $url");
+      // print("PHONE: $phone");
+      final ProductController productController = Get.put(ProductController());
+      productController.totalOrderStatusData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
+      productController.isLoading.value = false;
+      print("Response Body: ${response.body}");
+    }
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return orderStatusFromJson(response.body);
     }
     if (response.statusCode == 400) {
     }

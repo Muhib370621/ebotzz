@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ebotzz/screens/home_screen/orderStatusScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -46,7 +47,10 @@ class CustomAppBar extends StatelessWidget {
           SizedBox(width: 100.w),
           assetImage('assets/images/newTopLogo.jpg', width: 100.h, height: 50.w),
           SizedBox(width: 102 .w,),
-          Icon(Icons.notifications_outlined,size: 28.sp,color: Colors.grey.shade800,),
+          InkWell(
+              onTap: (){
+                Get.to(()=>OrderStatusScreen());
+              },child: Icon(Icons.notifications_outlined,size: 28.sp,color: Colors.grey.shade800,)),
           Spacer(),
           // InkWell(
           //   onTap: () {

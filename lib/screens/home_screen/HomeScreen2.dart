@@ -9,9 +9,8 @@ class HomeScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SignUpController signUpController = Get.put(SignUpController());
+    // final SignUpController signUpController = Get.put(SignUpController());
     final ProductController productController = Get.put(ProductController());
-
 
     TextEditingController controller = TextEditingController();
     TextEditingController controller2 = TextEditingController();
@@ -42,28 +41,63 @@ class HomeScreen2 extends StatelessWidget {
                               suffixIcon: Icon(Icons.search),
                             ),
                           ),
-                          Expanded(child: Container(width: 50,
-                             height: 50,
-                             decoration: BoxDecoration(
-                                 border: Border.all(
-                                     color: Colors.grey.shade800
-                                 ),
-                                 borderRadius: BorderRadius.circular(15)
-                             ),
-                             child: InkWell(
-
-                                 onTap: (){
-                                   Get.defaultDialog(
-                                       content: Column(
-                                         children: [
-                                           Container(
-                                             child: Center(child: Text(""),),
-                                           )
-                                         ],
-                                       )
-                                   );
-                                 },
-                                 child: const Center(child: Text("Categories"),)),))
+                          Expanded(
+                              child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade800),
+                                borderRadius: BorderRadius.circular(15)),
+                            child: InkWell(
+                                onTap: () {
+                                  Get.defaultDialog(
+                                    title: "Categories",
+                                    content: SizedBox(
+                                      height: 480.h,
+                                      child: ListView.builder(
+                                        physics: BouncingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: productController
+                                            .totalCategoryData.length,
+                                        itemBuilder: (context, index) {
+                                          return SingleChildScrollView(
+                                            physics: BouncingScrollPhysics(),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  height: 45.h,
+                                                  width: 290.w,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.black12,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(
+                                                        15,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Text(productController
+                                                          .totalCategoryData[
+                                                      index]["name"]),
+                                                ),
+                                                SizedBox(
+                                                  height: 2.h,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Center(
+                                  child: Text("Categories"),
+                                )),
+                          ))
                         ],
                       ),
                       const SizedBox(
@@ -150,16 +184,16 @@ class HomeScreen2 extends StatelessWidget {
                               onTap: () {
                                 Get.to(DashboardProductDetailScreen(
                                     products: ProductModel(
-                                      id: productController.totalData[2]["id"],
-                                      title: productController.totalData[2]["name"],
-                                      description: productController.totalData[0]
+                                  id: productController.totalData[2]["id"],
+                                  title: productController.totalData[2]["name"],
+                                  description: productController.totalData[0]
                                       ["description"],
-                                      price: double.parse(
-                                          productController.totalData[2]["price"]),
-                                      quantity: 1,
-                                      img: productController.totalData[2]["images"][0]
-                                      ["src"],
-                                    )));
+                                  price: double.parse(
+                                      productController.totalData[2]["price"]),
+                                  quantity: 1,
+                                  img: productController.totalData[2]["images"]
+                                      [0]["src"],
+                                )));
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,13 +327,12 @@ class HomeScreen2 extends StatelessWidget {
                                       products: ProductModel(
                                     id: productController.totalData[index + 3]
                                         ["id"],
-                                    title: productController.totalData[index+3]
-                                        ["name"],
+                                    title: productController
+                                        .totalData[index + 3]["name"],
                                     description: productController
                                         .totalData[index + 3]["description"],
                                     price: double.parse(productController
-                                            .totalData[index + 3]["price"]
-                                        ),
+                                        .totalData[index + 3]["price"]),
                                     quantity: 1,
                                     img: productController.totalData[index + 3]
                                         ["images"][0]["src"],
@@ -376,9 +409,9 @@ class HomeScreen2 extends StatelessWidget {
                                             BorderRadius.circular(15)),
                                     child: SizedBox(
                                       width: 150,
-                                      child:productController.totalData[index+36]["images"][0]["src"].toString()!=""? Image.network(productController
+                                      child: Image.network(productController
                                               .totalData[index + 36]["images"]
-                                          [0]["src"]):Container(),
+                                          [0]["src"]),
                                     ),
                                   ),
                                   onTap: () {
@@ -442,7 +475,9 @@ class HomeScreen2 extends StatelessWidget {
                                         width: 200,
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
-                                         child: Image.network(productController.totalData[35]["images"][0]["src"]),
+                                          child: Image.network(
+                                              productController.totalData[35]
+                                                  ["images"][0]["src"]),
                                         ),
                                       ),
                                       Padding(

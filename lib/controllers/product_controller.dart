@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
 import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/utils/imports.dart';
@@ -22,6 +23,7 @@ class ProductController extends GetxController {
     // TODO: implement onInit
     getAllProducts();
     getCategories();
+    getOrderStatus();
 
     super.onInit();
   }
@@ -74,7 +76,9 @@ class ProductController extends GetxController {
     update();
   }
 
-  List<Map<String, dynamic>> totalData = <Map<String, dynamic>>[].obs;
+  RxList<Map<String, dynamic>> totalData = <Map<String, dynamic>>[].obs;
+  RxList<Map<String, dynamic>> totalCategoryData = <Map<String, dynamic>>[].obs;
+  RxList<Map<String, dynamic>> totalOrderStatusData = <Map<String, dynamic>>[].obs;
 
 
   Future<List<ProductApiModel>?>getAllProducts() async {
@@ -84,8 +88,6 @@ class ProductController extends GetxController {
       if (kDebugMode) {
         print("Result: " + result.toString());
       }
-
-      isLoading.value = false;
       return result;
     } on SocketException {
       isLoading.value = false;
@@ -107,7 +109,27 @@ class ProductController extends GetxController {
       if (kDebugMode) {
         print("Result: " + result.toString());
       }
+      return result;
+    } on SocketException {
       isLoading.value = false;
+      // Prompts.showDialog(
+      //     middleText: "Internet connection failure!", title: 'Oops');
+    } on Exception {
+      isLoading.value = false;
+      // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
+    } catch (e) {
+      isLoading.value = false;
+      // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
+    }
+  }
+
+  Future<List<OrderStatus>?>getOrderStatus() async {
+    try {
+      isLoading.value = true;
+      var result = await CustomerServices().getOrderStatus();
+      if (kDebugMode) {
+        print("Result: " + result.toString());
+      }
       return result;
     } on SocketException {
       isLoading.value = false;
@@ -123,5 +145,6 @@ class ProductController extends GetxController {
   }
 
 
-  }
+
+}
 
