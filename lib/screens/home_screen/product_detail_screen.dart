@@ -109,13 +109,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(products.img),
-              // Hero(
-              //   tag: index,
-              //   child: Image.asset(
-              //     products.images[index],
-              //     fit: BoxFit.fill,
-              //   ),
-              // ),
+
             ),
             SizedBox(height: 10.h,),
             Row(
@@ -161,20 +155,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                 InkWell(
                   onTap: (){
                     controller.addToCart(products);
-                    Get.to(CartScreen());
-                    // Get.defaultDialog(
-                    //   title: "Select Operation",
-                    //   content: Row(
-                    //     children: [
-                    //       Expanded(child: CustomActionButton(buttonText: 'Add to cart',isIcon: false,)),
-                    //       SizedBox(width: 20.w),
-                    //       Expanded(child: CustomActionButton(buttonText: 'Cancel',isIcon: false,onTap: (){
-                    //
-                    //       },)),
-                    //     ],
-                    //   )
-                    //
-                    // );
+                    Get.to(CartScreen(products: products,));
                   },
                   child: TradeColumn(
                     image: "assets/images/buy.svg",
@@ -242,6 +223,13 @@ class DashboardProductDetailScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.back();
+        },
+        backgroundColor: Colors.pink,
+        child: const Icon(Icons.arrow_back),
       ),
     );
   }

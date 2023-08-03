@@ -10,7 +10,8 @@ import '../widgets/counter_button.dart';
 import '../widgets/empty_widget.dart';
 
 class CartScreen extends StatelessWidget {
-  CartScreen({super.key});
+  final ProductModel? products;
+  CartScreen({super.key,  this.products});
   ProductController controller = Get.put(ProductController());
   PreferredSizeWidget _appBar() {
     return AppBar(
@@ -63,9 +64,16 @@ class CartScreen extends StatelessWidget {
                             label: product.quantity);
                       }),
                 )
-              : const EmptyWidget(title: "Empty");
+              :  EmptyWidget(title: "Empty",products: products,);
         },
       ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.back();
+            },
+            backgroundColor: Colors.pink,
+            child: const Icon(Icons.arrow_back),
+          ),
     ));
   }
 }

@@ -34,6 +34,13 @@ class TradingOfferScreen extends StatelessWidget {
           ],
         ),
       ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.back();
+            },
+            backgroundColor: Colors.pink,
+            child: const Icon(Icons.arrow_back),
+          ),
     ));
   }
 }
@@ -68,66 +75,73 @@ class TradingOffercard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 10,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Your Product:',
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 10,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Your Product:',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600)),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Text(
+                        yourtradingProdut.title,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600)),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(
-                      yourtradingProdut.title,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,),
-                    ),
-                    Text(
-                      yourtradingProdut.price.toString(),
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        children: [
-                          Text('Offered Product:',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600)),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Container(
-                            width: 100.w,
-                            child: SingleChildScrollView(
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: controller.tradingList.length,
-                                    itemBuilder: (context, index) {
-                                      return OfferedProductCard(
-                                          product: controller.tradingList[index]);
-                                    })),
-                          )
-                        ],
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,),
                       ),
-                    ),
-                    StatusCard(
-                      statuscode: tradingstatus,
-                    ),
-                  ],
+                      Text(
+                        yourtradingProdut.price.toString(),
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          children: [
+                            Text('Offered Product:',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600)),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Container(
+                              width: 100.w,
+                              child: SingleChildScrollView(
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: controller.tradingList.length,
+                                      itemBuilder: (context, index) {
+                                        return OfferedProductCard(
+                                            product: controller.tradingList[index]);
+                                      })),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 200.h,
+                        height: 30.h,
+                        child: StatusCard(
+                          statuscode: tradingstatus,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 

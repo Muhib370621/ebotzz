@@ -181,20 +181,6 @@ class HomeScreen2 extends StatelessWidget {
                             height: 250,
                             // color: Colors.pink,
                             child: InkWell(
-                              onTap: () {
-                                Get.to(DashboardProductDetailScreen(
-                                    products: ProductModel(
-                                  id: productController.totalData[2]["id"],
-                                  title: productController.totalData[2]["name"],
-                                  description: productController.totalData[0]
-                                      ["description"],
-                                  price: double.parse(
-                                      productController.totalData[2]["price"]),
-                                  quantity: 1,
-                                  img: productController.totalData[2]["images"]
-                                      [0]["src"],
-                                )));
-                              },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -202,16 +188,16 @@ class HomeScreen2 extends StatelessWidget {
                                       width: 120,
                                       height: 140,
                                       child: Image.network(
-                                        productController.totalData[2]["images"]
+                                        productController.totalData[1]["images"]
                                             [0]["src"],
                                         fit: BoxFit.cover,
                                       )),
-                                  Text(productController.totalData[2]["name"]
+                                  Text(productController.totalData[1]["name"]
                                       .toString()),
-                                  Text(productController.totalData[2]["type"]
+                                  Text(productController.totalData[1]["type"]
                                       .toString()),
                                   Text(
-                                    productController.totalData[2]["price"]
+                                    productController.totalData[1]["price"]
                                             .toString() +
                                         " USD",
                                     style: TextStyle(
@@ -220,6 +206,21 @@ class HomeScreen2 extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              onTap: () {
+
+                                Get.to(DashboardProductDetailScreen(
+                                    products: ProductModel(
+                                      id: productController.totalData[1]["id"],
+                                      title: productController.totalData[1]["name"],
+                                      description: productController.totalData[0]
+                                      ["description"],
+                                      price:
+                                      double.parse(productController.totalData[1]["price"]),
+                                      quantity: 1,
+                                      img: productController.totalData[1]["images"]
+                                      [0]["src"],
+                                    )));
+                              },
                             ),
                           ),
                         ],
@@ -277,7 +278,7 @@ class HomeScreen2 extends StatelessWidget {
                                           child: Image(
                                             image: NetworkImage(
                                                 productController
-                                                        .totalData[index + 3]
+                                                        .totalData[index + 2]
                                                     ["images"][0]["src"]),
                                             fit: BoxFit.cover,
                                           ),
@@ -325,16 +326,16 @@ class HomeScreen2 extends StatelessWidget {
                                 onTap: () {
                                   Get.to(DashboardProductDetailScreen(
                                       products: ProductModel(
-                                    id: productController.totalData[index + 3]
+                                    id: productController.totalData[index + 2]
                                         ["id"],
                                     title: productController
-                                        .totalData[index + 3]["name"],
+                                        .totalData[index + 2]["name"],
                                     description: productController
-                                        .totalData[index + 3]["description"],
+                                        .totalData[index + 2]["description"],
                                     price: double.parse(productController
-                                        .totalData[index + 3]["price"]),
+                                        .totalData[index + 2]["price"]),
                                     quantity: 1,
-                                    img: productController.totalData[index + 3]
+                                    img: productController.totalData[index + 2]
                                         ["images"][0]["src"],
                                   )));
                                 },
@@ -410,7 +411,7 @@ class HomeScreen2 extends StatelessWidget {
                                     child: SizedBox(
                                       width: 150,
                                       child: Image.network(productController
-                                              .totalData[index + 36]["images"]
+                                              .totalData[index + 37]["images"]
                                           [0]["src"]),
                                     ),
                                   ),
@@ -418,16 +419,16 @@ class HomeScreen2 extends StatelessWidget {
                                     Get.to(DashboardProductDetailScreen(
                                         products: ProductModel(
                                       id: productController
-                                          .totalData[index + 36]["id"],
+                                          .totalData[index + 37]["id"],
                                       title: productController
-                                          .totalData[index + 36]["type"],
+                                          .totalData[index + 37]["type"],
                                       description: productController
-                                          .totalData[index + 36]["name"],
+                                          .totalData[index + 37]["name"],
                                       price: double.parse(productController
-                                          .totalData[index + 36]["price"]),
+                                          .totalData[index + 37]["price"]),
                                       quantity: 1,
                                       img: productController
-                                              .totalData[index + 36]["images"]
+                                              .totalData[index + 37]["images"]
                                           [0]["src"],
                                     )));
                                   },
@@ -476,7 +477,7 @@ class HomeScreen2 extends StatelessWidget {
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Image.network(
-                                              productController.totalData[35]
+                                              productController.totalData[index+40]
                                                   ["images"][0]["src"]),
                                         ),
                                       ),
@@ -488,7 +489,7 @@ class HomeScreen2 extends StatelessWidget {
                                           children: [
                                             Text(
                                               productController
-                                                  .totalData[index + 36]["name"]
+                                                  .totalData[index + 40]["name"]
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize: 18.sp,
@@ -497,7 +498,7 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                             Text(
                                                 productController
-                                                    .totalData[index + 36]
+                                                    .totalData[index + 40]
                                                         ["type"]
                                                     .toString(),
                                                 style: TextStyle(
@@ -506,7 +507,7 @@ class HomeScreen2 extends StatelessWidget {
                                                     fontWeight:
                                                         FontWeight.bold)),
                                             Text(
-                                                "price : ${productController.totalData[index + 36]["price"]}" +
+                                                "price : ${productController.totalData[index + 40]["price"]}" +
                                                     " USD ",
                                                 style: TextStyle(
                                                     fontSize: 18.sp,
@@ -523,16 +524,16 @@ class HomeScreen2 extends StatelessWidget {
                                     Get.to(DashboardProductDetailScreen(
                                         products: ProductModel(
                                       id: productController
-                                          .totalData[index + 36]["id"],
+                                          .totalData[index + 40]["id"],
                                       title: productController
-                                          .totalData[index + 36]["name"],
+                                          .totalData[index + 40]["name"],
                                       description: productController
-                                          .totalData[index + 36]["description"],
+                                          .totalData[index + 40]["description"],
                                       price: double.parse(productController
-                                          .totalData[index + 36]["price"]),
+                                          .totalData[index + 40]["price"]),
                                       quantity: 1,
                                       img: productController
-                                              .totalData[index + 36]["images"]
+                                              .totalData[index + 40]["images"]
                                           [0]["src"],
                                     )));
                                   },

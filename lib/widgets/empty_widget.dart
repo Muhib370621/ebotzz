@@ -6,10 +6,11 @@ import '../utils/imports.dart';
 enum EmptyWidgetType { cart, favorite }
 
 class EmptyWidget extends StatelessWidget {
+  final ProductModel? products;
   final EmptyWidgetType type;
   final String title;
 
-  const EmptyWidget({Key? key, this.type = EmptyWidgetType.cart, required this.title}) : super(key: key);
+  const EmptyWidget({Key? key, this.type = EmptyWidgetType.cart, required this.title, this.products}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class EmptyWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          type == EmptyWidgetType.cart ? Image.asset(AppAsset.emptyCart) : Image.asset(AppAsset.emptyFavorite),
+          type == EmptyWidgetType.cart ? Image.asset(AppAsset.emptyCart) : Image.network(products!.img),
           const SizedBox(height: 10),
           Text(
             title,
