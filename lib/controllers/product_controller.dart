@@ -21,10 +21,14 @@ class ProductController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
-    getAllProducts();
-    getCategories();
-    getOrderStatus();
+    inital();
     super.onInit();
+  }
+
+  inital() async {
+    await getAllProducts();
+    await getCategories();
+    await getOrderStatus();
   }
 
   RxBool isLoading = false.obs;

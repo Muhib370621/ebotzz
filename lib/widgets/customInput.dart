@@ -23,7 +23,6 @@ class CustomInputField extends StatelessWidget {
         // },
         // autovalidateMode:
         // AutovalidateMode.onUserInteraction,
-
         decoration: InputDecoration(
           suffixIcon: suffixIcon,
           contentPadding: EdgeInsets.all(16),

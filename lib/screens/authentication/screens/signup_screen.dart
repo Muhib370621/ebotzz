@@ -2,10 +2,8 @@
 
 import 'package:flutter_svg/svg.dart';
 
-
 import '../../../utils/imports.dart';
 import '../../../widgets/customTabBar.dart';
-
 
 class SignUPScreen extends StatefulWidget {
   SignUPScreen({Key? key}) : super(key: key);
@@ -15,13 +13,13 @@ class SignUPScreen extends StatefulWidget {
 }
 
 class _SignUPScreenState extends State<SignUPScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
     // _getProducts();
     super.initState();
   }
+
   TextEditingController emailControllerr = TextEditingController();
 
   TextEditingController passwordControllerr = TextEditingController();
@@ -48,36 +46,37 @@ class _SignUPScreenState extends State<SignUPScreen> {
   //   print(products[0].description); // prints a product name
   // }
 
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
+      backgroundColor: Colors.white,
+      body: Stack(
+        // fit: StackFit.loose,
         children: [
-          Center(
+          Positioned(
+            top: 0,
+            // left: 0,
+            // right: 0,
             child: Container(
-              width: 500,
-              height: 400,
-              color: Colors.pink,
+              width: 400.w,
+              height: 670.h,
+              color: Colors.redAccent,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 55.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(width: 50,),
-                      Align(
-                        alignment:Alignment.center,
-                        child: Text(
-                          "Welcome",
-                          style: TextStyle(
-                            color:Colors.white,
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      SizedBox(width: 100.w,),
+                      Text(
+                        "Welcome",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       InkWell(
@@ -85,7 +84,7 @@ class _SignUPScreenState extends State<SignUPScreen> {
                           Get.to(LoginScreen());
                         },
                         child: Padding(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.only(right: 20),
                             child: Row(
                               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -95,26 +94,59 @@ class _SignUPScreenState extends State<SignUPScreen> {
                               ],
                             )),
                       ),
-
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 20.h,
                   ),
                   Text(
                     "We make shopping and trading easy",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    style: TextStyle(color: Colors.white, fontSize: 18.sp),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 25.h,
                   ),
                   SvgPicture.asset("assets/images/loginBackground.svg"),
                 ],
               ),
-
             ),
           ),
-          Expanded(child: CustomTabBar())
+          Positioned(
+            top: Get.height*0.49,
+            // left: 0,
+            // right: 0,
+            // bottom: 0,
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Container(
+                height: 450.h,
+                width: 400.w,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(
+                      20,
+                    ),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 0.8.h,
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        height: 350.h,
+                        width: 350.w,
+                        child: const CustomTabBar(),
+                      ),
+                    )
+                  ],
+                ),
+                // child: const CustomTabBar(),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -21,7 +21,6 @@ class CustomerServices {
     );
     final ProductController productController = Get.put(ProductController());
     productController.totalData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
-    productController.isLoading.value = false;
 
     if (kDebugMode) {
       print("Called API: $url");
@@ -33,6 +32,7 @@ class CustomerServices {
     }
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+      productController.isLoading.value = false;
       return productApiModelFromJson(response.body);
     }
     if (response.statusCode == 400) {

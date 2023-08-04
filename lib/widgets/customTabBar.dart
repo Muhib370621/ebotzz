@@ -13,12 +13,12 @@ class CustomTabBar extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(35),
+          preferredSize: const Size.fromHeight(20),
           child: AppBar(
             elevation: 0,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(
+            shape:  const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                 Radius.circular(
                   20,
                 ),
               ),
@@ -30,7 +30,7 @@ class CustomTabBar extends StatelessWidget {
               indicatorSize: TabBarIndicatorSize.label,
               labelColor: Colors.pink,
               unselectedLabelColor: Colors.black,
-              indicatorWeight: 0.5.h,
+              indicatorWeight: 4.h,
               tabs: const [
                 Tab(
                   text: "Signup",

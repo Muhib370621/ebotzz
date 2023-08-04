@@ -16,46 +16,42 @@ class SimpleSignupView extends StatelessWidget {
     // TextEditingController controller3 = TextEditingController();
     // TextEditingController controller4 = TextEditingController();
     return Scaffold(
+      backgroundColor: Colors.white,
+
       body: Obx(() {
-        return Container(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                CustomInputField(
-                  controller: signUpController.nameController.value,
-                  label: "name",
-                ),
-                // SizedBox(height: 5,),
-                CustomInputField(
-                  controller: signUpController.emailController.value,
-                  label: "email",
-                ),
-
-                CustomInputField(
-                    controller: signUpController.passwordController.value,
-                    label: "password"),
-                SizedBox(
-                  height: 10,
-                ),
-
-                CustomActionButton(
-                  buttonText: "Signup",
-                  isIcon: false,
-                  onTap: () {
-                    signUpController.signUp(
-                      signUpController.nameController.value.text,
-                      signUpController.emailController.value.text,
-                      signUpController.passwordController.value.text,
-                    );
-                  }, isLoading: signUpController.isLoading.value,
-                )
-              ],
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 10,
             ),
-          ),
+            CustomInputField(
+              controller: signUpController.nameController.value,
+              label: "name",
+            ),
+            // SizedBox(height: 5,),
+            CustomInputField(
+              controller: signUpController.emailController.value,
+              label: "email",
+            ),
+            CustomInputField(
+                controller: signUpController.passwordController.value,
+                label: "password"),
+            const SizedBox(
+              height: 10,
+            ),
+            CustomActionButton(
+              buttonText: "Signup",
+              isIcon: false,
+              onTap: () {
+                signUpController.signUp(
+                  signUpController.nameController.value.text,
+                  signUpController.emailController.value.text,
+                  signUpController.passwordController.value.text,
+                );
+              }, isLoading: signUpController.isLoading.value,
+            )
+          ],
         );
       }),
     );
