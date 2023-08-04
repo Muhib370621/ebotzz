@@ -64,7 +64,7 @@ class CartScreen extends StatelessWidget {
                             label: product.quantity);
                       }),
                 )
-              :  EmptyWidget(title: "Empty",products: products,);
+              :  EmptyWidget(title: "Empty",);
         },
       ),
           floatingActionButton: FloatingActionButton(

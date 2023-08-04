@@ -22,6 +22,7 @@ class ProductController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     getAllProducts();
+    print("total category list is"+totalCategoryData.toString());
     getCategories();
     getOrderStatus();
 

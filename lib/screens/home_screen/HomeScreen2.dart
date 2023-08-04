@@ -278,7 +278,7 @@ class HomeScreen2 extends StatelessWidget {
                                           child: Image(
                                             image: NetworkImage(
                                                 productController
-                                                        .totalData[index + 2]
+                                                        .totalData[3]
                                                     ["images"][0]["src"]),
                                             fit: BoxFit.cover,
                                           ),
@@ -345,7 +345,7 @@ class HomeScreen2 extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Container(
@@ -411,7 +411,7 @@ class HomeScreen2 extends StatelessWidget {
                                     child: SizedBox(
                                       width: 150,
                                       child: Image.network(productController
-                                              .totalData[index + 37]["images"]
+                                              .totalData[index+37]["images"]
                                           [0]["src"]),
                                     ),
                                   ),
