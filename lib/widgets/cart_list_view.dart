@@ -29,7 +29,7 @@ class CartListView extends StatelessWidget {
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
-                    child: Image.asset(
+                    child: Image.network(
                       products.img,
                     ),
                   ),
