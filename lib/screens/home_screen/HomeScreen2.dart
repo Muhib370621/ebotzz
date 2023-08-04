@@ -61,16 +61,16 @@ class HomeScreen2 extends StatelessWidget {
                                             .totalCategoryData.length,
                                         itemBuilder: (context, index) {
                                           return SingleChildScrollView(
-                                            physics: BouncingScrollPhysics(),
+                                            physics: const BouncingScrollPhysics(),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Container(
-                                                  padding: EdgeInsets.all(10),
+                                                  padding: const EdgeInsets.all(10),
                                                   height: 45.h,
                                                   width: 290.w,
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                     color: Colors.black12,
                                                     borderRadius:
                                                         BorderRadius.all(
@@ -278,7 +278,7 @@ class HomeScreen2 extends StatelessWidget {
                                           child: Image(
                                             image: NetworkImage(
                                                 productController
-                                                        .totalData[3]
+                                                        .totalData[2]
                                                     ["images"][0]["src"]),
                                             fit: BoxFit.cover,
                                           ),

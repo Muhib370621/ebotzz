@@ -22,10 +22,8 @@ class ProductController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     getAllProducts();
-    print("total category list is"+totalCategoryData.toString());
     getCategories();
     getOrderStatus();
-
     super.onInit();
   }
 
@@ -80,6 +78,7 @@ class ProductController extends GetxController {
   RxList<Map<String, dynamic>> totalData = <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> totalCategoryData = <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> totalOrderStatusData = <Map<String, dynamic>>[].obs;
+  var list =[].obs;
 
 
   Future<List<ProductApiModel>?>getAllProducts() async {
@@ -107,6 +106,7 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       var result = await CustomerServices().getCategory();
+      // list.value = result;
       if (kDebugMode) {
         print("Result: " + result.toString());
       }

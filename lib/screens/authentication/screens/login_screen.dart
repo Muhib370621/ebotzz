@@ -15,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   bool isVisible = true;
   @override
   Widget build(BuildContext context) {
+    ProductController controller = Get.put(ProductController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -136,7 +137,11 @@ class LoginScreen extends StatelessWidget {
                       CustomActionButton(
                         buttonText: "Login",
                         onTap: () {
-                          // CustomerServices.loginCustomer(emailController.text,passwordController.text )
+                          // CustomerServices().getAllProducts();
+                          // CustomerServices().getCategory();
+                          // print("check "+controller.totalCategoryData.toString());
+
+                          // getOrderStatus();
                           Get.snackbar("Successfully", "Login Successfully!",
                               colorText: Colors.white,
                               snackPosition: SnackPosition.BOTTOM,

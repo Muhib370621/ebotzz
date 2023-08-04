@@ -27,7 +27,6 @@ class CustomerServices {
       print("Called API: $url");
       // print("PHONE: $phone");
       print("Status Code: ${response.statusCode}");
-
       print("products"+  productController.totalData.toString());
       print("Response Body: ${response.body}");
 
@@ -62,8 +61,7 @@ class CustomerServices {
       final ProductController productController = Get.put(ProductController());
       productController.totalCategoryData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
       productController.isLoading.value = false;
-
-      print("Response Body: ${response.body}");
+      print("Response Body of category product is : ${productController.totalCategoryData}");
     }
 
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -95,7 +93,6 @@ class CustomerServices {
       productController.isLoading.value = false;
       print("Response Body: ${response.body}");
     }
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       return orderStatusFromJson(response.body);
     }

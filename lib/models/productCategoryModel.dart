@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 // To parse this JSON data, do
 //
 //     final productCategoryModel = productCategoryModelFromJson(jsonString);
