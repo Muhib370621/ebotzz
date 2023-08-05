@@ -8,6 +8,7 @@ import '../widgets/bottom_bar.dart';
 import '../widgets/cart_list_view.dart';
 import '../widgets/counter_button.dart';
 import '../widgets/empty_widget.dart';
+import 'createOrderScreen.dart';
 
 class CartScreen extends StatelessWidget {
   final ProductModel? products;
@@ -42,7 +43,10 @@ class CartScreen extends StatelessWidget {
             priceLabel: "Total price",
             priceValue: "\$${controller.totalPrice.value.toStringAsFixed(2)}",
             buttonLabel: "Checkout",
-            onTap: controller.totalPrice > 0 ? () {} : null,
+            onTap: (){
+              Get.to(CreateOrderScreen(product:products));
+            },
+            // onTap: controller.totalPrice > 0 ? () {} : null,
           );
         },
       ),
@@ -65,6 +69,8 @@ class CartScreen extends StatelessWidget {
                       }),
                 )
               :  EmptyWidget(title: "Empty",);
+
+
         },
       ),
           floatingActionButton: FloatingActionButton(

@@ -51,71 +51,66 @@ class _SignUPScreenState extends State<SignUPScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        // fit: StackFit.loose,
+      body: Column(
         children: [
-          Positioned(
-            top: 0,
-            // left: 0,
-            // right: 0,
-            child: Container(
-              width: 400.w,
-              height: 670.h,
-              color: Colors.redAccent,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 55.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(width: 100.w,),
-                      Text(
-                        "Welcome",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28.sp,
-                          fontWeight: FontWeight.w500,
+          Expanded(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Container(
+                width: 400.w,
+                height: 670.h,
+                color: Colors.pink,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 55.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 100.w,),
+                        Text(
+                          "Welcome",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Get.to(LoginScreen());
-                        },
-                        child: Padding(
-                            padding: EdgeInsets.only(right: 20),
-                            child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Icon(Icons.login_rounded,color: Colors.white,),
-                                SizedBox(width: 5,),
-                                Text("Login",style: TextStyle(fontSize: 18,color: Colors.white),),
-                              ],
-                            )),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    "We make shopping and trading easy",
-                    style: TextStyle(color: Colors.white, fontSize: 18.sp),
-                  ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  SvgPicture.asset("assets/images/loginBackground.svg"),
-                ],
+                        InkWell(
+                          onTap: (){
+                            Get.to(LoginScreen());
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Icon(Icons.login_rounded,color: Colors.white,),
+                                  SizedBox(width: 5,),
+                                  Text("Login",style: TextStyle(fontSize: 18,color: Colors.white),),
+                                ],
+                              )),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      "We make shopping and trading easy",
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    SvgPicture.asset("assets/images/loginBackground.svg"),
+                  ],
+                ),
               ),
             ),
           ),
-          Positioned(
-            top: Get.height*0.49,
-            // left: 0,
-            // right: 0,
-            // bottom: 0,
+          Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Container(
@@ -148,7 +143,8 @@ class _SignUPScreenState extends State<SignUPScreen> {
             ),
           ),
         ],
-      ),
+      )
+
     );
   }
 }

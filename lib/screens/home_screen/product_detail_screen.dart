@@ -32,16 +32,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
           },
         )
       ],
-      // leading: IconButton(
-      //   icon: const Icon(
-      //     FontAwesomeIcons.arrowLeft,
-      //     color: Colors.black,
-      //   ),
-      //   onPressed: () {
-      //     controller.currentPageViewItemIndicator.value = 0;
-      //     Navigator.pop(context);
-      //   },
-      // ),
+
       title: Text(products.title, style: h2Style),
     );
   }
@@ -139,16 +130,16 @@ class DashboardProductDetailScreen extends StatelessWidget {
                         product: products, statusid: 3, isApproved: false));
                     Get.to(() => TradingOfferScreen());
                   },
-                  child: TradeColumn(
+                  child: const TradeColumn(
                     image: "assets/images/trade.svg",
                     name: "Trade",
                   ),
                 ),
-                TradeColumn(
+                const TradeColumn(
                   image: "assets/images/bid.svg",
                   name: "Bid",
                 ),
-                TradeColumn(
+                const TradeColumn(
                   image: "assets/images/eye.svg",
                   name: "Watch",
                 ),
@@ -157,12 +148,12 @@ class DashboardProductDetailScreen extends StatelessWidget {
                     controller.addToCart(products);
                     Get.to(CartScreen(products: products,));
                   },
-                  child: TradeColumn(
+                  child: const TradeColumn(
                     image: "assets/images/buy.svg",
                     name: "Buy",
                   ),
                 ),
-                TradeColumn(
+                const TradeColumn(
                   image: "assets/images/heart.svg",
                   name: "Add",
                 ),

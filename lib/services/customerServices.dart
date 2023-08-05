@@ -8,8 +8,13 @@ import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/createOrderModel.dart';
+import '../models/deleteOrderByIdModel.dart';
+import '../models/errorModel.dart';
+import '../models/getOrderByIdModel.dart';
 import '../models/loginModel.dart';
 import '../models/productCategoryModel.dart';
+import '../utils/prompts.dart';
 
 class CustomerServices {
 
@@ -46,8 +51,6 @@ class CustomerServices {
       throw Exception('Something went wrong');
     }
   }
-
-
 
   Future<List<ProductCategoryModel>> getCategory() async {
 
@@ -108,6 +111,68 @@ class CustomerServices {
     }
   }
 
+  Future<GetByIdOrderModel> getOrderById(String id) async {
+
+    String url = UrlSchemes.baseUrl("orders/${id}");
+    var response = await http.get(
+      Uri.parse(url),
+    );
+    if (kDebugMode) {
+      print("Called API: $url");
+      // print("PHONE: $phone");
+      final ProductController productController = Get.put(ProductController());
+      productController.getOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
+      productController.isLoading.value = false;
+      print("Response Body: ${response.body}");
+    }
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return getByIdOrderModelFromJson(response.body);
+    }
+    if (response.statusCode == 400) {
+    }
+    if (response.statusCode == 401) {
+      throw Exception('Failed to send!');
+    }
+    if (response.statusCode == 500) {
+      throw Exception('Internal Server Error!');
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
+
+  Future<DeleteOrderByIdModel> deleteOrderById(String id) async{
+    String url = UrlSchemes.baseUrl("orders/${id}");
+    var response = await http.delete(
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        Uri.parse(url)
+    );
+    // debug mode
+    if (kDebugMode) {
+      print("Called API: $url");
+      print("Status Code: ${response.statusCode}");
+      final ProductController productController = Get.put(ProductController());
+      productController.deleteOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
+      productController.isLoading.value = false;
+      print("Response Body of delete order by id is : ${response.body}");
+      // print("HEADERS: $header");
+    }
+    if (response.statusCode == 200) {
+      return deleteOrderByIdModelFromJson(response.body);
+    }
+    if (response.statusCode == 401) {
+      throw Exception('Not Authorized');
+    }
+    if (response.statusCode == 500) {
+      throw Exception('Server Not Responding');
+    } else {
+      throw Exception('Something Went Wrong');
+    }
+
+  }
+
   static Future<LoginResponseModel?> loginCustomer(String userName,String password) async{
     LoginResponseModel? model;
 
@@ -129,4 +194,54 @@ class CustomerServices {
   }
 
 
+
+  Future<CreateOrderModel> createOrder (
+      String paymentMethod,String paymentMethodTitle,bool setPaid,
+      Map<String,dynamic> billing,
+      Map<String,dynamic> shipping
+      )
+  async{
+
+    String url = UrlSchemes.baseUrl("orders");
+    var data = jsonEncode({
+      "payment_method":paymentMethod,
+      "payment_method_title":paymentMethodTitle,
+      "set_paid":setPaid,
+      "billing":billing,
+      "shipping":shipping
+    });
+
+    var response = await http.post(
+      headers: {'Content-Type': 'application/json'},
+      Uri.parse(url),
+      body: data,
+    );
+
+    if (kDebugMode) {
+      print("Called API: $url");
+      print("Status Code: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+    }
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Get.defaultDialog(
+          title: "Successfully placed order",
+          titleStyle: const TextStyle(color: Colors.green,fontSize: 16),
+          content:Container(
+            width: 300,height: 300,child: Lottie.asset("assets/json/successIcon.json"),
+          )
+      );
+      return createOrderModelFromJson(response.body);
+    }
+    if (response.statusCode == 400) {
+      Prompts.showError("Oops",errorModelFromJson(response.body).message!);
+    }
+    if (response.statusCode == 401) {
+      throw Exception('Failed to send!');
+    }
+    if (response.statusCode == 500) {
+      throw Exception('Internal Server Error!');
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
 }
