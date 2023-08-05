@@ -63,7 +63,7 @@ class CreateOrderScreen extends StatelessWidget {
                             color: Colors.black
 
                           ),
-                          child: Center(child: const Text("Enter billing details",style: TextStyle(color: Colors.white),))),
+                          child: const Center(child: Text("Enter billing details",style: TextStyle(color: Colors.white),))),
                       SizedBox(height: 20.h,),
                       Row(
                         children: [

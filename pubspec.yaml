@@ -42,6 +42,7 @@ dependencies:
   carousel_slider: ^4.1.1
   lottie: ^2.0.0
   sidebarx: ^0.14.0
+  image_picker: ^0.8.6+3
   simple_animations: ^4.0.1
   native_device_orientation: ^1.1.4
   flutter_svg: ^2.0.5

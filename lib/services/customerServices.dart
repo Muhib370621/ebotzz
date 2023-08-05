@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
 import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/createOrderModel.dart';
+import '../models/createProductModel.dart';
 import '../models/deleteOrderByIdModel.dart';
 import '../models/errorModel.dart';
 import '../models/getOrderByIdModel.dart';
@@ -154,6 +156,7 @@ class CustomerServices {
       print("Called API: $url");
       print("Status Code: ${response.statusCode}");
       final ProductController productController = Get.put(ProductController());
+
       productController.deleteOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
       productController.isLoading.value = false;
       print("Response Body of delete order by id is : ${response.body}");
@@ -231,6 +234,65 @@ class CustomerServices {
           )
       );
       return createOrderModelFromJson(response.body);
+    }
+    if (response.statusCode == 400) {
+      Prompts.showError("Oops",errorModelFromJson(response.body).message!);
+    }
+    if (response.statusCode == 401) {
+      throw Exception('Failed to send!');
+    }
+    if (response.statusCode == 500) {
+      throw Exception('Internal Server Error!');
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
+
+
+  Future<CreateProductModel> createProduct (
+      String name,String type,String regularPrice,
+      String description,
+      String shortDescription,
+      List images
+      ) async{
+
+    String url = UrlSchemes.baseUrl("orders");
+    var data = jsonEncode({
+      "name":name,
+      "type":type,
+      "regular_price":regularPrice,
+      "description":description,
+      "short_description":shortDescription,
+      "images":[
+        {
+          "src" : images
+        }
+      ]
+    });
+
+    var response = await http.post(
+      headers: {'Content-Type': 'application/json'},
+      Uri.parse(url),
+      body: data,
+    );
+
+    if (kDebugMode) {
+      print("Called API: $url");
+      print("Status Code: ${response.statusCode}");
+      ProductController productController = Get.put(ProductController());
+      productController.createProductResponse.value =Map<String, dynamic>.from(json.decode(response.body));
+      productController.isLoading.value = false;
+      print("Response Body of create product is : ${response.body}");
+    }
+    if ((response.statusCode == 200 || response.statusCode == 201) ) {
+      Get.defaultDialog(
+          title: "Successfully placed order",
+          titleStyle: const TextStyle(color: Colors.green,fontSize: 16),
+          content:Container(
+            width: 300,height: 300,child: Lottie.asset("assets/json/successIcon.json"),
+          )
+      );
+      return createProductModelFromJson(response.body);
     }
     if (response.statusCode == 400) {
       Prompts.showError("Oops",errorModelFromJson(response.body).message!);

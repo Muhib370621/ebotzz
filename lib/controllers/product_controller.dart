@@ -9,6 +9,7 @@ import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';
 
 import '../models/createOrderModel.dart';
+import '../models/createProductModel.dart';
 import '../models/deleteOrderByIdModel.dart';
 import '../models/getOrderByIdModel.dart';
 import '../models/productCategoryModel.dart';
@@ -22,9 +23,10 @@ class ProductController extends GetxController {
   RxDouble totalPrice = 0.0.obs;
   var billing = {}.obs;
   var shipping = {}.obs;
-  var getOrderById={}.obs;
-  var deleteOrderById={}.obs;
-  CreateOrderModel? getResultCreate ;
+  var getOrderById = {}.obs;
+  var deleteOrderById = {}.obs;
+  var createProductResponse ={}.obs;
+  CreateOrderModel? getResultCreate;
 
   @override
   void onInit() {
@@ -157,7 +159,6 @@ class ProductController extends GetxController {
     }
   }
 
-
   Future<GetByIdOrderModel?> getOrderByIdResponse(String id) async {
     try {
       isLoading.value = true;
@@ -166,8 +167,7 @@ class ProductController extends GetxController {
         print("Result: " + result.toString());
       }
       return result;
-    }
-    on SocketException {
+    } on SocketException {
       isLoading.value = false;
       // Prompts.showDialog(
       //     middleText: "Internet connection failure!", title: 'Oops');
@@ -188,8 +188,7 @@ class ProductController extends GetxController {
         print("Result: " + result.toString());
       }
       return result;
-    }
-    on SocketException {
+    } on SocketException {
       isLoading.value = false;
       // Prompts.showDialog(
       //     middleText: "Internet connection failure!", title: 'Oops');
@@ -202,33 +201,34 @@ class ProductController extends GetxController {
     }
   }
 
-
-  Map<String,String> setBilling (String firstName,lastName,address1,address2,city,state,postcode,country,email,phone){
-    var set =<String,String> {
-      "first_name":firstName,
-      "last_name":lastName,
-      "address1":address1,
-      "address2":address2,
-      "city":city,
-      "state":state,
-      "postcode":postcode,
-      "country":country,
-      "email":email,
-      "phone":phone
+  Map<String, String> setBilling(String firstName, lastName, address1, address2,
+      city, state, postcode, country, email, phone) {
+    var set = <String, String>{
+      "first_name": firstName,
+      "last_name": lastName,
+      "address1": address1,
+      "address2": address2,
+      "city": city,
+      "state": state,
+      "postcode": postcode,
+      "country": country,
+      "email": email,
+      "phone": phone
     };
     return set;
   }
 
-  Map<String,String> setShipping (String firstName,lastName,address1,address2,city,state,postcode,country){
-    var set =<String,String> {
-      "first_name":firstName,
-      "last_name":lastName,
-      "address1":address1,
-      "address2":address2,
-      "city":city,
-      "state":state,
-      "postcode":postcode,
-      "country":country,
+  Map<String, String> setShipping(String firstName, lastName, address1,
+      address2, city, state, postcode, country) {
+    var set = <String, String>{
+      "first_name": firstName,
+      "last_name": lastName,
+      "address1": address1,
+      "address2": address2,
+      "city": city,
+      "state": state,
+      "postcode": postcode,
+      "country": country,
     };
     return set;
   }
@@ -246,6 +246,25 @@ class ProductController extends GetxController {
 
       getResultCreate = result;
 
+      if (kDebugMode) {
+        print("Result: " + result.toString());
+      }
+      return result;
+    } on SocketException {
+      isLoading.value = false;
+    } on Exception {
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+    }
+  }
+
+  Future<CreateProductModel?> createProduct(String name, type, regularPrice,
+      description, shortDescription, images) async {
+    try {
+      isLoading.value = true;
+      var result = await CustomerServices().createProduct(
+          name, type, regularPrice, description, shortDescription, images);
       if (kDebugMode) {
         print("Result: " + result.toString());
       }

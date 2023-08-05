@@ -50,7 +50,6 @@ class VendorTabBar extends StatelessWidget {
                 Tab(
                   text: "Export",
                 ),
-
               ],
             ),
           ),

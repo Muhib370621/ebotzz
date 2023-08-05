@@ -26,11 +26,11 @@ class VendorScreenDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.data_exploration_outlined,
               color: Color(0xffE41E5C),
             ),
-            title: Text(
+            title: const Text(
               'DashBoard',
               style: TextStyle(color: Colors.black),
             ),
@@ -39,68 +39,68 @@ class VendorScreenDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.card_membership_rounded,
               color: Color(0xffE41E5C),
             ),
-            title: Text(
+            title: const Text(
               'Products',
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => VendorProducts());
+              Get.to(() => const VendorProducts());
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.shopping_cart_outlined,
               color: Color(0xffE41E5C),
             ),
-            title: Text(
+            title: const Text(
               'Orders',
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => VendorOrders());
+              Get.to(() => const VendorOrders());
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.shop_2_outlined,
               color: Color(0xffE41E5C),
             ),
-            title: Text(
+            title: const Text(
               'Auction',
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => AuctionScreen());
+              Get.to(() => const AuctionScreen());
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.arrow_circle_up,
               color: Color(0xffE41E5C),
             ),
-            title: Text(
+            title: const Text(
               'Withdraw',
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(VendorWithdraw());
+              Get.to(const VendorWithdraw());
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.settings,
               color: Color(0xffE41E5C),
             ),
-            title: Text(
+            title: const Text(
               'Setting',
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(VendorSetting());
+              Get.to(const VendorSetting());
             },
           ),
         ],
