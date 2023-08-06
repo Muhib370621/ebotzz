@@ -29,6 +29,7 @@ class OrderStatusScreen extends StatelessWidget {
                   productController.deleteOrderByIdResponse(controller.text);
                   productController.getOrderByIdResponse(controller.text);
                   if(productController.getOrderById["status"]=="trash"){
+                    productController.getOrderStatus();
                     Get.snackbar("Successfully", "Deleted item Successfully!",
                         colorText: Colors.white,
                         snackPosition: SnackPosition.BOTTOM,
