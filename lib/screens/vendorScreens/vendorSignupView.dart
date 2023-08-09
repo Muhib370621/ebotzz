@@ -1,6 +1,7 @@
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
 
+import '../../controllers/signUpController.dart';
 import '../../utils/imports.dart';
 
 class VendorSignupView extends StatelessWidget {
@@ -8,6 +9,7 @@ class VendorSignupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SignUpController signUpController = Get.put(SignUpController());
     TextEditingController controller1 = TextEditingController();
     TextEditingController controller2 = TextEditingController();
     TextEditingController controller3 = TextEditingController();
@@ -37,14 +39,7 @@ class VendorSignupView extends StatelessWidget {
               SizedBox(height: 10,),
 
               CustomActionButton(buttonText: "Signup",isIcon: false,onTap: (){
-
-                Get.defaultDialog(
-                    title: "Successfully registered",
-                    titleStyle: TextStyle(color: Colors.green,fontSize: 16),
-                    content:Container(
-                      width: 300,height: 300,child: Lottie.asset("assets/json/successIcon.json"),
-                    )
-                );
+                // signUpController.signUp(name, email, password)
               }, isLoading: false,),
               SizedBox(height: 10,)
 

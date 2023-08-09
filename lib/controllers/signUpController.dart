@@ -51,4 +51,45 @@ class SignUpController extends GetxController {
       // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
     }
   }
+
+
+  // Future<SignUpModel?> signUpVendor(
+  //     String name,
+  //     String email,
+  //     String password,
+  //     String firstName,
+  //     String lastName,
+  //     String shopName,
+  //     String shopURL,
+  //     String phoneNumber
+  //     // String confirmPass,
+  //     ) async {
+  //   try {
+  //     isLoading.value = true;
+  //     var result = await AuthenticationServices().signUpVendor(
+  //       name: name,
+  //       email: email,
+  //       password: password,
+  //
+  //       // confirmPass: confirmPass,
+  //     );
+  //     if (kDebugMode) {
+  //       print("Result: " + result.toString());
+  //     }
+  //     // completeData.value = result;
+  //     object.value = result;
+  //     isLoading.value = false;
+  //     return result;
+  //   } on SocketException {
+  //     isLoading.value = false;
+  //     // Prompts.showDialog(
+  //     //     middleText: "Internet connection failure!", title: 'Oops');
+  //   } on Exception {
+  //     isLoading.value = false;
+  //     // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
+  //   } catch (e) {
+  //     isLoading.value = false;
+  //     // Prompts.showDialog(middleText: "No data found!", title: 'Oops');
+  //   }
+  // }
 }
