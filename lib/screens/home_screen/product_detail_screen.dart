@@ -8,11 +8,14 @@ import 'package:ebotzz/widgets/customActionButton.dart';
 import '../../utils/imports.dart';
 import '../../widgets/counter_button.dart';
 import '../../widgets/trade_column.dart';
+import '../bidsScreen.dart';
+import '../tradeScreen.dart';
 
 class DashboardProductDetailScreen extends StatelessWidget {
 
   final ProductModel products;
   TradingController tradingController = Get.put(TradingController());
+  final ProductController productController = Get.put(ProductController());
   DashboardProductDetailScreen({Key? key, required this.products})
       : super(key: key);
   PreferredSizeWidget _appBar(BuildContext context) {
@@ -126,18 +129,119 @@ class DashboardProductDetailScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: (){
-                    tradingController.addYourTradingProduct(Yourtradingproduct(
-                        product: products, statusid: 3, isApproved: false));
-                    Get.to(() => TradingOfferScreen());
+                    // tradingController.addYourTradingProduct(Yourtradingproduct(
+                    //     product: products, statusid: 3, isApproved: false));
+                    // Get.to(() => TradingOfferScreen());
+
+                      Get.defaultDialog(
+                        title: "Choose item for trade" ,
+                        content: SizedBox(
+                          height: 500,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
+                              children: List.generate(10, (index) {
+                                return Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                                  child: InkWell(
+                                    child: Container(
+                                      width: 200,
+                                      height: 320,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: Colors.grey)),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 150,
+                                            width: 200,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Image(
+                                                image: NetworkImage(
+                                                    productController
+                                                        .totalData[index+36]
+                                                    ["images"][0]["src"]
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 5),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  productController
+                                                      .totalData[index + 36]["name"]
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      color: Colors.grey.shade800,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                                Text(
+                                                    productController
+                                                        .totalData[index + 36]
+                                                    ["type"]
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 16.sp,
+                                                        color: Colors.grey.shade800,
+                                                        fontWeight:
+                                                        FontWeight.bold)),
+                                                Text(
+                                                    "price : ${productController.totalData[index +36]["price"]}" +
+                                                        " USD ",
+                                                    style: TextStyle(
+                                                        fontSize: 18.sp,
+                                                        color: Colors.grey.shade800,
+                                                        fontWeight:
+                                                        FontWeight.bold)),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: (){
+                                      var originalProduct = products;
+                                      var offeredProduct = ProductModel(id:productController.totalData[index+36]["id"] ,
+                                          title: productController.totalData[index+36]["title"].toString() ,
+                                          description: productController.totalData[index+36]["description"] ,
+                                          price:double.parse(productController.totalData[index+36]["price"])  ,
+                                          img:productController.totalData[index+36]["images"][0]["src"]
+                                      );
+                                      Get.to(TradeScreen(productOriginal: originalProduct,productOffered: offeredProduct,));
+                                    },
+
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        ),
+                      );
+
                   },
                   child: const TradeColumn(
                     image: "assets/images/trade.svg",
                     name: "Trade",
                   ),
                 ),
-                const TradeColumn(
-                  image: "assets/images/bid.svg",
-                  name: "Bid",
+                InkWell(
+                  onTap: (){
+                    Get.to(BidsScreen());
+                  },
+                  child: const TradeColumn(
+                    image: "assets/images/bid.svg",
+                    name: "Bid",
+                  ),
                 ),
                 const TradeColumn(
                   image: "assets/images/eye.svg",

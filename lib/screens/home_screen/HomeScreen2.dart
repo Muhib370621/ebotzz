@@ -26,7 +26,7 @@ class HomeScreen2 extends StatelessWidget {
             child: productController.isLoading.value == true
                 ? const Center(
                     child: CircularProgressIndicator(
-                    color: Colors.red,
+                    color: Colors.pink,
                   ))
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -416,98 +416,111 @@ class HomeScreen2 extends StatelessWidget {
                                   ),
                                 ),
                                 onTap: () {
-                                var originalItem=  ProductModel(id: productController.totalData[index + 37]["id"],
-                                      title: productController.totalData[index + 37]["type"],
-                                      description: productController.totalData[index + 37]["name"],
-                                      price: double.parse(productController.totalData[index + 37]["price"]),
-                                  quantity: 1,
-                                  img: productController
-                                      .totalData[index + 37]["images"]
-                                  [0]["src"]);
-                                  Get.defaultDialog(
-                                    title: "Choose item for trade" ,
-                                    content: SizedBox(
-                                      height: 500,
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.vertical,
-                                        child: Column(
-                                          children: List.generate(10, (index) {
-                                            return Padding(
-                                              padding:
-                                              const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                                              child: InkWell(
-                                                child: Container(
-                                                  width: 200,
-                                                  height: 290,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(20),
-                                                      border: Border.all(color: Colors.grey)),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 150,
-                                                        width: 200,
-                                                        child: Padding(
-                                                          padding: const EdgeInsets.all(8.0),
-                                                          child: Image(
-                                                            image: NetworkImage(
-                                                                productController
-                                                                    .totalData[index+21]
-                                                                ["images"][0]["src"]),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(left: 5),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              productController
-                                                                  .totalData[index + 21]["name"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  fontSize: 18.sp,
-                                                                  color: Colors.grey.shade800,
-                                                                  fontWeight: FontWeight.bold),
-                                                            ),
-                                                            Text(
-                                                                productController
-                                                                    .totalData[index + 21]
-                                                                ["type"]
-                                                                    .toString(),
-                                                                style: TextStyle(
-                                                                    fontSize: 16.sp,
-                                                                    color: Colors.grey.shade800,
-                                                                    fontWeight:
-                                                                    FontWeight.bold)),
-                                                            Text(
-                                                                "price : ${productController.totalData[index + 21]["price"]}" +
-                                                                    " USD ",
-                                                                style: TextStyle(
-                                                                    fontSize: 18.sp,
-                                                                    color: Colors.grey.shade800,
-                                                                    fontWeight:
-                                                                    FontWeight.bold)),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
+                                  Get.to(DashboardProductDetailScreen(
+                                      products: ProductModel(
+                                        id: productController.totalData[index+37]["id"],
+                                        title: productController.totalData[index+37]["name"],
+                                        description: productController.totalData[index+37]
+                                        ["description"],
+                                        price: double.parse(
+                                            productController.totalData[index+37]["price"]),
+                                        quantity: 1,
+                                        img: productController.totalData[index+37]["images"][0]
+                                        ["src"],
+                                      )));
 
-                                              ),
-                                            );
-                                          }),
-                                        ),
-                                      ),
-                                    ),
-
-                                  );
+                                // var originalItem=  ProductModel(id: productController.totalData[index + 37]["id"],
+                                //       title: productController.totalData[index + 37]["type"],
+                                //       description: productController.totalData[index + 37]["name"],
+                                //       price: double.parse(productController.totalData[index + 37]["price"]),
+                                //   quantity: 1,
+                                //   img: productController
+                                //       .totalData[index + 37]["images"]
+                                //   [0]["src"]);
+                                //   Get.defaultDialog(
+                                //     title: "Choose item for trade" ,
+                                //     content: SizedBox(
+                                //       height: 500,
+                                //       child: SingleChildScrollView(
+                                //         scrollDirection: Axis.vertical,
+                                //         child: Column(
+                                //           children: List.generate(10, (index) {
+                                //             return Padding(
+                                //               padding:
+                                //               const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                                //               child: InkWell(
+                                //                 child: Container(
+                                //                   width: 200,
+                                //                   height: 290,
+                                //                   decoration: BoxDecoration(
+                                //                       borderRadius: BorderRadius.circular(20),
+                                //                       border: Border.all(color: Colors.grey)),
+                                //                   child: Column(
+                                //                     crossAxisAlignment:
+                                //                     CrossAxisAlignment.start,
+                                //                     children: [
+                                //                       SizedBox(
+                                //                         height: 150,
+                                //                         width: 200,
+                                //                         child: Padding(
+                                //                           padding: const EdgeInsets.all(8.0),
+                                //                           child: Image(
+                                //                             image: NetworkImage(
+                                //                                 productController
+                                //                                     .totalData[index+21]
+                                //                                 ["images"][0]["src"]),
+                                //                             fit: BoxFit.cover,
+                                //                           ),
+                                //                         ),
+                                //                       ),
+                                //                       Padding(
+                                //                         padding: EdgeInsets.only(left: 5),
+                                //                         child: Column(
+                                //                           crossAxisAlignment:
+                                //                           CrossAxisAlignment.start,
+                                //                           children: [
+                                //                             Text(
+                                //                               productController
+                                //                                   .totalData[index + 21]["name"]
+                                //                                   .toString(),
+                                //                               style: TextStyle(
+                                //                                   fontSize: 18.sp,
+                                //                                   color: Colors.grey.shade800,
+                                //                                   fontWeight: FontWeight.bold),
+                                //                             ),
+                                //                             Text(
+                                //                                 productController
+                                //                                     .totalData[index + 21]
+                                //                                 ["type"]
+                                //                                     .toString(),
+                                //                                 style: TextStyle(
+                                //                                     fontSize: 16.sp,
+                                //                                     color: Colors.grey.shade800,
+                                //                                     fontWeight:
+                                //                                     FontWeight.bold)),
+                                //                             Text(
+                                //                                 "price : ${productController.totalData[index + 21]["price"]}" +
+                                //                                     " USD ",
+                                //                                 style: TextStyle(
+                                //                                     fontSize: 18.sp,
+                                //                                     color: Colors.grey.shade800,
+                                //                                     fontWeight:
+                                //                                     FontWeight.bold)),
+                                //                           ],
+                                //                         ),
+                                //                       )
+                                //                     ],
+                                //                   ),
+                                //                 ),
+                                //
+                                //               ),
+                                //             );
+                                //           }),
+                                //         ),
+                                //       ),
+                                //     ),
+                                //
+                                //   );
 
                                   // Get.to(DashboardProductDetailScreen(
                                   //     products: ProductModel(
