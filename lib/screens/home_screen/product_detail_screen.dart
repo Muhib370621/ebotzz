@@ -3,6 +3,7 @@
 import 'package:ebotzz/controllers/tradingcontroller.dart';
 import 'package:ebotzz/core/app_extension.dart';
 import 'package:ebotzz/models/yourproduct.dart';
+import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 
 import '../../utils/imports.dart';
@@ -243,9 +244,14 @@ class DashboardProductDetailScreen extends StatelessWidget {
                     name: "Bid",
                   ),
                 ),
-                const TradeColumn(
-                  image: "assets/images/eye.svg",
-                  name: "Watch",
+                InkWell(
+                  onTap: (){
+                    Prompts.makeAnOffer();
+                  },
+                  child: const TradeColumn(
+                    image: "assets/images/eye.svg",
+                    name: "Make Offer",
+                  ),
                 ),
                 InkWell(
                   onTap: (){

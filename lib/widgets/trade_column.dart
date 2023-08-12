@@ -21,7 +21,7 @@ class TradeColumn extends StatelessWidget {
             child: SvgPicture.asset(
               image,
               color: Colors.white,
-              height: 30,
+              height: 25,
             ),
           ),
           SizedBox(
