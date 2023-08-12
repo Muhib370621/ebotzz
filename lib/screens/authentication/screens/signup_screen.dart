@@ -60,6 +60,7 @@ class _SignUPScreenState extends State<SignUPScreen> {
                 width: 400.w,
                 height: 670.h,
                 color: Colors.pink,
+                // child: Image.asset("assets/images/img_3.png"),
                 child: Column(
                   children: [
                     SizedBox(
