@@ -185,7 +185,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                                   image: NetworkImage(
                                                       productController
                                                                   .totalData[
-                                                              index + 36]
+                                                              index + 40]
                                                           ["images"][0]["src"]),
                                                   fit: BoxFit.cover,
                                                 ),
@@ -199,7 +199,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                                 children: [
                                                   Text(
                                                     productController
-                                                        .totalData[index + 36]
+                                                        .totalData[index + 40]
                                                             ["name"]
                                                         .toString(),
                                                     style: TextStyle(
@@ -211,7 +211,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                                   ),
                                                   Text(
                                                       productController
-                                                          .totalData[index + 36]
+                                                          .totalData[index + 40]
                                                               ["type"]
                                                           .toString(),
                                                       style: TextStyle(
@@ -221,7 +221,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   Text(
-                                                      "price : ${productController.totalData[index + 36]["price"]}" +
+                                                      "price : ${productController.totalData[index + 40]["price"]}" +
                                                           " USD ",
                                                       style: TextStyle(
                                                           fontSize: 18.sp,
@@ -239,17 +239,17 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                         var originalProduct = products;
                                         var offeredProduct = ProductModel(
                                             id: productController
-                                                .totalData[index + 36]["id"],
+                                                .totalData[index + 40]["id"],
                                             title: productController
-                                                .totalData[index + 36]["title"]
+                                                .totalData[index + 40]["title"]
                                                 .toString(),
                                             description: productController
-                                                    .totalData[index + 36]
+                                                    .totalData[index + 40]
                                                 ["description"],
                                             price: double.parse(
-                                                productController.totalData[index + 36]
+                                                productController.totalData[index + 40]
                                                     ["price"]),
-                                            img: productController.totalData[index + 36]
+                                            img: productController.totalData[index + 40]
                                                 ["images"][0]["src"]);
                                         Get.to(TradeScreen(
                                           productOriginal: originalProduct,
