@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
 import 'package:ebotzz/widgets/jobFilterContainer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddProduct extends StatefulWidget {
@@ -18,20 +18,32 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
-
   pickImageFromCamera() async {
     // final RiggerController riggerController = Get.put(RiggerController());
     final imagePicker = ImagePicker();
     final image = await imagePicker.pickImage(
       source: ImageSource.camera,
-      preferredCameraDevice: CameraDevice.front,
+      preferredCameraDevice: CameraDevice.rear,
     );
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    await referenceImageToUpload.putFile(
+      File(
+        image!.path,
+      ),
+    );
+
     // String userID = LocalStorage.readString(
     //     key: LocalStorageKeys.userID)
     //     .toString();
-    _uploadImage(File(image!.path));
-    setState(() {
-      selectedImages.add(File(image!.path));
+    imageUrl = await referenceImageToUpload.getDownloadURL();
+
+    setState(()  {
+      selectedImages.add(File(image.path));
+      imagePaths.add(imageUrl!);
       // riggerController.uploadImage(
       //   userID,
       //   File(image.path),
@@ -41,33 +53,22 @@ class _AddProductState extends State<AddProduct> {
     });
   }
 
-  List<File> selectedImages = [];
+  List<File> selectedImages = <File>[];
   List<String> imagePaths = [];
   final picker = ImagePicker();
 
   Future getImages() async {
-    // final RiggerController riggerController = Get.put(RiggerController());
     String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-
-    /*Step 2: Upload to Firebase storage*/
-    //Install firebase_storage
-    //Import the library
-
-    //Get a reference to storage root
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDirImages = referenceRoot.child('images');
 
-    //Create a reference for the image to be stored
     Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
     final pickedFile = await picker.pickMultiImage(
         imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
     List<XFile> xfilePick = pickedFile;
-    // String userID = LocalStorage.readString(
-    //     key: LocalStorageKeys.userID)
-    //     .toString();
 
     setState(
-          () async {
+      () async {
         if (xfilePick.isNotEmpty) {
           for (var i = 0; i < xfilePick.length; i++) {
             await referenceImageToUpload.putFile(
@@ -75,11 +76,16 @@ class _AddProductState extends State<AddProduct> {
                 xfilePick[i].path,
               ),
             );
+            selectedImages.add(File(xfilePick[i].path));
+            // imagePaths.add(imageUrl!);
+            print(selectedImages.length);
+            setState(() {});
             //Success: get the download URL
             setState(() async {
               imageUrl = await referenceImageToUpload.getDownloadURL();
               imagePaths.add(imageUrl!);
               print(imageUrl);
+              print(imagePaths);
             });
             // riggerController.uploadImage(
             //   userID,
@@ -96,10 +102,12 @@ class _AddProductState extends State<AddProduct> {
   }
 
   String? imageUrl;
+
   Future<void> _uploadImage(File file) async {
     if (selectedImages.isNotEmpty) {
       try {
-        String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+        String uniqueFileName =
+            DateTime.now().millisecondsSinceEpoch.toString();
 
         /*Step 2: Upload to Firebase storage*/
         //Install firebase_storage
@@ -110,7 +118,8 @@ class _AddProductState extends State<AddProduct> {
         Reference referenceDirImages = referenceRoot.child('images');
 
         //Create a reference for the image to be stored
-        Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+        Reference referenceImageToUpload =
+            referenceDirImages.child(uniqueFileName);
         await referenceImageToUpload.putFile(
           File(
             file.path,
@@ -132,13 +141,14 @@ class _AddProductState extends State<AddProduct> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     ProductController productController = Get.put(ProductController());
     TextEditingController controllerName = TextEditingController();
     TextEditingController controller = TextEditingController();
     TextEditingController controllerType = TextEditingController();
-    TextEditingController controllerRegularPrice= TextEditingController();
+    TextEditingController controllerRegularPrice = TextEditingController();
     TextEditingController controllerDescription = TextEditingController();
     TextEditingController controllerShortDescription = TextEditingController();
 
@@ -147,19 +157,36 @@ class _AddProductState extends State<AddProduct> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20.h,),
+            SizedBox(
+              height: 20.h,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 12),
-              child: Text("Add New Products",
-                style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 24.sp),),
+              child: Text(
+                "Add New Products",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 24.sp),
+              ),
             ),
-            CustomInputField(controller: controller,label:"Search Products",),
-            SizedBox(height: 15.h,),
+            CustomInputField(
+              controller: controller,
+              label: "Search Products",
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 12),
-              child: Text("Filter your search:",style: TextStyle(color: Colors.black38,fontSize: 20),),
+              child: Text(
+                "Filter your search:",
+                style: TextStyle(color: Colors.black38, fontSize: 20),
+              ),
             ),
-            SizedBox(height: 17.h,),
+            SizedBox(
+              height: 17.h,
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
@@ -167,39 +194,57 @@ class _AddProductState extends State<AddProduct> {
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(Icons.filter_list_off_outlined,color: Colors.black54,),
-                    SizedBox(width: 5.w,),
+                    Icon(
+                      Icons.filter_list_off_outlined,
+                      color: Colors.black54,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     JobFilterContainer(label: "All Dates"),
-                    SizedBox(width: 5.w,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     JobFilterContainer(label: "Select Category"),
-                    SizedBox(width: 5.w,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     JobFilterContainer(label: "Product type"),
-                    SizedBox(width: 5.w,),
+                    SizedBox(
+                      width: 5.w,
+                    ),
                     JobFilterContainer(label: "Bulk Actions"),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 25.h,),
-            Center(child: CustomActionButton(buttonText: "Apply",isIcon: false, isLoading: false,)),
-            SizedBox(height: 20.h,),
-
-
+            SizedBox(
+              height: 25.h,
+            ),
+            Center(
+                child: CustomActionButton(
+              buttonText: "Apply",
+              isIcon: false,
+              isLoading: false,
+            )),
+            SizedBox(
+              height: 20.h,
+            ),
             SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.black45)
-                  ),
+                      border: Border.all(color: Colors.black45)),
                   child: Column(
                     children: [
-                      SizedBox(height: 50.h,),
-
+                      SizedBox(
+                        height: 50.h,
+                      ),
                       Center(
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Prompts.uploadPicPopup(() {
                               Get.back();
                               pickImageFromCamera();
@@ -237,7 +282,9 @@ class _AddProductState extends State<AddProduct> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10.h,),
+                      SizedBox(
+                        height: 10.h,
+                      ),
                       Visibility(
                         visible: selectedImages.isNotEmpty,
                         child: DottedBorder(
@@ -253,24 +300,17 @@ class _AddProductState extends State<AddProduct> {
                               child: GridView.builder(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount:
-                                selectedImages.length,
+                                itemCount: selectedImages.length,
                                 gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
-                                itemBuilder:
-                                    (BuildContext context,
-                                    int index) {
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3),
+                                itemBuilder: (BuildContext context, int index) {
                                   return Center(
-                                      child:
-                                      Image.file(
-                                          selectedImages[
-                                          index]));
+                                      child: Image.file(selectedImages[index]));
                                 },
                               ),
                             )),
                       ),
-
                       SizedBox(
                         height: 20.h,
                       ),
@@ -306,22 +346,40 @@ class _AddProductState extends State<AddProduct> {
                         controller: controllerShortDescription,
                         label: "Enter the short description of product",
                       ),
-                      SizedBox(height: 20.h,),
-                      CustomActionButton(buttonText: "Create", isLoading: false,isIcon: false,onTap: (){
-
-                        productController.createProduct(controllerName.text, controllerType.text, controllerRegularPrice.text,
-                            controllerDescription.text, controllerShortDescription.text,
-                            imageUrl
-                        );
-                      },),
-                      SizedBox(height: 20.h,),
-
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      CustomActionButton(
+                        buttonText: "Create",
+                        isLoading: false,
+                        isIcon: false,
+                        onTap: () async {
+                          print("tapped");
+                          print(controllerName.text);
+                          await CustomerServices().createProduct(
+                              controllerName.text,
+                              controllerType.text,
+                              controllerRegularPrice.text,
+                              controllerDescription.text,
+                              controllerShortDescription.text,
+                              imagePaths);
+                          // await productController.createProduct(
+                          //     controllerName.text,
+                          //     controllerType.text,
+                          //     controllerRegularPrice.text,
+                          //     controllerDescription.text,
+                          //     controllerShortDescription.text,
+                          //     imageUrl);
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-
           ],
         ),
       ),

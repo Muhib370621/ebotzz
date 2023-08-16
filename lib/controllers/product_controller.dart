@@ -259,8 +259,8 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<CreateProductModel?> createProduct(String name, type, regularPrice,
-      description, shortDescription, images) async {
+  Future<CreateProductModel?> createProduct(String name, String type, String regularPrice,
+      String description, String shortDescription, images) async {
     try {
       isLoading.value = true;
       var result = await CustomerServices().createProduct(

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
 import 'package:ebotzz/models/signUpModel.dart';
+import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
 import 'package:ebotzz/services/urlSchemes.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';
@@ -292,6 +293,9 @@ class CustomerServices {
             width: 300,height: 300,child: Lottie.asset("assets/json/successIcon.json"),
           )
       );
+      Future.delayed(Duration(seconds: 2),(){
+        Get.off(()=> HomeScreen2());
+      });
       return createProductModelFromJson(response.body);
     }
     if (response.statusCode == 400) {
