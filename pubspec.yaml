@@ -45,7 +45,10 @@ dependencies:
   image_picker:
   simple_animations: ^4.0.1
   native_device_orientation: ^1.1.4
+  dotted_border: ^2.0.0+3
+  firebase_storage: ^11.2.5
   flutter_svg: ^2.0.5
+  firebase_core: ^2.15.0
   http:
   fl_chart:
 

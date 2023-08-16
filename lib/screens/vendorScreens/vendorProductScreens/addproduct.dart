@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:ebotzz/utils/imports.dart';
+import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
 import 'package:ebotzz/widgets/jobFilterContainer.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,16 +19,118 @@ class AddProduct extends StatefulWidget {
 
 class _AddProductState extends State<AddProduct> {
 
-  File? _image;
-  _pickImageFromCamera() async {
+  pickImageFromCamera() async {
+    // final RiggerController riggerController = Get.put(RiggerController());
     final imagePicker = ImagePicker();
     final image = await imagePicker.pickImage(
       source: ImageSource.camera,
       preferredCameraDevice: CameraDevice.front,
     );
+    // String userID = LocalStorage.readString(
+    //     key: LocalStorageKeys.userID)
+    //     .toString();
+    _uploadImage(File(image!.path));
     setState(() {
-      _image = File(image!.path);
+      selectedImages.add(File(image!.path));
+      // riggerController.uploadImage(
+      //   userID,
+      //   File(image.path),
+      // );
+      // _image1 = File(image!.path);
+      // imageController.image.value = _image;
     });
+  }
+
+  List<File> selectedImages = [];
+  List<String> imagePaths = [];
+  final picker = ImagePicker();
+
+  Future getImages() async {
+    // final RiggerController riggerController = Get.put(RiggerController());
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    /*Step 2: Upload to Firebase storage*/
+    //Install firebase_storage
+    //Import the library
+
+    //Get a reference to storage root
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+
+    //Create a reference for the image to be stored
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    final pickedFile = await picker.pickMultiImage(
+        imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
+    List<XFile> xfilePick = pickedFile;
+    // String userID = LocalStorage.readString(
+    //     key: LocalStorageKeys.userID)
+    //     .toString();
+
+    setState(
+          () async {
+        if (xfilePick.isNotEmpty) {
+          for (var i = 0; i < xfilePick.length; i++) {
+            await referenceImageToUpload.putFile(
+              File(
+                xfilePick[i].path,
+              ),
+            );
+            //Success: get the download URL
+            setState(() async {
+              imageUrl = await referenceImageToUpload.getDownloadURL();
+              imagePaths.add(imageUrl!);
+              print(imageUrl);
+            });
+            // riggerController.uploadImage(
+            //   userID,
+            //   File(xfilePick[i].path),
+            // );
+            selectedImages.add(File(xfilePick[i].path));
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Nothing is selected')));
+        }
+      },
+    );
+  }
+
+  String? imageUrl;
+  Future<void> _uploadImage(File file) async {
+    if (selectedImages.isNotEmpty) {
+      try {
+        String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+        /*Step 2: Upload to Firebase storage*/
+        //Install firebase_storage
+        //Import the library
+
+        //Get a reference to storage root
+        Reference referenceRoot = FirebaseStorage.instance.ref();
+        Reference referenceDirImages = referenceRoot.child('images');
+
+        //Create a reference for the image to be stored
+        Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+        await referenceImageToUpload.putFile(
+          File(
+            file.path,
+          ),
+        );
+        //Success: get the download URL
+        setState(() async {
+          imageUrl = await referenceImageToUpload.getDownloadURL();
+          print(imageUrl);
+        });
+        // final Reference ref =
+        // FirebaseStorage.instance.ref().child('images/${DateTime.now().toString()}');
+        // await ref.putFile(file);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Image uploaded to Firebase Storage')),
+        );
+      } catch (e) {
+        print(e.toString());
+      }
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -91,10 +196,17 @@ class _AddProductState extends State<AddProduct> {
                   child: Column(
                     children: [
                       SizedBox(height: 50.h,),
+
                       Center(
                         child: InkWell(
                           onTap: (){
-                            _pickImageFromCamera();
+                            Prompts.uploadPicPopup(() {
+                              Get.back();
+                              pickImageFromCamera();
+                            }, () {
+                              Get.back();
+                              getImages();
+                            });
                           },
                           child: Container(
                             width: 200.w,
@@ -125,6 +237,40 @@ class _AddProductState extends State<AddProduct> {
                           ),
                         ),
                       ),
+                      SizedBox(height: 10.h,),
+                      Visibility(
+                        visible: selectedImages.isNotEmpty,
+                        child: DottedBorder(
+                            padding: EdgeInsets.all(10.sp),
+                            borderType: BorderType.RRect,
+                            radius: Radius.circular(15.sp),
+                            dashPattern: const [10, 10],
+                            color: Colors.redAccent,
+                            strokeWidth: 2,
+                            child: SizedBox(
+                              // height: 8.h,
+                              width: 280.w,
+                              child: GridView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount:
+                                selectedImages.length,
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                                itemBuilder:
+                                    (BuildContext context,
+                                    int index) {
+                                  return Center(
+                                      child:
+                                      Image.file(
+                                          selectedImages[
+                                          index]));
+                                },
+                              ),
+                            )),
+                      ),
+
                       SizedBox(
                         height: 20.h,
                       ),
@@ -165,7 +311,7 @@ class _AddProductState extends State<AddProduct> {
 
                         productController.createProduct(controllerName.text, controllerType.text, controllerRegularPrice.text,
                             controllerDescription.text, controllerShortDescription.text,
-                            "http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_front.jpg"
+                            imageUrl
                         );
                       },),
                       SizedBox(height: 20.h,),

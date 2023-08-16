@@ -1,9 +1,15 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
+import 'package:ebotzz/firebase_options.dart';
 import 'package:ebotzz/utils/imports.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

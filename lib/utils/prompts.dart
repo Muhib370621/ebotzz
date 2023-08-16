@@ -1,3 +1,4 @@
+import 'package:ebotzz/core/shared/uplaodPicPopup.dart';
 import 'package:ebotzz/widgets/popups/makeAnOffer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,6 +73,15 @@ class Prompts {
         ), // set the font size of the message
       ),
       // icon: Lottie.asset(AppAssets.successIcon),
+    );
+  }
+
+  static uploadPicPopup(void Function() onCamTap,void Function() onGallTap,) {
+    Get.dialog(
+      UploadPicPopup(onCameraTap: onCamTap,onGalleryTap: onGallTap,),
+      barrierColor: Colors.redAccent.withOpacity(
+        0.7,
+      ),
     );
   }
 }

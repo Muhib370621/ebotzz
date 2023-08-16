@@ -33,42 +33,72 @@ class BottomNavBar extends StatelessWidget {
       ),
       drawer: Drawer(child: DrawerScreen()),
       bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          elevation: 5,
-          type: BottomNavigationBarType.shifting,
-          backgroundColor: whiteColor,
-          selectedItemColor: Colors.black,
-          showSelectedLabels: true,
+        () => Container(
+          decoration: BoxDecoration(
+            // color: Colors.black,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(
+                  18,
+                ),
+                topRight: Radius.circular(18)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1,
+                blurRadius: 10,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18.0),
+              topRight: Radius.circular(18.0),
+            ),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                // sets the background color of the `BottomNavigationBar`
+                canvasColor: Colors.black,
+              ),
+              child: BottomNavigationBar(
+                elevation: 10,
+                type: BottomNavigationBarType.shifting,
+                backgroundColor: Colors.black,
+                selectedItemColor: Colors.blueAccent.withOpacity(0.9),
+                showSelectedLabels: true,
 
-          unselectedItemColor: Colors.grey,
-          selectedFontSize: 14,
+                unselectedItemColor: Colors.grey,
+                selectedFontSize: 14,
 
-          unselectedFontSize: 12,
-          currentIndex: _bottomNavigationController.currentIndex.value,
-          onTap: (index) {
-            HapticFeedback.mediumImpact();
-            _bottomNavigationController.changeIndex(index);
-          },
+                unselectedFontSize: 12,
+                currentIndex: _bottomNavigationController.currentIndex.value,
+                onTap: (index) {
+                  HapticFeedback.mediumImpact();
+                  _bottomNavigationController.changeIndex(index);
+                },
 
-          // ignore: prefer_const_literals_to_create_immutables
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+                // ignore: prefer_const_literals_to_create_immutables
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.shopping_basket),
+                    label: 'Cart',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite),
+                    label: 'Wishlist',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.currency_exchange),
+                    label: 'Trade offers',
+                  ),
+                ],
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket),
-              label: 'Cart',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Wishlist',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.currency_exchange),
-              label: 'Trade offers',
-            ),
-          ],
+          ),
         ),
       ),
     );
