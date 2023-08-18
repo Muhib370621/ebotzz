@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable, avoid_unnecessary_containers
 
-import 'package:ebotzz/core/app_extension.dart';
+import 'package:ebotzz/core/utils/app_extension.dart';
 
 import '../utils/imports.dart';
 

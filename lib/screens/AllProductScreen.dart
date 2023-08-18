@@ -2,7 +2,7 @@
 
 import 'package:ebotzz/utils/imports.dart';
 
-import '../core/app_data.dart';
+import '../core/utils/app_data.dart';
 import '../widgets/product_list_view.dart';
 
 class AllProductScreen extends StatelessWidget {

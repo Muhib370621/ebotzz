@@ -1,6 +1,7 @@
 
 
 
+import '../core/utils/appColors.dart';
 import '../utils/imports.dart';
 
 class BottomBar extends StatelessWidget {
@@ -30,8 +31,8 @@ class BottomBar extends StatelessWidget {
             children: [
               FittedBox(
                 child: Text(priceLabel,
-                    style: const TextStyle(
-                        color: Colors.black45, fontWeight: FontWeight.bold)),
+                    style:  TextStyle(
+                        color: AppColors.bottomBarColor, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(height: 5),
               FittedBox(

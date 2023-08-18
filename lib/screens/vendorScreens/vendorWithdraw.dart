@@ -1,3 +1,4 @@
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class VendorWithdraw extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: AppColors.vendorAppBarColor,
         title: Text("VendorWithdraw"),
       ),
       body: Column(

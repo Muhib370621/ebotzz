@@ -1,3 +1,4 @@
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
@@ -26,7 +27,7 @@ class AddAuctionScreen extends StatelessWidget {
     TextEditingController controller16= TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: AppColors.vendorAppBarColor,
         title: Text("Add Auction Screen"),
       ),
       body: SingleChildScrollView(

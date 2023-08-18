@@ -1,3 +1,4 @@
+import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/screens/vendorScreens/auctionScreen.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorAnalytics.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorOrders.dart';
@@ -35,7 +36,7 @@ class VendorScreenDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => VendorDashBoard());
+              Get.toNamed(RouteNames.vendorDashBoard);
             },
           ),
           ListTile(
@@ -48,7 +49,8 @@ class VendorScreenDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => const VendorProducts());
+              // Get.to(() => const VendorProducts());
+              Get.toNamed(RouteNames.vendorProductScreen);
             },
           ),
           ListTile(
@@ -61,7 +63,8 @@ class VendorScreenDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => const VendorOrders());
+              // Get.to(() => const VendorOrders());
+              Get.toNamed(RouteNames.vendorOrderScreen);
             },
           ),
           ListTile(
@@ -74,7 +77,8 @@ class VendorScreenDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(() => const AuctionScreen());
+              // Get.to(() => const AuctionScreen());
+              Get.toNamed(RouteNames.auctionScreen);
             },
           ),
           ListTile(
@@ -87,7 +91,8 @@ class VendorScreenDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(const VendorWithdraw());
+              // Get.to(const VendorWithdraw());
+              Get.toNamed(RouteNames.vendorWithdrawScreen);
             },
           ),
           ListTile(
@@ -100,7 +105,8 @@ class VendorScreenDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              Get.to(const VendorSetting());
+              // Get.to(const VendorSetting());
+              Get.toNamed(RouteNames.vendorSettingScreen);
             },
           ),
         ],

@@ -1,5 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
+import 'package:ebotzz/core/routes/appRoutes.dart';
+import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/firebase_options.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Brandon Grotesque',
             appBarTheme: AppBarTheme(color: blackColor, centerTitle: true)
         ),
+        getPages: AppRoutes.routes,
+        initialRoute: RouteNames.loginScreen,
       ),
       child: SignUPScreen(),
       designSize: Size(393, 851),

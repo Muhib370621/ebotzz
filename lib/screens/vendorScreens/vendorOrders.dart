@@ -1,3 +1,4 @@
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
@@ -13,7 +14,7 @@ class VendorOrders extends StatelessWidget {
     TextEditingController controller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor:AppColors.vendorAppBarColor,
         title: Text("Vendor Orders "),
       ),
       body: SingleChildScrollView(

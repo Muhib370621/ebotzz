@@ -1,3 +1,4 @@
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/dashboardHeading.dart';
 import 'package:ebotzz/widgets/productsData.dart';
@@ -20,29 +21,13 @@ class VendorDashBoard extends StatelessWidget {
     "100-110": 12.0,
     "110-120": 2.0,
   };
-  // List<FlSpot> lineChartData =[
-  //   FlSpot(1,100000.0),
-  //   FlSpot(2,200000.0),
-  //   FlSpot(3,300000.0),
-  //   FlSpot(4,400000.0),
-  //   FlSpot(5,200000.0),
-  //   FlSpot(6,250000.0),
-  //   FlSpot(7,170000.0),
-  //   FlSpot(8,180000.0),
-  //   FlSpot(9,200000.0),
-  //   FlSpot(10,150000.0),
-  //   FlSpot(11,120000.0),
-  //   FlSpot(12,120000.0),
-  // ];
-
-
 
   VendorDashBoard({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: AppColors.vendorAppBarColor,
         title: Text("Dashboard screen"),
       ),
       drawer: VendorScreenDrawer(),

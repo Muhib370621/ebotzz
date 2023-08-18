@@ -1,6 +1,6 @@
 
 
-import '../models/product.dart';
+import '../../models/product.dart';
 import 'app_assets.dart';
 
 class AppData {

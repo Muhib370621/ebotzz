@@ -1,6 +1,6 @@
 
 
-import '../core/app_assets.dart';
+import '../core/utils/app_assets.dart';
 import '../utils/imports.dart';
 
 enum EmptyWidgetType { cart, favorite }

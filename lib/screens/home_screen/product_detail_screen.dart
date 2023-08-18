@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
 
 import 'package:ebotzz/controllers/tradingcontroller.dart';
-import 'package:ebotzz/core/app_extension.dart';
+import 'package:ebotzz/core/utils/app_extension.dart';
 import 'package:ebotzz/models/yourproduct.dart';
 import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';

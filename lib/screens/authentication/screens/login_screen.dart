@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
+import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 
@@ -102,9 +103,7 @@ class LoginScreen extends StatelessWidget {
                               suffixIcon: isVisible == false
                                   ? GestureDetector(
                                       onTap: () {
-                                        // setState(() {
-                                        //   isVisible = true;
-                                        // });
+
                                       },
                                       child: Icon(Icons.visibility_off))
                                   : GestureDetector(
@@ -137,11 +136,6 @@ class LoginScreen extends StatelessWidget {
                       CustomActionButton(
                         buttonText: "Login",
                         onTap: () {
-                          // CustomerServices().getAllProducts();
-                          // CustomerServices().getCategory();
-                          // print("check "+controller.totalCategoryData.toString());
-
-                          // getOrderStatus();
                           Get.snackbar("Successfully", "Login Successfully!",
                               colorText: Colors.white,
                               snackPosition: SnackPosition.BOTTOM,
@@ -150,7 +144,7 @@ class LoginScreen extends StatelessWidget {
                                 Icons.check,
                                 color: Colors.white,
                               ));
-                          Get.to(BottomNavBar());
+                         Get.toNamed(RouteNames.bottomNav);
                         },
                         isIcon: false, isLoading: false,
                       )
@@ -167,7 +161,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.to(SignUPScreen());
+                            Get.toNamed(RouteNames.signup);
                           },
                           child: Text(
                             "Sign Up",

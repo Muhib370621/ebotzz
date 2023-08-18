@@ -8,6 +8,7 @@ import 'package:ebotzz/widgets/customInput.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../core/utils/appColors.dart';
 import '../../widgets/vendorWidgets/vendorTabBar.dart';
 
 class VendorProducts extends StatelessWidget {
@@ -17,7 +18,7 @@ class VendorProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: AppColors.vendorAppBarColor,
         title: Text("VendorProducts"),
       ),
       body: Column(

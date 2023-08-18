@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable, avoid_unnecessary_containers, prefer_const_constructors, body_might_complete_normally_nullable, sized_box_for_whitespace, deprecated_member_use
 
+import 'package:ebotzz/core/routes/appRoutes.dart';
+import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../utils/imports.dart';
@@ -34,17 +36,6 @@ class _SignUPScreenState extends State<SignUPScreen> {
 
   bool loading = false;
 
-  // / EXAMPLE GET PRODUCTS
-  // _getProducts() async {
-  //
-  //   // Step 1 - Initialize WooSignal
-  //   await WooSignal.instance.init(appKey: "EPxLkbNSpfUjldxDhFWxYtUatkoSfhXPWybjFLvC");
-  //
-  //   // Step 2 - Call an API
-  //   var products = await WooSignal.instance.getProducts();
-  //
-  //   print(products[0].description); // prints a product name
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +71,7 @@ class _SignUPScreenState extends State<SignUPScreen> {
                         ),
                         InkWell(
                           onTap: (){
-                            Get.to(LoginScreen());
+                            Get.toNamed(RouteNames.loginScreen);
                           },
                           child: Padding(
                               padding: EdgeInsets.only(right: 20),

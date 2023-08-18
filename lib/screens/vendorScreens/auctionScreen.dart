@@ -1,8 +1,10 @@
+import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/utils/appColors.dart';
 import 'addAuctionScreen.dart';
 
 class AuctionScreen extends StatelessWidget {
@@ -16,7 +18,7 @@ class AuctionScreen extends StatelessWidget {
     int items = 6;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: AppColors.vendorAppBarColor,
         title: Text("Auction Screen"),
       ),
       body: SingleChildScrollView(
@@ -78,7 +80,6 @@ class AuctionScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(thickness: 3,color: Colors.black,),
               ),
-              
               Padding(
                 padding: const EdgeInsets.only(left: 14),
                 child: Text("Auction Activity:",style: TextStyle(fontSize: 24.sp,),),
@@ -96,7 +97,7 @@ class AuctionScreen extends StatelessWidget {
                       Text("Draft (0)",style: TextStyle(fontSize: 18.sp)),
                       SizedBox(height: 20.h,),
                       CustomActionButton(buttonText: "Add Auction",isIcon: false,onTap: (){
-                        Get.to(AddAuctionScreen());
+                        Get.toNamed(RouteNames.addAuctionScreen);
                       }, isLoading: false,)
                     ],
                   ),
