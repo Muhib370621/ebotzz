@@ -251,6 +251,9 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                                     ["price"]),
                                             img: productController.totalData[index + 40]
                                                 ["images"][0]["src"]);
+
+                                        Get.back();
+
                                         Get.to(TradeScreen(
                                           productOriginal: originalProduct,
                                           productOffered: offeredProduct,
