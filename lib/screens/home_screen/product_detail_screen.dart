@@ -253,7 +253,6 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                                 ["images"][0]["src"]);
 
                                         Get.back();
-
                                         Get.to(TradeScreen(
                                           productOriginal: originalProduct,
                                           productOffered: offeredProduct,

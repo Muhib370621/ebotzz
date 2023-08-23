@@ -59,14 +59,14 @@ class FinalizeTradeScreen extends StatelessWidget {
                 child: Center(
                   child: amount >= 0
                       ? Text(
-                          "The amount to pay is: $amount",
+                          "The amount to pay is: \$${amount.toStringAsFixed(2)}",
                           style: TextStyle(
                               color: Colors.grey.shade700,
                               fontWeight: FontWeight.bold,
                               fontSize: 18.sp),
                         )
                       : Text(
-                          "The amount to be recieved is : ${amount.toString().substring(1, 4)}",
+                          "The amount to be recieved is : \$${amount.toStringAsFixed(2)}",
                           style: TextStyle(
                               color: Colors.grey.shade700,
                               fontWeight: FontWeight.bold,

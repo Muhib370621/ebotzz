@@ -8,12 +8,14 @@ class CustomActionButton extends StatelessWidget {
     required this.buttonText,
     this.onTap,
     this.isIcon, required this.isLoading,
+    this.color
 
   }) : super(key: key);
   final String buttonText;
   final void Function()? onTap;
   final bool? isIcon;
   final bool isLoading;
+  final Color? color;
 
 
   @override
@@ -27,7 +29,8 @@ class CustomActionButton extends StatelessWidget {
           horizontal: 4,
         ),
         decoration: BoxDecoration(
-          color: Colors.pink,
+          color: color==null?Colors.pink:
+              color,
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
