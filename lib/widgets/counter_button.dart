@@ -8,7 +8,7 @@ class CounterButton extends StatelessWidget {
   final int label;
   final Axis orientation;
 
-  const CounterButton(
+   CounterButton(
       {Key? key,
       required this.onIncrementSelected,
       required this.onDecrementSelected,
@@ -22,7 +22,7 @@ class CounterButton extends StatelessWidget {
       child: icon,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       fillColor: Colors.white,
-      onPressed: () => onTap(),
+      onPressed: onTap,
     );
   }
 
@@ -37,6 +37,8 @@ class CounterButton extends StatelessWidget {
         ),
       ),
       button(const Icon(Icons.add), onIncrementSelected),
+
+
     ];
   }
 

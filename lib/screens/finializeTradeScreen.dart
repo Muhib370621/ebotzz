@@ -7,7 +7,7 @@ import '../widgets/customActionButton.dart';
 import '../widgets/customInput.dart';
 
 class FinalizeTradeScreen extends StatelessWidget {
-  var amount;
+  double amount;
   FinalizeTradeScreen({Key? key, required this.amount}) : super(key: key);
 
   @override
@@ -57,16 +57,16 @@ class FinalizeTradeScreen extends StatelessWidget {
               ),
               Container(
                 child: Center(
-                  child: amount >= 0
+                  child: (amount) >= 0
                       ? Text(
-                          "The amount to pay is: \$${amount.toStringAsFixed(2)}",
+                          "The amount to pay is: \$" + amount.toStringAsFixed(2),
                           style: TextStyle(
                               color: Colors.grey.shade700,
                               fontWeight: FontWeight.bold,
                               fontSize: 18.sp),
                         )
                       : Text(
-                          "The amount to be recieved is : \$${amount.toStringAsFixed(2)}",
+                          "The amount to be recieved is : \$" + amount.toStringAsFixed(2).toString().substring(1),
                           style: TextStyle(
                               color: Colors.grey.shade700,
                               fontWeight: FontWeight.bold,

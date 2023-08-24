@@ -175,9 +175,10 @@ class HomeScreen2 extends StatelessWidget {
                                   ),
                                 ),
                                 onTap: () {
+                                  productController.total.value = double.parse(productController.totalData[0]["price"]);
                                   Get.to(DashboardProductDetailScreen(
                                       products: ProductModel(
-                                    id: productController.totalData[0]["id"],
+                                        id: productController.totalData[0]["id"],
                                     title: productController.totalData[0]
                                         ["name"],
                                     description: productController.totalData[0]
@@ -228,6 +229,7 @@ class HomeScreen2 extends StatelessWidget {
                                     ],
                                   ),
                                   onTap: () {
+                                    productController.total.value = double.parse(productController.totalData[1]["price"]);
                                     Get.to(DashboardProductDetailScreen(
                                         products: ProductModel(
                                       id: productController.totalData[1]["id"],
@@ -353,6 +355,7 @@ class HomeScreen2 extends StatelessWidget {
                                       ),
                                     ),
                                     onTap: () {
+                                      productController.total.value = double.parse(productController.totalData[index+2]["price"]);
                                       Get.to(DashboardProductDetailScreen(
                                           products: ProductModel(
                                         id: productController
@@ -500,6 +503,8 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                           ),
                                           onTap: () {
+                                            productController.total.value = double.parse(productController.totalData[index+40]["price"]);
+
                                             Get.to(DashboardProductDetailScreen(
                                                 products: ProductModel(
                                                   id: productController
@@ -605,6 +610,7 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                           ),
                                           onTap: () {
+                                            productController.total.value = double.parse(productController.totalData[index+45]["price"]);
                                             Get.to(DashboardProductDetailScreen(
                                                 products: ProductModel(
                                                   id: productController
@@ -720,6 +726,8 @@ class HomeScreen2 extends StatelessWidget {
                                         ],
                                       ),
                                       onTap: () {
+                                        productController.total.value = double.parse(productController.totalData[index+40]["price"]);
+
                                         print(index);
                                         Get.to(DashboardProductDetailScreen(
                                             products: ProductModel(

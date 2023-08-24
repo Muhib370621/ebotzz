@@ -21,6 +21,10 @@ class ProductController extends GetxController {
   RxList<ProductModel> tradingproduct = <ProductModel>[].obs;
   RxList<ProductCategoryModel> categoryList = <ProductCategoryModel>[].obs;
   RxDouble totalPrice = 0.0.obs;
+  var quantity=0.obs;
+  var total = 0.0.obs;
+
+
   var billing = {}.obs;
   var shipping = {}.obs;
   var getOrderById = {}.obs;
@@ -56,18 +60,26 @@ class ProductController extends GetxController {
 
   void increaseItem(ProductModel product) {
     product.quantity++;
-
     update();
     calculateTotalPrice();
   }
 
+  void calculateTotal(ProductModel product){
+    product.quantity++;
+    quantity.value = product.quantity;
+    total.value += product.price;
+  }
+
+
   void decreaseItem(ProductModel product) {
+    product.quantity --;
     if (product.quantity > 1) {
       product.quantity--;
       update();
       calculateTotalPrice();
     }
   }
+
 
   void addToCart(ProductModel furniture) {
     furniture.quantity = 1;
@@ -80,6 +92,14 @@ class ProductController extends GetxController {
     totalPrice.value = 0;
     for (var element in cartProduct) {
       totalPrice.value += element.quantity * element.price;
+    }
+  }
+
+  calculateTotalDecremented(ProductModel product) {
+    if(product.quantity >1) {
+      product.quantity --;
+      quantity.value = product.quantity;
+      total.value -= product.price;
     }
   }
 

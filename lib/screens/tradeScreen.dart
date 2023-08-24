@@ -150,7 +150,7 @@ class TradeScreen extends StatelessWidget {
                       child: Column(
                     children: [
                       Text(
-                        productOriginal.title,
+                        productOffered.title,
                         style: TextStyle(
                             color: Colors.grey.shade800, fontSize: 20.sp),
                       ),
@@ -349,30 +349,33 @@ class TradeScreen extends StatelessWidget {
                     ],
                   ),
                 )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("The amount to be received is ",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(
-                        (productOriginal.price == productOffered.price)
-                            ? "\$0  "
-                            : " \$" +
-                                (productOriginal.price -
-                                        productOffered.price)
-                                    .toStringAsFixed(2)
-                                    .substring(1),
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        // (productOriginal.price - productOffered.price).toString().length==3?
-                        // (productOriginal.price - productOffered.price).toString().substring(1,3)+" USD ":
-                        //
-                        // (productOriginal.price - productOffered.price).toString().length>5?
-                        // (productOriginal.price - productOffered.price).toString().substring(1,6)+" USD ":
-                        //
-                        // (productOriginal.price - productOffered.price).toString().substring(1)+" USD "
-                      )
-                    ],
-                  ),
+                : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                         Text("The amount to be received is ",
+                            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp)),
+                        Text(
+                          (productOriginal.price == productOffered.price)
+                              ? "\$0  "
+                              : " \$" +
+                                  (productOriginal.price -
+                                          productOffered.price)
+                                      .toStringAsFixed(2)
+                                      .substring(1),
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp),
+                          // (productOriginal.price - productOffered.price).toString().length==3?
+                          // (productOriginal.price - productOffered.price).toString().substring(1,3)+" USD ":
+                          //
+                          // (productOriginal.price - productOffered.price).toString().length>5?
+                          // (productOriginal.price - productOffered.price).toString().substring(1,6)+" USD ":
+                          //
+                          // (productOriginal.price - productOffered.price).toString().substring(1)+" USD "
+                        )
+                      ],
+                    ),
+                ),
             SizedBox(height: 5.h,),
             Divider(),
 
@@ -382,7 +385,9 @@ class TradeScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h,),
             Center(child: CustomActionButton(buttonText: "Pay with PayPal", isLoading: false,isIcon: false,color: Colors.blue,onTap: (){
-              Get.to(FinalizeTradeScreen(amount: (productOriginal.price-productOffered.price),));
+              var amount = (productOriginal.price-productOffered.price);
+              print(amount.toString());
+              Get.to(FinalizeTradeScreen(amount: amount,));
             },)),
             SizedBox(height: 20.h,),
 

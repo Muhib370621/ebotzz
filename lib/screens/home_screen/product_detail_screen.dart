@@ -41,56 +41,27 @@ class DashboardProductDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget bottomBar() {
-    ProductController controller = Get.put(ProductController());
-
-    return Container(
-      padding: const EdgeInsets.all(15),
-      height: 90,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const FittedBox(
-                child: Text('Price',
-                    style: TextStyle(
-                        color: Colors.black45, fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(height: 5),
-              FittedBox(child: Text("\$${products.price}", style: h2Style))
-            ],
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                primary: blackColor,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10))),
-            onPressed: () {
-              tradingController.addYourTradingProduct(Yourtradingproduct(
-                  product: products, statusid: 3, isApproved: false));
-              Get.to(() => TradingOfferScreen());
-            },
-            child: const Text("Trade"),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                primary: blackColor,
-                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 15.h),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10))),
-            onPressed: () {
-              controller.addToCart(products);
-            },
-            child: const Text("Add to cart"),
-          )
-        ],
-      ),
-    ).fadeAnimation(1.3);
-  }
+  // Widget bottomBar() {
+  //   ProductController controller = Get.put(ProductController());
+  //   return Container(
+  //     padding: const EdgeInsets.all(15),
+  //     height: 90,
+  //     child:Obx(() {
+  //       return Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           const FittedBox(
+  //             child: Text('Price',
+  //                 style: TextStyle(
+  //                     color: Colors.black45, fontWeight: FontWeight.bold)),
+  //           ),
+  //           const SizedBox(height: 5),
+  //           FittedBox(child: Text("\$${productController.totalPrice.value}", style: h2Style))
+  //         ],
+  //       );}
+  //     )
+  //   ).fadeAnimation(1.3);
+  // }
 
   Widget productImageSlider(double height) {
     ProductController controller = Get.put(ProductController());
@@ -241,7 +212,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                                             id: productController
                                                 .totalData[index + 40]["id"],
                                             title: productController
-                                                .totalData[index + 40]["title"]
+                                                .totalData[index + 40]["name"]
                                                 .toString(),
                                             description: productController
                                                     .totalData[index + 40]
@@ -315,20 +286,18 @@ class DashboardProductDetailScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                        child: GetBuilder(
-                      init: ProductController(),
-                      builder: (controller) {
+                      child: Obx(() {
                         return CounterButton(
-                          label: products.quantity,
+                          label: controller.quantity.value,
                           onIncrementSelected: () =>
-                              controller.increaseItem(products),
+                              controller.calculateTotal(products),
                           onDecrementSelected: () =>
-                              controller.decreaseItem(products),
+                              controller.calculateTotalDecremented(products),
                         );
-                      },
-                    ))
+                      }),
+                    )
                   ],
-                ).fadeAnimation(1.0),
+                ).fadeAnimation(1.0)
               ],
             ),
           ),
@@ -397,15 +366,17 @@ class DashboardProductDetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 3.5.h,
                   ),
-                  Text(
-                    "price : " + products.price.toString() + " USD ",
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.sp),
-                  ).fadeAnimation(0.8),
+                  Obx(() => Text(
+                        "price : " +
+                            productController.total.value.toStringAsFixed(2) +
+                            " USD ",
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp),
+                      ).fadeAnimation(0.8)),
                 ],
               ),
               const SizedBox(height: 20),
