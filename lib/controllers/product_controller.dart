@@ -21,8 +21,8 @@ class ProductController extends GetxController {
   RxList<ProductModel> tradingproduct = <ProductModel>[].obs;
   RxList<ProductCategoryModel> categoryList = <ProductCategoryModel>[].obs;
   RxDouble totalPrice = 0.0.obs;
-  var quantity=1.obs;
-  var total = 0.0.obs;
+  var quantity=1.obs; // used to keep track of the quantity of the product
+  var total = 0.0.obs; // used for calculating price in the product detail screen
 
 
   var billing = {}.obs;
