@@ -21,7 +21,7 @@ class ProductController extends GetxController {
   RxList<ProductModel> tradingproduct = <ProductModel>[].obs;
   RxList<ProductCategoryModel> categoryList = <ProductCategoryModel>[].obs;
   RxDouble totalPrice = 0.0.obs;
-  var quantity=0.obs;
+  var quantity=1.obs;
   var total = 0.0.obs;
 
 
@@ -65,12 +65,14 @@ class ProductController extends GetxController {
   }
 
   void calculateTotal(ProductModel product){
-    product.quantity++;
+    product.quantity++; // to keep track of quantity in the product model
     quantity.value = product.quantity;
-    total.value += product.price;
+    total.value += product.price;// adding the price inside the obs variable
+    product.price += product.price; // updating the original price
   }
 
 
+  // old function made by previous developer
   void decreaseItem(ProductModel product) {
     product.quantity --;
     if (product.quantity > 1) {
@@ -81,6 +83,7 @@ class ProductController extends GetxController {
   }
 
 
+  // made by previous developer
   void addToCart(ProductModel furniture) {
     furniture.quantity = 1;
     cartProduct.add(furniture);
@@ -88,6 +91,7 @@ class ProductController extends GetxController {
     update();
   }
 
+  // made by previous developer
   calculateTotalPrice() {
     totalPrice.value = 0;
     for (var element in cartProduct) {
@@ -95,11 +99,13 @@ class ProductController extends GetxController {
     }
   }
 
+  // made by Fayyaz ali
   calculateTotalDecremented(ProductModel product) {
-    if(product.quantity >1) {
-      product.quantity --;
-      quantity.value = product.quantity;
-      total.value -= product.price;
+    if(product.quantity >1) { // checking if the length is greater than 1
+      product.quantity --; // decreasing the original quantity
+      quantity.value = product.quantity; // adding the quantity of original product inside the obs variable
+      total.value -= product.price; // calculating the total price
+      product.price -= product.price; // updating the original price value
     }
   }
 
