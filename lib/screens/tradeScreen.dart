@@ -16,7 +16,7 @@ class TradeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black45,
-        title: Text("Trading screen"),
+        title: Text("Trading Offer"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -213,43 +213,52 @@ class TradeScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Ship to: ",
-                style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+              child: Row(
+                children: [
+                  Text(
+                    "Ship to: ",
+                    style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 7.w,),
+                  Text(
+                    "Select Address ",
+                    style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold,color: Colors.blueAccent),
+                  ),
+                ],
               ),
             ),
             SizedBox(
               height: 17,
             ),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.only(left: 60),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "noorkh vrlive",
-                    style:
-                        TextStyle(fontSize: 16.sp, color: Colors.grey.shade800),
-                  ),
-                  Text("Noor Islam ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Zamzama commercial DHA phase 5",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Karachi, Sindh 75600 ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Pakistan  ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("3100220107 ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                ],
-              ),
-            )),
+            // Center(
+            //     child: Padding(
+            //   padding: const EdgeInsets.only(left: 60),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         "noorkh vrlive",
+            //         style:
+            //             TextStyle(fontSize: 16.sp, color: Colors.grey.shade800),
+            //       ),
+            //       Text("Noor Islam ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Zamzama commercial DHA phase 5",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Karachi, Sindh 75600 ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Pakistan  ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("3100220107 ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //     ],
+            //   ),
+            // )),
             SizedBox(
               height: 20,
             ),
@@ -292,7 +301,7 @@ class TradeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Gift cards, coupons, eBay Bucks",
+                    "Gift cards, coupons, ebotzz Bucks",
                     style: TextStyle(fontSize: 17.sp),
                   ),
                   Padding(
@@ -379,12 +388,12 @@ class TradeScreen extends StatelessWidget {
             SizedBox(height: 5.h,),
             Divider(),
 
-            Center(
-              child: Text("Youll finish checkout on paypal",style: TextStyle(fontSize: 20.sp
-              ),),
-            ),
+            // Center(
+            //   child: Text("Youll finish checkout on paypal",style: TextStyle(fontSize: 20.sp
+            //   ),),
+            // ),
             SizedBox(height: 20.h,),
-            Center(child: CustomActionButton(buttonText: "Pay with PayPal", isLoading: false,isIcon: false,color: Colors.blue,onTap: (){
+            Center(child: CustomActionButton(buttonText: "Confirm Trade", isLoading: false,isIcon: false,color: Colors.blue,onTap: (){
               var amount = (productOriginal.price-productOffered.price);
               print(amount.toString());
               Get.to(FinalizeTradeScreen(amount: amount,));
