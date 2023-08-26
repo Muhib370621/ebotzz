@@ -28,7 +28,8 @@ class CounterButton extends StatelessWidget {
 
   List<Widget> body() {
     return [
-      button(const Icon(Icons.remove), onDecrementSelected),
+      // button(const Icon(Icons.remove), onDecrementSelected),
+      Text("Quantity"),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Text(
@@ -36,7 +37,7 @@ class CounterButton extends StatelessWidget {
           style: h2Style.copyWith(fontSize: 15),
         ),
       ),
-      button(const Icon(Icons.add), onIncrementSelected),
+      // button(const Icon(Icons.add), onIncrementSelected),
 
 
     ];

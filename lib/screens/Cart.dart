@@ -2,6 +2,7 @@
 // ignore: file_names
 // ignore_for_file: prefer_const_constructors, file_names, duplicate_ignore, must_be_immutable
 
+import 'package:ebotzz/screens/checkoutNewScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
 
 import '../widgets/bottom_bar.dart';
@@ -44,7 +45,7 @@ class CartScreen extends StatelessWidget {
             priceValue: "\$${controller.totalPrice.value.toStringAsFixed(2)}",
             buttonLabel: "Checkout",
             onTap: (){
-              Get.to(CreateOrderScreen(product:products));
+              Get.to(()=> CheckOutNewScreen(product: products!));
             },
             // onTap: controller.totalPrice > 0 ? () {} : null,
           );
