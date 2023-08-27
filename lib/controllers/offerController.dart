@@ -6,6 +6,8 @@ class OfferController extends GetxController{
 
 
   RxBool isLoading = false.obs;
+  var paymentMethod = 10.obs;
+  RxString paymentName="".obs;
 
   void makeLoading() {
 

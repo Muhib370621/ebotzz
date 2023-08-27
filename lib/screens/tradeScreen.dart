@@ -1,3 +1,4 @@
+import 'package:ebotzz/controllers/offerController.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/finializeTradeScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
@@ -13,10 +14,11 @@ class TradeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OfferController offerController= Get.put(OfferController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black45,
-        title: Text("Trading screen"),
+        title: Text("Trading offer"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -263,51 +265,148 @@ class TradeScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 85),
+            Obx(() => Padding(
+              padding: const EdgeInsets.only(left: 5,right: 5),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(
-                    "assets/images/paypal.png",
-                    width: 70,
-                    height: 70,
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Text(
-                    "PayPal",
-                    style: TextStyle(fontSize: 16.sp),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Gift cards, coupons, eBay Bucks",
-                    style: TextStyle(fontSize: 17.sp),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: Icon(
-                      Icons.navigate_next,
-                      size: 40.sp,
+                  InkWell(
+                    onTap: (){
+                      offerController.paymentMethod.value = 0;
+                      offerController.paymentName.value="Visa card";
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: offerController.paymentMethod.value==0?Colors.blue:Colors.transparent,
+                              width: 3
+                          )
+                      ),
+                      child: Image.asset(
+                        "assets/images/visalogo.png",
+                        fit: BoxFit.cover,
+
+                      ),
                     ),
-                  )
+                  ),
+                  InkWell(
+                    onTap: (){
+                      offerController.paymentMethod.value = 1;
+                      offerController.paymentName.value="Master card";
+
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: offerController.paymentMethod.value==1?Colors.blue:Colors.transparent,
+                              width: 3
+
+                          )
+                      ),
+                      child: Image.asset(
+                        "assets/images/mastercard.png",fit: BoxFit.cover,
+
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      offerController.paymentMethod.value = 2;
+                      offerController.paymentName.value="Google pay";
+
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: offerController.paymentMethod.value==2?Colors.blue:Colors.transparent,
+                              width: 3
+
+                          )
+                      ),
+                      child: Image.asset(
+                        "assets/images/img_4.png",fit: BoxFit.cover,
+
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      offerController.paymentMethod.value = 3;
+                      offerController.paymentName.value="Apple pay";
+
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: offerController.paymentMethod.value==3?Colors.blue:Colors.transparent,
+                              width: 3
+                          )
+                      ),
+                      child: Image.asset(
+                        "assets/images/applepay.png",fit: BoxFit.cover,
+
+                      ),
+                    ),
+                  ),
+
                 ],
               ),
+            ),),
+
+            SizedBox(
+              height: 10.h,
             ),
+
+            Center(
+              child: Container(
+                width: 350.w,
+                height: 100.h,
+                decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.4),
+                    border: Border.all(color: Colors.blue.shade800),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Center(child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Note that Funds will be held and released when both parties have confirmed delivery acceptance",style: TextStyle(color: Colors.blue.shade900,fontSize: 18),),
+                ))
+              ),
+            ),
+
             SizedBox(
               height: 20.h,
             ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Text(
+            //         "Gift cards, coupons, eBay Bucks",
+            //         style: TextStyle(fontSize: 17.sp),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.only(right: 12.0),
+            //         child: Icon(
+            //           Icons.navigate_next,
+            //           size: 40.sp,
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20.h,
+            // ),
+
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(
@@ -331,7 +430,6 @@ class TradeScreen extends StatelessWidget {
               height: 20.h,
             ),
             Divider(),
-
             ((productOriginal.price - productOffered.price) > 0)
                 ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -365,30 +463,53 @@ class TradeScreen extends StatelessWidget {
                                       .toStringAsFixed(2)
                                       .substring(1),
                           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp),
-                          // (productOriginal.price - productOffered.price).toString().length==3?
-                          // (productOriginal.price - productOffered.price).toString().substring(1,3)+" USD ":
-                          //
-                          // (productOriginal.price - productOffered.price).toString().length>5?
-                          // (productOriginal.price - productOffered.price).toString().substring(1,6)+" USD ":
-                          //
-                          // (productOriginal.price - productOffered.price).toString().substring(1)+" USD "
+
                         )
                       ],
                     ),
                 ),
+
+            Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Shipping ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp)),
+                  Text("Free shipping",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp)),
+                ],
+              ),
+            ),
+
+            Divider(),
+
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Payment method ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp)),
+                  Text("Trade",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.sp)),
+                ],
+              ),
+            ),
+            Divider(),
+
             SizedBox(height: 5.h,),
             Divider(),
 
             Center(
-              child: Text("Youll finish checkout on paypal",style: TextStyle(fontSize: 20.sp
+              child: Text("Youll finish checkout",style: TextStyle(fontSize: 20.sp
               ),),
             ),
             SizedBox(height: 20.h,),
-            Center(child: CustomActionButton(buttonText: "Pay with PayPal", isLoading: false,isIcon: false,color: Colors.blue,onTap: (){
+            Center(child:
+            Obx(()=> CustomActionButton(buttonText: "Pay with ${offerController.paymentName.value}", isLoading: false,isIcon: false,color: Colors.blue,onTap: (){
               var amount = (productOriginal.price-productOffered.price);
               print(amount.toString());
               Get.to(FinalizeTradeScreen(amount: amount,));
-            },)),
+            },)),),
             SizedBox(height: 20.h,),
 
           ],
