@@ -141,7 +141,9 @@ class CheckOutNewScreen extends StatelessWidget {
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          SizedBox(width: 5.w,),
+                          SizedBox(
+                            width: 5.w,
+                          ),
                           Text(
                             product.id.toString(),
                             style: TextStyle(
@@ -250,43 +252,52 @@ class CheckOutNewScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Ship to: ",
-                style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+              child: Row(
+                children: [
+                  Text(
+                    "Ship to: ",
+                    style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 7.w,),
+                  Text(
+                    "Select Address ",
+                    style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold,color: Colors.blueAccent),
+                  ),
+                ],
               ),
             ),
             SizedBox(
               height: 17,
             ),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.only(left: 60),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "noorkh vrlive",
-                    style:
-                        TextStyle(fontSize: 16.sp, color: Colors.grey.shade800),
-                  ),
-                  Text("Noor Islam ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Zamzama commercial DHA phase 5",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Karachi, Sindh 75600 ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Pakistan  ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("3100220107 ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                ],
-              ),
-            )),
+            // Center(
+            //     child: Padding(
+            //   padding: const EdgeInsets.only(left: 60),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         "noorkh vrlive",
+            //         style:
+            //             TextStyle(fontSize: 16.sp, color: Colors.grey.shade800),
+            //       ),
+            //       Text("Noor Islam ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Zamzama commercial DHA phase 5",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Karachi, Sindh 75600 ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Pakistan  ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("3100220107 ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //     ],
+            //   ),
+            // )),
             SizedBox(
               height: 20,
             ),
@@ -329,7 +340,7 @@ class CheckOutNewScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Gift cards, coupons, eBay Bucks",
+                    "Gift cards, coupons, ebotzz Bucks",
                     style: TextStyle(fontSize: 17.sp),
                   ),
                   Padding(
@@ -398,9 +409,9 @@ class CheckOutNewScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 20.sp)),
                         Text(
                           " \$ ${product.price}"
-                                  // (product.price - product.price)
-                                      // .toStringAsFixed(2)
-                                      .substring(1),
+                              // (product.price - product.price)
+                              // .toStringAsFixed(2)
+                              .substring(1),
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20.sp),
                           // (productOriginal.price - productOffered.price).toString().length==3?
@@ -437,7 +448,9 @@ class CheckOutNewScreen extends StatelessWidget {
               onTap: () {
                 var amount = (product.price - product.price);
                 print(amount.toString());
-                Get.to(CreateOrderScreen(product: product,));
+                Get.to(CreateOrderScreen(
+                  product: product,
+                ));
               },
             )),
             SizedBox(
