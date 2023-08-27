@@ -69,7 +69,7 @@ class TradeScreen extends StatelessWidget {
                       child: Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            "Add cart",
+                            "Add card",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -223,35 +223,35 @@ class TradeScreen extends StatelessWidget {
             SizedBox(
               height: 17,
             ),
-            Center(
-                child: Padding(
-              padding: const EdgeInsets.only(left: 60),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "noorkh vrlive",
-                    style:
-                        TextStyle(fontSize: 16.sp, color: Colors.grey.shade800),
-                  ),
-                  Text("Noor Islam ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Zamzama commercial DHA phase 5",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Karachi, Sindh 75600 ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("Pakistan  ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                  Text("3100220107 ",
-                      style: TextStyle(
-                          fontSize: 16.sp, color: Colors.grey.shade800)),
-                ],
-              ),
-            )),
+            // Center(
+            //     child: Padding(
+            //   padding: const EdgeInsets.only(left: 60),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         "noorkh vrlive",
+            //         style:
+            //             TextStyle(fontSize: 16.sp, color: Colors.grey.shade800),
+            //       ),
+            //       Text("Noor Islam ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Zamzama commercial DHA phase 5",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Karachi, Sindh 75600 ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("Pakistan  ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //       Text("3100220107 ",
+            //           style: TextStyle(
+            //               fontSize: 16.sp, color: Colors.grey.shade800)),
+            //     ],
+            //   ),
+            // )),
             SizedBox(
               height: 20,
             ),

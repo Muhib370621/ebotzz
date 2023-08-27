@@ -16,6 +16,7 @@ class CartListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductController productController = Get.put(ProductController());
     return Container(
       child: ListView.separated(
         itemCount: cartProduct.length,
@@ -40,12 +41,24 @@ class CartListView extends StatelessWidget {
                   children: [
                     Text(products.title.addOverFlow, style: h4Style),
                     const SizedBox(height: 5),
-                    Text("\$${products.price}", style: h2Style),
-                    const SizedBox(height: 5),
+                    Text("\$${products.price.toStringAsFixed(2)}", style: h2Style),
+                    const SizedBox(height: 10),
+
+                    Text("Quantity:"),
+                    SizedBox(height: 5,),
+                    Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade700),
+                        borderRadius: BorderRadius.circular(5)
+                      ),
+                      child: Center(child: Text(products.quantity.toString())),
+                    )
                   ],
                 ),
                 // Spacer(),
-                counterButton(products)
+                // counterButton(products)
               ],
             ).fadeAnimation(0.4 * index),
           );

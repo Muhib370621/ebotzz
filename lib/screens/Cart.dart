@@ -3,6 +3,7 @@
 // ignore_for_file: prefer_const_constructors, file_names, duplicate_ignore, must_be_immutable
 
 import 'package:ebotzz/screens/checkoutNewScreen.dart';
+import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
 import 'package:ebotzz/utils/imports.dart';
 
 import '../widgets/bottom_bar.dart';
@@ -12,6 +13,7 @@ import '../widgets/empty_widget.dart';
 import 'createOrderScreen.dart';
 
 class CartScreen extends StatelessWidget {
+
   final ProductModel? products;
   CartScreen({super.key,  this.products});
   ProductController controller = Get.put(ProductController());
@@ -24,6 +26,7 @@ class CartScreen extends StatelessWidget {
         IconButton(
           splashRadius: 20.0,
           onPressed: controller.clearCart,
+
           icon: const Icon(
             Icons.delete,
             color: Colors.black,
@@ -42,7 +45,7 @@ class CartScreen extends StatelessWidget {
         () {
           return BottomBar(
             priceLabel: "Total price",
-            priceValue: "\$${controller.totalPrice.value.toStringAsFixed(2)}",
+            priceValue: "\$${controller.cartScreenTotal.value.toStringAsFixed(2)}",
             buttonLabel: "Checkout",
             onTap: (){
               Get.to(()=> CheckOutNewScreen(product: products!));
@@ -76,7 +79,9 @@ class CartScreen extends StatelessWidget {
       ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Get.back();
+              Get.to(HomeScreen2());
+              controller.quantity.value= 1;
+
             },
             backgroundColor: Colors.pink,
             child: const Icon(Icons.arrow_back),

@@ -1,6 +1,7 @@
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/createOrderScreen.dart';
 import 'package:ebotzz/utils/constants.dart';
+import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/textswidget.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class CheckOutNewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductController productController = Get.put(ProductController());
     return Scaffold(
       appBar: _appBar(),
       body: SingleChildScrollView(
@@ -114,65 +116,70 @@ class CheckOutNewScreen extends StatelessWidget {
             SizedBox(
               height: 2.h,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 15),
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Container(
-                    width: 60,
-                    height: 70,
-                    child: Image.network(product.img),
-                  )),
-                  Expanded(
-                      child: Column(
-                    children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 20.sp),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "ID",
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w300,
+            SizedBox(
+              height: 200,child: ListView.builder(
+                itemCount:productController.cartProduct.length ,
+                itemBuilder: (context,index){
+              return Padding(
+                padding: const EdgeInsets.only(left: 20.0, top: 15),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                          width: 60,
+                          height: 70,
+                          child: Image.network(productController.cartProduct[index].img),
+                        )),
+                    Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              productController.cartProduct[index].title,
+                              style: TextStyle(
+                                  color: Colors.grey.shade800, fontSize: 20.sp),
                             ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            product.id.toString(),
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w300,
+                            Row(
+                              children: [
+                                Text(
+                                  "ID",
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                Text(
+                                  productController.cartProduct[index].id.toString(),
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
-                  Expanded(
-                      child: Column(
-                    children: [
-                      Text(
-                        "\$" + product.price.toString(),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.sp),
-                      ),
-                      SizedBox(
-                        height: 50.h,
-                      )
-                    ],
-                  )),
-                ],
-              ),
-            ),
+                          ],
+                        )),
+                    Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              "\$" + productController.cartProduct[index].price.toString(),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22.sp),
+                            ),
+                            SizedBox(
+                              height: 50.h,
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              );
+            }),),
             // Padding(
             //   padding: const EdgeInsets.only(top: 15,left: 20),
             //   child: Text("Offered product:",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),

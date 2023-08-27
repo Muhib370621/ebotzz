@@ -23,6 +23,8 @@ class ProductController extends GetxController {
   RxDouble totalPrice = 0.0.obs;
   var quantity=1.obs; // used to keep track of the quantity of the product
   var total = 0.0.obs; // used for calculating price in the product detail screen
+  var cartScreenTotal=0.0.obs;
+
 
 
   var billing = {}.obs;
@@ -68,7 +70,7 @@ class ProductController extends GetxController {
     product.quantity++; // to keep track of quantity in the product model
     quantity.value = product.quantity;
     total.value += product.price;// adding the price inside the obs variable
-    product.price += product.price; // updating the original price
+
   }
 
 
@@ -105,13 +107,14 @@ class ProductController extends GetxController {
       product.quantity --; // decreasing the original quantity
       quantity.value = product.quantity; // adding the quantity of original product inside the obs variable
       total.value -= product.price; // calculating the total price
-      product.price -= product.price; // updating the original price value
+
     }
   }
 
   void clearCart() {
     cartProduct.clear();
     totalPrice.value = 0;
+    cartScreenTotal.value=0;
     update();
   }
 

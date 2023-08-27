@@ -263,6 +263,8 @@ class DashboardProductDetailScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         controller.addToCart(products);
+                        productController.cartScreenTotal.value+=productController.total.value;
+
                         Get.to(CartScreen(
                           products: products,
                         ));

@@ -727,7 +727,6 @@ class HomeScreen2 extends StatelessWidget {
                                       ),
                                       onTap: () {
                                         productController.total.value = double.parse(productController.totalData[index+40]["price"]);
-
                                         print(index);
                                         Get.to(DashboardProductDetailScreen(
                                             products: ProductModel(
