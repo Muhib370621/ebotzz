@@ -6,6 +6,7 @@ import 'package:ebotzz/models/yourproduct.dart';
 import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 
+import '../../services/currentItem.dart';
 import '../../utils/imports.dart';
 import '../../widgets/counter_button.dart';
 import '../../widgets/trade_column.dart';
@@ -264,6 +265,8 @@ class DashboardProductDetailScreen extends StatelessWidget {
                       onTap: () {
                         controller.addToCart(products);
                         productController.cartScreenTotal.value+=productController.total.value;
+                        var item = CurrentItem(title: products.price, quantity: productController.quantity.value);
+                        controller.cartScreenItems.add(item);
 
                         Get.to(CartScreen(
                           products: products,

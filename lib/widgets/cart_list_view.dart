@@ -41,7 +41,7 @@ class CartListView extends StatelessWidget {
                   children: [
                     Text(products.title.addOverFlow, style: h4Style),
                     const SizedBox(height: 5),
-                    Text("\$${products.price.toStringAsFixed(2)}", style: h2Style),
+                    Text("\$${productController.cartScreenItems[index].title.toString()}", style: h2Style),
                     const SizedBox(height: 10),
 
                     Text("Quantity:"),
@@ -53,7 +53,7 @@ class CartListView extends StatelessWidget {
                         border: Border.all(color: Colors.grey.shade700),
                         borderRadius: BorderRadius.circular(5)
                       ),
-                      child: Center(child: Text(products.quantity.toString())),
+                      child: Center(child: Text(productController.cartScreenItems[index].quantity.toString())),
                     )
                   ],
                 ),

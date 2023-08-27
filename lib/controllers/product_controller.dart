@@ -25,6 +25,10 @@ class ProductController extends GetxController {
   var total = 0.0.obs; // used for calculating price in the product detail screen
   var cartScreenTotal=0.0.obs;
 
+  var cartScreenItems=[].obs;
+
+
+
 
 
   var billing = {}.obs;
