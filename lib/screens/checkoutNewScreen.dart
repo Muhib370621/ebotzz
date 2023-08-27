@@ -415,7 +415,7 @@ class CheckOutNewScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20.sp)),
                         Text(
-                          " \$ ${product.price}"
+                          " \$ ${productController.cartScreenTotal.value}"
                               // (product.price - product.price)
                               // .toStringAsFixed(2)
                               .substring(1),
