@@ -165,7 +165,7 @@ class CheckOutNewScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              "\$" + productController.cartProduct[index].price.toString(),
+                              "\$" + productController.cartScreenItems[index].title.toString(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,

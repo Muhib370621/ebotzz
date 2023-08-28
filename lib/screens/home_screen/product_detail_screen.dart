@@ -265,7 +265,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                       onTap: () {
                         controller.addToCart(products);
                         productController.cartScreenTotal.value+=productController.total.value;
-                        var item = CurrentItem(title: products.price, quantity: productController.quantity.value);
+                        var item = CurrentItem(title: productController.total.value, quantity: productController.quantity.value);
                         controller.cartScreenItems.add(item);
 
                         Get.to(CartScreen(
