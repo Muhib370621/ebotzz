@@ -1,3 +1,4 @@
+import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/textswidget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: TextFormField(
         controller: controller,
         // validator: (value) {
@@ -24,8 +25,11 @@ class CustomInputField extends StatelessWidget {
         // autovalidateMode:
         // AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
+          focusColor: Colors.red,
+          fillColor: Colors.red,
+          alignLabelWithHint: true,
           suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.all(16),
+          contentPadding: EdgeInsets.only(left: 15,top: 5),
           labelText: label,
           labelStyle: TextStyle(color: Colors.black45),
           enabledBorder: textFieldStyle,

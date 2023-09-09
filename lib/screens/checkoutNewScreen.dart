@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/createOrderScreen.dart';
 import 'package:ebotzz/utils/constants.dart';
@@ -45,59 +46,59 @@ class CheckOutNewScreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            Center(
-              child: Container(
-                width: 350.w,
-                height: 150.h,
-                decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.4),
-                    border: Border.all(color: Colors.blue.shade800),
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 8.w,
-                        ),
-
-                        Icon(
-                          Icons.lightbulb_outline_rounded,
-                          color: Colors.blue.shade800,
-                        ),
-                        // SizedBox(height: 10.h,),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Expanded(
-                            child: Text(
-                          "New! You can split payment for this purchase accross two cards ",
-                          style: TextStyle(color: Colors.blue.shade900),
-                        )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 33.0),
-                      child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Text(
-                            "Add card",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 19.sp),
-                          )),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            // Center(
+            //   child: Container(
+            //     width: 350.w,
+            //     height: 150.h,
+            //     decoration: BoxDecoration(
+            //         color: Colors.blue.withOpacity(0.4),
+            //         border: Border.all(color: Colors.blue.shade800),
+            //         borderRadius: BorderRadius.circular(20)),
+            //     child: Column(
+            //       children: [
+            //         SizedBox(
+            //           height: 20.h,
+            //         ),
+            //         Row(
+            //           children: [
+            //             SizedBox(
+            //               width: 8.w,
+            //             ),
+            //
+            //             Icon(
+            //               Icons.lightbulb_outline_rounded,
+            //               color: Colors.blue.shade800,
+            //             ),
+            //             // SizedBox(height: 10.h,),
+            //             SizedBox(
+            //               width: 8.w,
+            //             ),
+            //             Expanded(
+            //                 child: Text(
+            //               "New! You can split payment for this purchase accross two cards ",
+            //               style: TextStyle(color: Colors.blue.shade900),
+            //             )),
+            //           ],
+            //         ),
+            //         SizedBox(
+            //           height: 20.h,
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.only(left: 33.0),
+            //           child: Align(
+            //               alignment: Alignment.bottomLeft,
+            //               child: Text(
+            //                 "Add card",
+            //                 style: TextStyle(
+            //                     fontWeight: FontWeight.bold,
+            //                     color: Colors.black,
+            //                     fontSize: 19.sp),
+            //               )),
+            //         )
+            //       ],
+            //     ),
+            //   ),
+            // ),
 
             Padding(
               padding: const EdgeInsets.only(left: 20.0, top: 15),
@@ -117,69 +118,115 @@ class CheckOutNewScreen extends StatelessWidget {
               height: 2.h,
             ),
             SizedBox(
-              height: 200,child: ListView.builder(
-                itemCount:productController.cartProduct.length ,
-                itemBuilder: (context,index){
-              return Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 15),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Container(
-                          width: 60,
-                          height: 70,
-                          child: Image.network(productController.cartProduct[index].img),
-                        )),
-                    Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              productController.cartProduct[index].title,
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 20.sp),
+              height: 200,
+              child: ListView.builder(
+                  itemCount: productController.cartProduct.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                          const EdgeInsets.only(left: 15.0, top: 15, right: 15),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent.withOpacity(0.04),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              20.sp,
                             ),
-                            Row(
+                          ),
+                          border: Border.all(
+                            color: Colors.redAccent.withOpacity(
+                              0.1,
+                            ),
+                            width: 2.w,
+                          ),
+
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Container(
+                              width: 60,
+                              height: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                    20.sp,
+                                  ),
+                                ),
+                                child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  imageUrl:
+                                      productController.cartProduct[index].img,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                    color: Colors.redAccent,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                              ),
+                              // Image.network(productController.cartProduct[index].img),
+                            )),
+                            20.horizontalSpace,
+                            Expanded(
+                                child: Column(
                               children: [
                                 Text(
-                                  "ID",
+                                  productController.cartProduct[index].title,
                                   style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w300,
-                                  ),
+                                      color: Colors.grey.shade800,
+                                      fontSize: 20.sp),
                                 ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  productController.cartProduct[index].id.toString(),
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w300,
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "ID",
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    Text(
+                                      productController.cartProduct[index].id
+                                          .toString(),
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
-                            ),
+                            )),
+                            Expanded(
+                                child: Column(
+                              children: [
+                                Text(
+                                  "\$" +
+                                      productController
+                                          .cartScreenItems[index].title
+                                          .toString(),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22.sp),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                )
+                              ],
+                            )),
                           ],
-                        )),
-                    Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              "\$" + productController.cartScreenItems[index].title.toString(),
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22.sp),
-                            ),
-                            SizedBox(
-                              height: 50.h,
-                            )
-                          ],
-                        )),
-                  ],
-                ),
-              );
-            }),),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
             // Padding(
             //   padding: const EdgeInsets.only(top: 15,left: 20),
             //   child: Text("Offered product:",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
@@ -263,12 +310,18 @@ class CheckOutNewScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Ship to: ",
-                    style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: 7.w,),
+                  SizedBox(
+                    width: 7.w,
+                  ),
                   Text(
                     "Select Address ",
-                    style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold,color: Colors.blueAccent),
+                    style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent),
                   ),
                 ],
               ),
@@ -413,14 +466,14 @@ class CheckOutNewScreen extends StatelessWidget {
                       children: [
                         Text("The amount to be received is ",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20.sp)),
+                                fontWeight: FontWeight.bold, fontSize: 18.sp)),
                         Text(
                           " \$ ${productController.cartScreenTotal.value}"
                               // (product.price - product.price)
                               // .toStringAsFixed(2)
                               .substring(1),
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.sp),
+                              fontWeight: FontWeight.bold, fontSize: 18.sp),
                           // (productOriginal.price - productOffered.price).toString().length==3?
                           // (productOriginal.price - productOffered.price).toString().substring(1,3)+" USD ":
                           //
@@ -440,26 +493,58 @@ class CheckOutNewScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Youll finish checkout on paypal",
-                style: TextStyle(fontSize: 20.sp),
+                style: TextStyle(fontSize: 16.sp),
               ),
             ),
             SizedBox(
               height: 20.h,
             ),
             Center(
-                child: CustomActionButton(
-              buttonText: "Pay with PayPal",
-              isLoading: false,
-              isIcon: false,
-              color: Colors.blue,
-              onTap: () {
-                var amount = (product.price - product.price);
-                print(amount.toString());
-                Get.to(CreateOrderScreen(
-                  product: product,
-                ));
-              },
-            )),
+                child: SizedBox(
+                  width: Get.width*0.9,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: 40.h,
+                      width: Get.width * 0.9,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    // side: BorderSide(color: Colors.red)
+                                  ))),
+                          onPressed: () {
+                            var amount = (product.price - product.price);
+                                  print(amount.toString());
+                                  Get.to(CreateOrderScreen(
+                                    product: product,
+                                  ));
+                          },
+                          child: Text(
+                            "Pay with Paypal",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18.sp
+                            ),
+                          )),
+                    ),
+                  )
+            //       CustomActionButton(
+            //   buttonText: "Pay with PayPal",
+            //   isLoading: false,
+            //   isIcon: false,
+            //   color: Colors.redAccent,
+            //   onTap: () {
+            //       var amount = (product.price - product.price);
+            //       print(amount.toString());
+            //       Get.to(CreateOrderScreen(
+            //         product: product,
+            //       ));
+            //   },
+            // ),
+                )),
             SizedBox(
               height: 20.h,
             ),

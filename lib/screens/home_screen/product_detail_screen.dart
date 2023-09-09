@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/tradingcontroller.dart';
 import 'package:ebotzz/core/utils/app_extension.dart';
 import 'package:ebotzz/models/yourproduct.dart';
@@ -71,7 +72,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
         Center(
           child: Container(
             width: 310.w,
-            height: 480.h,
+            height: 470.h,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
@@ -84,7 +85,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
           ),
         ),
         Container(
-          padding: EdgeInsets.all(15.sp),
+          padding: EdgeInsets.all(10.sp),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(
@@ -106,10 +107,28 @@ class DashboardProductDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15),
             child: Column(
               children: [
-                Image.network(
-                  products.img,
-                  height: 270.h,
+                ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(
+                      20.sp,
+                    ),
+                  ),
+                  child: CachedNetworkImage(
+                    height: 270.h,
+                    imageUrl: products.img,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                      color: Colors.redAccent,
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
+                // Image.network(
+                //   products.img,
+                //   height: 270.h,
+                // ),
 
                 SizedBox(
                   height: 10.h,
@@ -264,8 +283,11 @@ class DashboardProductDetailScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         controller.addToCart(products);
-                        productController.cartScreenTotal.value+=productController.total.value;
-                        var item = CurrentItem(title: productController.total.value, quantity: productController.quantity.value);
+                        productController.cartScreenTotal.value +=
+                            productController.total.value;
+                        var item = CurrentItem(
+                            title: productController.total.value,
+                            quantity: productController.quantity.value);
                         controller.cartScreenItems.add(item);
 
                         Get.to(CartScreen(

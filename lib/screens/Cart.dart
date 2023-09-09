@@ -13,20 +13,30 @@ import '../widgets/empty_widget.dart';
 import 'createOrderScreen.dart';
 
 class CartScreen extends StatelessWidget {
-
   final ProductModel? products;
-  CartScreen({super.key,  this.products});
+
+  CartScreen({super.key, this.products});
+
   ProductController controller = Get.put(ProductController());
+
   PreferredSizeWidget _appBar() {
     return AppBar(
+      leading: IconButton(
+        onPressed: () {
+          Get.back();
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
+      ),
       backgroundColor: whiteColor,
       elevation: 0,
-      title: const Text("Cart", style: h2Style),
+      title: const Text("Ebotzz Cart", style: h2Style),
       actions: [
         IconButton(
           splashRadius: 20.0,
           onPressed: controller.clearCart,
-
           icon: const Icon(
             Icons.delete,
             color: Colors.black,
@@ -41,19 +51,46 @@ class CartScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: _appBar(),
-      bottomNavigationBar: Obx(
-        () {
-          return BottomBar(
-            priceLabel: "Total price",
-            priceValue: "\$${controller.cartScreenTotal.value.toStringAsFixed(2)}",
-            buttonLabel: "Checkout",
-            onTap: (){
-              Get.to(()=> CheckOutNewScreen(product: products!));
-            },
-            // onTap: controller.totalPrice > 0 ? () {} : null,
-          );
-        },
-      ),
+      bottomNavigationBar:
+
+           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 40.h,
+              width: Get.width * 0.9,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    // side: BorderSide(color: Colors.red)
+                  ))),
+                  onPressed: () {
+                    Get.to(() => CheckOutNewScreen(product: products!));
+                  },
+                  child: Text(
+                    "Go to checkout",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18.sp
+                    ),
+                  )),
+            ),
+          )
+
+          // return BottomBar(
+          //   priceLabel: "Total price",
+          //   priceValue:
+          //       "\$${controller.cartScreenTotal.value.toStringAsFixed(2)}",
+          //   buttonLabel: "Checkout",
+          //   onTap: () {
+          //     Get.to(() => CheckOutNewScreen(product: products!));
+          //   },
+          //   // onTap: controller.totalPrice > 0 ? () {} : null,
+          // );
+
+      ,
       body: GetBuilder(
         init: ProductController(),
         builder: (controller) {
@@ -72,20 +109,19 @@ class CartScreen extends StatelessWidget {
                             label: product.quantity);
                       }),
                 )
-              :  EmptyWidget(title: "Empty",);
-
-
+              : EmptyWidget(
+                  title: "Empty",
+                );
         },
       ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Get.to(HomeScreen2());
-              controller.quantity.value= 1;
-
-            },
-            backgroundColor: Colors.pink,
-            child: const Icon(Icons.arrow_back),
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(HomeScreen2());
+          controller.quantity.value = 1;
+        },
+        backgroundColor: Colors.redAccent,
+        child: const Icon(Icons.arrow_back),
+      ),
     ));
   }
 }

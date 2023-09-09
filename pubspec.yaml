@@ -49,6 +49,7 @@ dependencies:
   firebase_storage: ^11.2.5
   flutter_svg: ^2.0.5
   firebase_core: ^2.15.0
+  cached_network_image: ^3.2.3
   http:
   fl_chart:
 
@@ -98,6 +99,25 @@ flutter:
     # "family" key with the font family name, and a "fonts" key with a
     # list giving the asset and other descriptors for the font. For
     # example:
+  fonts:
+    - family: JossefinSans
+      fonts:
+#        - asset: assets/fonts/MartelSans/MartelSans-ExtraLightItalic.ttf
+#          weight: 100
+        - asset: assets/fonts/MartelSans/MartelSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/MartelSans/MartelSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/MartelSans/MartelSans-Regular.ttf
+          weight: 400
+#        - asset: assets/fonts/MartelSans/MartelSans-Medium.ttf
+#          weight: 600
+        - asset: assets/fonts/MartelSans/MartelSans-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/MartelSans/MartelSans-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/MartelSans/MartelSans-ExtraBold.ttf
+          weight: 900
     # fonts:
     # - family: Monserrat
     #   fonts:

@@ -31,8 +31,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: child,
         theme: ThemeData(
-            fontFamily: 'Brandon Grotesque',
-            appBarTheme: AppBarTheme(color: blackColor, centerTitle: true)
+            fontFamily: 'JossefinSans',
+            appBarTheme: AppBarTheme(color: blackColor, centerTitle: true),
+          colorScheme: ThemeData().colorScheme.copyWith(
+            primary: Colors.redAccent,
+            secondary: Colors.white,
+          ),
         ),
         getPages: AppRoutes.routes,
         initialRoute: RouteNames.loginScreen,

@@ -53,8 +53,8 @@ const h4Style = TextStyle(
     color: Colors.black);
 
 final textFieldStyle = OutlineInputBorder(
-  borderRadius: BorderRadius.circular(25),
-  borderSide: BorderSide(color: Colors.black, width: 1.0),
+  borderRadius: BorderRadius.circular(20),
+  borderSide: BorderSide(color: Colors.grey, width: 1.0),
 );
 final errorTextFieldStyle = OutlineInputBorder(
     borderRadius: BorderRadius.circular(25),

@@ -64,7 +64,7 @@ class BottomNavBar extends StatelessWidget {
                 elevation: 10,
                 type: BottomNavigationBarType.shifting,
                 backgroundColor: Colors.black,
-                selectedItemColor: Colors.blueAccent.withOpacity(0.9),
+                selectedItemColor: Colors.redAccent.withOpacity(0.8),
                 showSelectedLabels: true,
 
                 unselectedItemColor: Colors.grey,

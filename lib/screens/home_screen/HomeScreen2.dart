@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/services/mainScreenItems.dart';
 import 'package:ebotzz/utils/imports.dart';
@@ -31,10 +32,10 @@ class HomeScreen2 extends StatelessWidget {
                   )
                 : productController.totalData.isEmpty
                     ? Center(
-                      child: Lottie.asset(
+                        child: Lottie.asset(
                           "assets/json/noData.json",
                         ),
-                    )
+                      )
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -44,20 +45,22 @@ class HomeScreen2 extends StatelessWidget {
                             children: [
                               Expanded(
                                 flex: 2,
-                                child: CustomInputField(
-                                  controller: controller,
-                                  label: "search your items here",
-                                  suffixIcon: Icon(Icons.search),
+                                child: SizedBox(
+                                  height: 45.h,
+                                  child: CustomInputField(
+                                    controller: controller,
+                                    label: "Search for anything",
+                                    suffixIcon: Icon(Icons.search),
+                                  ),
                                 ),
                               ),
-                              Expanded(
-                                  child: Container(
-                                width: 50,
-                                height: 50,
+                              Container(
+                                width: 95.w,
+                                height: 45.h,
                                 decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Colors.grey.shade800),
-                                    borderRadius: BorderRadius.circular(15)),
+                                    color: Colors.grey.withOpacity(0.1),
+                                    border: Border.all(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20)),
                                 child: InkWell(
                                     onTap: () {
                                       Get.defaultDialog(
@@ -109,25 +112,29 @@ class HomeScreen2 extends StatelessWidget {
                                       );
                                     },
                                     child: const Center(
-                                      child: Text("Categories"),
+                                      child: Text(
+                                        "Categories",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
                                     )),
-                              ))
+                              ),
+                              10.horizontalSpace
                             ],
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Row(
-                            children: const [
+                            children: [
                               SizedBox(
                                 width: 24,
                               ),
                               Text(
-                                "Your Recenly Viewd Items",
+                                "Your Recently Viewed Items",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w900),
                               ),
                             ],
                           ),
@@ -150,35 +157,72 @@ class HomeScreen2 extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                          width: 130,
-                                          height: 140,
-                                          child: Image(
-                                            image: NetworkImage(
+                                        width: 130,
+                                        height: 140,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                              20.sp,
+                                            ),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
                                                 productController.totalData[0]
-                                                    ["images"][0]["src"]),
-                                            fit: BoxFit.cover,
-                                          )),
-                                      Text(productController.totalData[0]
-                                              ["name"]
-                                          .toString()),
-                                      // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
-                                      Text(MainScreenItems.recentlyViewdItems[0]
-                                              ["type"]
-                                          .toString()),
-                                      Text(
-                                        "${productController.totalData[0]["price"]} USD",
-                                        style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.bold),
+                                                    ["images"][0]["src"],
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                CircularProgressIndicator(
+                                                    color: Colors.redAccent,
+                                                    value: downloadProgress
+                                                        .progress),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Icon(Icons.error),
+                                          ),
+                                        ),
+                                      ),
+                                      // Image(
+                                      //   image: NetworkImage(
+                                      //      ),
+                                      //   fit: BoxFit.cover,
+                                      // )),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: SizedBox(
+                                          width: 120,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(productController
+                                                  .totalData[0]["name"]
+                                                  .toString()),
+                                              // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                              Text(MainScreenItems
+                                                          .recentlyViewdItems[0]
+                                                      ["type"] ??
+                                                  "NaN".toString()),
+                                              Text(
+                                                "${productController.totalData[0]["price"]} USD",
+                                                style: TextStyle(
+                                                    fontSize: 20.sp,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 onTap: () {
-                                  productController.total.value = double.parse(productController.totalData[0]["price"]);
+                                  productController.total.value = double.parse(
+                                      productController.totalData[0]["price"]);
                                   Get.to(DashboardProductDetailScreen(
                                       products: ProductModel(
-                                        id: productController.totalData[0]["id"],
+                                    id: productController.totalData[0]["id"],
                                     title: productController.totalData[0]
                                         ["name"],
                                     description: productController.totalData[0]
@@ -194,58 +238,136 @@ class HomeScreen2 extends StatelessWidget {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Container(
-                                color: Colors.white,
-                                width: 160,
-                                height: 250,
-                                // color: Colors.pink,
-                                child: InkWell(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                          width: 120,
-                                          height: 140,
-                                          child: Image.network(
-                                            productController.totalData[1]
-                                                ["images"][0]["src"],
-                                            fit: BoxFit.cover,
-                                          )),
-                                      Text(productController.totalData[1]
-                                              ["name"]
-                                          .toString()),
-                                      Text(productController.totalData[1]
-                                              ["type"]
-                                          .toString()),
-                                      Text(
-                                        productController.totalData[1]["price"]
-                                                .toString() +
-                                            " USD",
-                                        style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.bold),
+                              InkWell(
+                                onTap: () {
+                                  productController.total.value = double.parse(
+                                      productController.totalData[1]["price"]);
+                                  Get.to(DashboardProductDetailScreen(
+                                      products: ProductModel(
+                                        id: productController.totalData[1]["id"],
+                                        title: productController.totalData[1]
+                                        ["name"],
+                                        description: productController.totalData[1]
+                                        ["description"],
+                                        price: double.parse(productController
+                                            .totalData[1]["price"]),
+                                        quantity: 1,
+                                        img: productController.totalData[1]
+                                        ["images"][0]["src"],
+                                      )));
+                                },
+
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 130,
+                                      height: 140,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            20.sp,
+                                          ),
+                                        ),
+                                        child: Container(
+                                          child: CachedNetworkImage(
+                                            imageUrl: productController
+                                                .totalData[1]["images"][0]["src"],
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                CircularProgressIndicator(
+                                                    color: Colors.redAccent,
+                                                    value: downloadProgress
+                                                        .progress),
+                                            errorWidget: (context, url, error) =>
+                                                Icon(Icons.error),
+                                          ),
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                  onTap: () {
-                                    productController.total.value = double.parse(productController.totalData[1]["price"]);
-                                    Get.to(DashboardProductDetailScreen(
-                                        products: ProductModel(
-                                      id: productController.totalData[1]["id"],
-                                      title: productController.totalData[1]
-                                          ["name"],
-                                      description: productController
-                                          .totalData[0]["description"],
-                                      price: double.parse(productController
-                                          .totalData[1]["price"]),
-                                      quantity: 1,
-                                      img: productController.totalData[1]
-                                          ["images"][0]["src"],
-                                    )));
-                                  },
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: SizedBox(
+                                        width: 160,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(productController.totalData[1]
+                                                    ["name"]
+                                                .toString()),
+                                            // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                            Text(MainScreenItems
+                                                        .recentlyViewdItems[1]
+                                                    ["type"] ??
+                                                "NaN".toString()),
+                                            Text(
+                                              "${productController.totalData[1]["price"]} USD",
+                                              style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
+                              // Container(
+                              //   color: Colors.white,
+                              //   width: 160,
+                              //   height: 250,
+                              //   // color: Colors.pink,
+                              //   child: InkWell(
+                              //     child: Column(
+                              //       crossAxisAlignment:
+                              //           CrossAxisAlignment.start,
+                              //       children: [
+                              //         SizedBox(
+                              //             width: 120,
+                              //             height: 140,
+                              //             child: Image.network(
+                              //               productController.totalData[1]
+                              //                   ["images"][0]["src"],
+                              //               fit: BoxFit.cover,
+                              //             )),
+                              //         Text(productController.totalData[1]
+                              //                 ["name"]
+                              //             .toString()),
+                              //         Text(productController.totalData[1]
+                              //                 ["type"]
+                              //             .toString()),
+                              //         Text(
+                              //           productController.totalData[1]["price"]
+                              //                   .toString() +
+                              //               " USD",
+                              //           style: TextStyle(
+                              //               fontSize: 20.sp,
+                              //               fontWeight: FontWeight.bold),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     onTap: () {
+                              //       productController.total.value =
+                              //           double.parse(productController
+                              //               .totalData[1]["price"]);
+                              //       Get.to(DashboardProductDetailScreen(
+                              //           products: ProductModel(
+                              //         id: productController.totalData[1]["id"],
+                              //         title: productController.totalData[1]
+                              //             ["name"],
+                              //         description: productController
+                              //             .totalData[0]["description"],
+                              //         price: double.parse(productController
+                              //             .totalData[1]["price"]),
+                              //         quantity: 1,
+                              //         img: productController.totalData[1]
+                              //             ["images"][0]["src"],
+                              //       )));
+                              //     },
+                              //   ),
+                              // ),
                             ],
                           ),
                           SizedBox(
@@ -355,7 +477,9 @@ class HomeScreen2 extends StatelessWidget {
                                       ),
                                     ),
                                     onTap: () {
-                                      productController.total.value = double.parse(productController.totalData[index+2]["price"]);
+                                      productController.total.value =
+                                          double.parse(productController
+                                              .totalData[index + 2]["price"]);
                                       Get.to(DashboardProductDetailScreen(
                                           products: ProductModel(
                                         id: productController
@@ -428,74 +552,115 @@ class HomeScreen2 extends StatelessWidget {
                                   child: Column(
                                     children: List.generate(5, (index) {
                                       return Padding(
-                                        padding:
-                                        const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 5),
                                         child: InkWell(
                                           child: Container(
-                                            width: 200,
+                                            // width: 200,
                                             height: 280,
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(20),
-                                                border:
-                                                Border.all(color: Colors.grey)),
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.grey)),
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   height: 150,
                                                   width: 200,
                                                   child: Padding(
                                                     padding:
-                                                    const EdgeInsets.all(8.0),
-                                                    child: Image(
-                                                      image: NetworkImage(
-                                                          productController
-                                                              .totalData[index+40]
-                                                          ["images"][0]["src"]),
-                                                      fit: BoxFit.cover,
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(
+                                                          20.sp,
+                                                        ),
+                                                      ),
+                                                      child: CachedNetworkImage(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl: productController
+                                                                    .totalData[
+                                                                index + 40][
+                                                            "images"][0]["src"],
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                          color:
+                                                              Colors.redAccent,
+                                                        ),
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(Icons.error),
+                                                      ),
                                                     ),
+                                                    // Image(
+                                                    //   image: NetworkImage(
+                                                    //       productController
+                                                    //                   .totalData[
+                                                    //               index +
+                                                    //                   40]["images"]
+                                                    //           [0]["src"]),
+                                                    //   fit: BoxFit.cover,
+                                                    // ),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(left: 5),
+                                                  padding:
+                                                      EdgeInsets.only(left: 5),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
-                                                      Text(
-                                                        productController
-                                                            .totalData[index + 40]
-                                                        ["name"]
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            color:
-                                                            Colors.grey.shade800,
-                                                            fontWeight:
-                                                            FontWeight.bold),
+                                                      SizedBox(
+                                                        width: 190.w,
+                                                        child: Text(
+                                                          productController
+                                                              .totalData[index +
+                                                                  40]["name"]
+                                                              .toString(),
+                                                          overflow:
+                                                              TextOverflow.fade,
+                                                          style: TextStyle(
+                                                              fontSize: 18.sp,
+                                                              color: Colors.grey
+                                                                  .shade800,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
                                                       ),
                                                       Text(
                                                           productController
-                                                              .totalData[index + 40]
-                                                          ["type"]
+                                                              .totalData[index +
+                                                                  40]["type"]
                                                               .toString(),
                                                           style: TextStyle(
                                                               fontSize: 16.sp,
-                                                              color: Colors
-                                                                  .grey.shade800,
+                                                              color: Colors.grey
+                                                                  .shade800,
                                                               fontWeight:
-                                                              FontWeight.bold)),
+                                                                  FontWeight
+                                                                      .bold)),
                                                       Text(
                                                           "price : ${productController.totalData[index + 40]["price"]}" +
                                                               " USD ",
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
-                                                              color: Colors
-                                                                  .grey.shade800,
+                                                              color: Colors.grey
+                                                                  .shade800,
                                                               fontWeight:
-                                                              FontWeight.bold)),
+                                                                  FontWeight
+                                                                      .bold)),
                                                     ],
                                                   ),
                                                 )
@@ -503,24 +668,30 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                           ),
                                           onTap: () {
-                                            productController.total.value = double.parse(productController.totalData[index+40]["price"]);
+                                            productController.total.value =
+                                                double.parse(productController
+                                                        .totalData[index + 40]
+                                                    ["price"]);
 
                                             Get.to(DashboardProductDetailScreen(
                                                 products: ProductModel(
-                                                  id: productController
-                                                      .totalData[index + 40]["id"],
-                                                  title: productController
-                                                      .totalData[index + 40]["name"],
-                                                  description: productController
+                                              id: productController
+                                                  .totalData[index + 40]["id"],
+                                              title: productController
+                                                      .totalData[index + 40]
+                                                  ["name"],
+                                              description: productController
                                                       .totalData[index + 40]
                                                   ["description"],
-                                                  price: double.parse(productController
-                                                      .totalData[index + 40]["price"]),
-                                                  quantity: 1,
-                                                  img: productController
-                                                      .totalData[index + 40]["images"]
-                                                  [0]["src"],
-                                                )));
+                                              price: double.parse(
+                                                  productController
+                                                          .totalData[index + 40]
+                                                      ["price"]),
+                                              quantity: 1,
+                                              img: productController
+                                                      .totalData[index + 40]
+                                                  ["images"][0]["src"],
+                                            )));
                                           },
                                         ),
                                       );
@@ -528,81 +699,111 @@ class HomeScreen2 extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                               Expanded(
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.vertical,
                                   child: Column(
                                     children: List.generate(5, (index) {
                                       return Padding(
-                                        padding:
-                                        const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 5),
                                         child: InkWell(
                                           child: Container(
                                             width: 200,
                                             height: 280,
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(20),
-                                                border:
-                                                Border.all(color: Colors.grey)),
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                    color: Colors.grey)),
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   height: 150,
                                                   width: 200,
                                                   child: Padding(
                                                     padding:
-                                                    const EdgeInsets.all(8.0),
-                                                    child: Image(
-                                                      image: NetworkImage(
-                                                          productController
-                                                              .totalData[index+45]
-                                                          ["images"][0]["src"]),
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
+                                                      imageUrl: productController
+                                                                  .totalData[
+                                                              index + 45]
+                                                          ["images"][0]["src"],
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                        color: Colors.redAccent,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Icon(Icons.error),
                                                     ),
+                                                    // Image(
+                                                    //   image: NetworkImage(
+                                                    //       productController
+                                                    //                   .totalData[
+                                                    //               index +
+                                                    //                   45]["images"]
+                                                    //           [0]["src"]),
+                                                    //   fit: BoxFit.cover,
+                                                    // ),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsets.only(left: 5),
+                                                  padding:
+                                                      EdgeInsets.only(left: 5),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
-                                                      Text(
-                                                        productController
-                                                            .totalData[index + 45]
-                                                        ["name"]
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            color:
-                                                            Colors.grey.shade800,
-                                                            fontWeight:
-                                                            FontWeight.bold),
-                                                      ),
-                                                      Text(
+                                                      SizedBox(
+                                                        width:150.w ,
+                                                        height: 60.h,
+                                                        child: Text(
                                                           productController
-                                                              .totalData[index + 45]
-                                                          ["type"]
+                                                              .totalData[index +
+                                                                  45]["name"]
                                                               .toString(),
-                                                          style: TextStyle(
-                                                              fontSize: 16.sp,
-                                                              color: Colors
-                                                                  .grey.shade800,
-                                                              fontWeight:
-                                                              FontWeight.bold)),
-                                                      Text(
-                                                          "price : ${productController.totalData[index + 45]["price"]}" +
-                                                              " USD ",
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
                                                               color: Colors
                                                                   .grey.shade800,
                                                               fontWeight:
-                                                              FontWeight.bold)),
+                                                                  FontWeight
+                                                                      .bold),
+                                                          overflow: TextOverflow.fade,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                          productController
+                                                              .totalData[index +
+                                                                  45]["type"]
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 16.sp,
+                                                              color: Colors.grey
+                                                                  .shade800,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                      Text(
+                                                          "price : ${productController.totalData[index + 45]["price"]}" +
+                                                              " USD ",
+                                                          style: TextStyle(
+                                                              fontSize: 18.sp,
+                                                              color: Colors.grey
+                                                                  .shade800,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
                                                     ],
                                                   ),
                                                 )
@@ -610,23 +811,29 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                           ),
                                           onTap: () {
-                                            productController.total.value = double.parse(productController.totalData[index+45]["price"]);
+                                            productController.total.value =
+                                                double.parse(productController
+                                                        .totalData[index + 45]
+                                                    ["price"]);
                                             Get.to(DashboardProductDetailScreen(
                                                 products: ProductModel(
-                                                  id: productController
-                                                      .totalData[index + 45]["id"],
-                                                  title: productController
-                                                      .totalData[index + 45]["name"],
-                                                  description: productController
+                                              id: productController
+                                                  .totalData[index + 45]["id"],
+                                              title: productController
+                                                      .totalData[index + 45]
+                                                  ["name"],
+                                              description: productController
                                                       .totalData[index + 45]
                                                   ["description"],
-                                                  price: double.parse(productController
-                                                      .totalData[index + 45]["price"]),
-                                                  quantity: 1,
-                                                  img: productController
-                                                      .totalData[index + 45]["images"]
-                                                  [0]["src"],
-                                                )));
+                                              price: double.parse(
+                                                  productController
+                                                          .totalData[index + 45]
+                                                      ["price"]),
+                                              quantity: 1,
+                                              img: productController
+                                                      .totalData[index + 45]
+                                                  ["images"][0]["src"],
+                                            )));
                                           },
                                         ),
                                       );
@@ -726,7 +933,10 @@ class HomeScreen2 extends StatelessWidget {
                                         ],
                                       ),
                                       onTap: () {
-                                        productController.total.value = double.parse(productController.totalData[index+40]["price"]);
+                                        productController.total.value =
+                                            double.parse(productController
+                                                    .totalData[index + 40]
+                                                ["price"]);
                                         print(index);
                                         Get.to(DashboardProductDetailScreen(
                                             products: ProductModel(
@@ -772,11 +982,12 @@ class HomeScreen2 extends StatelessWidget {
                             children: List.generate(4, (index) {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
+                                    horizontal: 0, vertical: 10),
                                 child: Container(
                                   width: 500,
                                   height: 200,
                                   decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(2.sp,),),
                                     color: index % 2 == 0
                                         ? Colors.orange
                                         : index % 3 == 0
@@ -834,18 +1045,25 @@ class HomeScreen2 extends StatelessWidget {
                                       controller: controller2,
                                       label: "First name",
                                     ),
+                                    10.verticalSpace,
                                     CustomInputField(
                                       controller: controller3,
                                       label: "Last name",
                                     ),
+                                    10.verticalSpace,
+
                                     CustomInputField(
                                       controller: controller4,
                                       label: "Email aAddress",
                                     ),
+                                    10.verticalSpace,
+
                                     CustomInputField(
                                       controller: controller4,
                                       label: "Your Message",
                                     ),
+                                    10.verticalSpace,
+
                                     CustomActionButton(
                                       buttonText: "Submit",
                                       isIcon: false,
@@ -861,7 +1079,9 @@ class HomeScreen2 extends StatelessWidget {
                                             ));
                                       },
                                       isLoading: false,
-                                    )
+                                    ),
+                                    20.verticalSpace,
+
                                   ],
                                 ),
                               )
