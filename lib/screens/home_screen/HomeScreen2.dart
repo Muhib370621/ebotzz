@@ -41,6 +41,7 @@ class HomeScreen2 extends StatelessWidget {
                         children: [
                           // CustomInputField(controller: controller,label: "Search on ebotzz",),
                           const CustomAppBar(),
+                          15.verticalSpace,
                           Row(
                             children: [
                               Expanded(
