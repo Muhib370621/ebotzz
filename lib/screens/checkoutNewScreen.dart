@@ -118,8 +118,9 @@ class CheckOutNewScreen extends StatelessWidget {
               height: 2.h,
             ),
             SizedBox(
-              height: 200,
+              height: 330.h,
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                   itemCount: productController.cartProduct.length,
                   itemBuilder: (context, index) {
                     return Padding(
@@ -161,7 +162,7 @@ class CheckOutNewScreen extends StatelessWidget {
                                       (context, url, downloadProgress) =>
                                           CircularProgressIndicator(
                                     value: downloadProgress.progress,
-                                    color: Colors.redAccent,
+                                    color: Colors.red.shade600,
                                   ),
                                   errorWidget: (context, url, error) =>
                                       Icon(Icons.error),

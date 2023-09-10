@@ -6,14 +6,55 @@ import 'package:ebotzz/widgets/customActionButton.dart';
 
 import '../../../utils/imports.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin{
+  AnimationController? _controller;
+  Animation<double>? _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize the animation controller
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2), // Set the duration of the fade animation
+    );
+
+    // Create a Tween that will control the opacity of the widget
+    _animation = Tween<double>(
+      begin: 0.0, // Start with 0% opacity (fully transparent)
+      end: 1.0, // End with 100% opacity (fully visible)
+    ).animate(_controller!);
+
+    // Start the animation when the screen is initialized
+    _controller!.forward();
+  }
+
+  @override
+  void dispose() {
+    // Don't forget to dispose the animation controller to prevent memory leaks
+    _controller!.dispose();
+    super.dispose();
+  }
+
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   bool loading = false;
+
   var formKey = GlobalKey<FormState>();
+
   bool isVisible = true;
+
   @override
   Widget build(BuildContext context) {
     ProductController controller = Get.put(ProductController());
@@ -144,7 +185,7 @@ class LoginScreen extends StatelessWidget {
                                 Icons.check,
                                 color: Colors.white,
                               ));
-                         Get.toNamed(RouteNames.bottomNav);
+                         Get.toNamed(RouteNames.bottomNav,);
                         },
                         isIcon: false, isLoading: false,
                       )

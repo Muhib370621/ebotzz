@@ -2,6 +2,7 @@ class RouteNames{
   static const bottomNav = '/bottomNav';
   static const signup = '/signup';
   static const loginScreen = '/loginScreen';
+  static const splashScreen = '/splashScreen';
 
   //bottom navigation screens
   static const homeScreen = '/homeScreen';

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -48,7 +49,7 @@ class UploadPicPopup extends StatelessWidget {
                   },
                   child: Icon(
                     Icons.close,
-                    color: Colors.redAccent,
+                    color: Colors.red.shade600,
                     weight: 25.sp,
                     // fill: 25.sp,
                   ),
@@ -70,7 +71,7 @@ class UploadPicPopup extends StatelessWidget {
                             height: 80.h,
                             width: 92.w,
                             decoration: BoxDecoration(
-                              color:  Colors.redAccent,
+                              color:  AppColors.mainColor,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   20.sp,
@@ -111,7 +112,7 @@ class UploadPicPopup extends StatelessWidget {
                             height: 80.h,
                             width: 92.w,
                             decoration: BoxDecoration(
-                              color: Colors.redAccent,
+                              color: AppColors.mainColor,
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   20.sp,

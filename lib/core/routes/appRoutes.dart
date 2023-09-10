@@ -5,6 +5,7 @@ import 'package:ebotzz/screens/authentication/screens/login_screen.dart';
 import 'package:ebotzz/screens/authentication/screens/signup_screen.dart';
 import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
 import 'package:ebotzz/screens/home_screen/product_detail_screen.dart';
+import 'package:ebotzz/screens/splash_screen/splash_screen.dart';
 import 'package:ebotzz/screens/trading_offers.dart';
 import 'package:ebotzz/screens/vendorScreens/auctionScreen.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorDashBoard.dart';
@@ -19,12 +20,15 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../../screens/bottom_nav_bar.dart';
 import '../../screens/vendorScreens/addAuctionScreen.dart';
+import '../../utils/imports.dart';
 
 class AppRoutes {
   static final routes = [
     GetPage(
       name: RouteNames.bottomNav,
       page: () =>  BottomNavBar(),
+      transition: Transition.fade,
+      // duration: Duration(seconds: 2),
     ),
     GetPage(
       name: RouteNames.signup,
@@ -34,7 +38,11 @@ class AppRoutes {
       name: RouteNames.loginScreen,
       page: () =>  LoginScreen(),
     ),
-
+    GetPage(
+      name: RouteNames.splashScreen,
+      page: () =>  SplashScreen(),
+      transition: Transition.upToDown
+    ),
 
     // bottom navigation screens
     GetPage(

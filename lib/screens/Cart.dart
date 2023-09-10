@@ -119,7 +119,7 @@ class CartScreen extends StatelessWidget {
           Get.to(HomeScreen2());
           controller.quantity.value = 1;
         },
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.red.shade600,
         child: const Icon(Icons.arrow_back),
       ),
     ));

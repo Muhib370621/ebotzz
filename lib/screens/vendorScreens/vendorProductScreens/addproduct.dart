@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/utils/prompts.dart';
@@ -292,7 +293,7 @@ class _AddProductState extends State<AddProduct> {
                             borderType: BorderType.RRect,
                             radius: Radius.circular(15.sp),
                             dashPattern: const [10, 10],
-                            color: Colors.redAccent,
+                            color: AppColors.mainColor,
                             strokeWidth: 2,
                             child: SizedBox(
                               // height: 8.h,

@@ -1,4 +1,5 @@
 import 'package:ebotzz/controllers/offerController.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/core/utils/app_extension.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/finializeTradeScreen.dart';
@@ -558,7 +559,7 @@ class TradeScreen extends StatelessWidget {
                                 border: Border.all(
                                     color:
                                         offerController.paymentMethod.value == 0
-                                            ? Colors.redAccent
+                                            ? AppColors.mainColor
                                             : Colors.transparent,
                                     width: 3)),
                             child: Image.asset(
@@ -579,7 +580,7 @@ class TradeScreen extends StatelessWidget {
                                 border: Border.all(
                                     color:
                                         offerController.paymentMethod.value == 1
-                                            ? Colors.redAccent
+                                            ? AppColors.mainColor
                                             : Colors.transparent,
                                     width: 3)),
                             child: Image.asset(
@@ -600,7 +601,7 @@ class TradeScreen extends StatelessWidget {
                                 border: Border.all(
                                     color:
                                         offerController.paymentMethod.value == 2
-                                            ? Colors.redAccent
+                                            ? AppColors.mainColor
                                             : Colors.transparent,
                                     width: 3)),
                             child: Image.asset(
@@ -621,7 +622,7 @@ class TradeScreen extends StatelessWidget {
                                 border: Border.all(
                                     color:
                                         offerController.paymentMethod.value == 3
-                                            ? Colors.redAccent
+                                            ? AppColors.mainColor
                                             : Colors.transparent,
                                     width: 3)),
                             child: Image.asset(
@@ -766,7 +767,7 @@ class TradeScreen extends StatelessWidget {
                               "Pay with ${offerController.paymentName.value}",
                           isLoading: false,
                           isIcon: false,
-                          color: Colors.redAccent,
+                          color: AppColors.mainColor,
                           onTap: () {
                             var amount =
                                 (productOriginal.price - productOffered.price);

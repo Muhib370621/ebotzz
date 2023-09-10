@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/tradingcontroller.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/core/utils/app_extension.dart';
 import 'package:ebotzz/models/yourproduct.dart';
 import 'package:ebotzz/utils/prompts.dart';
@@ -120,7 +121,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                         (context, url, downloadProgress) =>
                             CircularProgressIndicator(
                       value: downloadProgress.progress,
-                      color: Colors.redAccent,
+                      color: AppColors.mainColor,
                     ),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),

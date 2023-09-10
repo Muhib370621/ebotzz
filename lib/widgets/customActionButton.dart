@@ -1,4 +1,5 @@
 
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:flutter/material.dart';
 
 
@@ -29,22 +30,22 @@ class CustomActionButton extends StatelessWidget {
           horizontal: 4,
         ),
         decoration: BoxDecoration(
-          color: color==null?Colors.pink:
+          color: color==null?AppColors.mainColor:
               color,
           borderRadius: BorderRadius.circular(25),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.pink.withOpacity(
-                0.4,
-              ),
-              blurRadius: 5.0, // soften the shadow
-              spreadRadius: 1.0, //extend the shadow
-              offset: const Offset(
-                2.0, // Move to right 5  horizontally
-                2.0, // Move to bottom 5 Vertically
-              ),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.pink.withOpacity(
+          //       0.4,
+          //     ),
+          //     blurRadius: 5.0, // soften the shadow
+          //     spreadRadius: 1.0, //extend the shadow
+          //     offset: const Offset(
+          //       2.0, // Move to right 5  horizontally
+          //       2.0, // Move to bottom 5 Vertically
+          //     ),
+          //   ),
+          // ],
         ),
         child: Center(
           child: Row(

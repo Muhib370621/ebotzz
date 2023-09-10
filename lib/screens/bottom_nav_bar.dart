@@ -2,6 +2,7 @@
 
 import 'package:ebotzz/controllers/bottom_navigation_controller.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/services.dart';
 
@@ -64,7 +65,7 @@ class BottomNavBar extends StatelessWidget {
                 elevation: 10,
                 type: BottomNavigationBarType.shifting,
                 backgroundColor: Colors.black,
-                selectedItemColor: Colors.redAccent.withOpacity(0.8),
+                selectedItemColor: AppColors.mainColor,
                 showSelectedLabels: true,
 
                 unselectedItemColor: Colors.grey,

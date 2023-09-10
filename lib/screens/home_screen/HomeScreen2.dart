@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/signUpController.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/services/mainScreenItems.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
@@ -25,11 +26,17 @@ class HomeScreen2 extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: productController.isLoading.value == true
-                ? Center(
-                    child: Lottie.asset(
-                      "assets/json/loading.json",
+                ? Padding(
+                  padding: const EdgeInsets.only(top: 28.0),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.mainColor,
+                      ),
+                      // Lottie.asset(
+                      //   "assets/json/loadingAnimation.json",
+                      // ),
                     ),
-                  )
+                )
                 : productController.totalData.isEmpty
                     ? Center(
                         child: Lottie.asset(
@@ -173,7 +180,7 @@ class HomeScreen2 extends StatelessWidget {
                                             progressIndicatorBuilder: (context,
                                                     url, downloadProgress) =>
                                                 CircularProgressIndicator(
-                                                    color: Colors.redAccent,
+                                                    color: AppColors.mainColor,
                                                     value: downloadProgress
                                                         .progress),
                                             errorWidget:
@@ -196,9 +203,14 @@ class HomeScreen2 extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(productController
-                                                  .totalData[0]["name"]
-                                                  .toString()),
+                                              SizedBox(
+                                                height: 40.h,
+                                                child: Text(productController
+                                                    .totalData[0]["name"]
+                                                    .toString(),
+                                                  overflow: TextOverflow.fade,
+                                                ),
+                                              ),
                                               // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
                                               Text(MainScreenItems
                                                           .recentlyViewdItems[0]
@@ -257,62 +269,70 @@ class HomeScreen2 extends StatelessWidget {
                                         ["images"][0]["src"],
                                       )));
                                 },
+                                child: Container(
+                                  color: Colors.white,
+                                  width: 160,
+                                  height: 250,
 
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 130,
-                                      height: 140,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                            20.sp,
-                                          ),
-                                        ),
-                                        child: Container(
-                                          child: CachedNetworkImage(
-                                            imageUrl: productController
-                                                .totalData[1]["images"][0]["src"],
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                CircularProgressIndicator(
-                                                    color: Colors.redAccent,
-                                                    value: downloadProgress
-                                                        .progress),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(Icons.error),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: SizedBox(
-                                        width: 160,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(productController.totalData[1]
-                                                    ["name"]
-                                                .toString()),
-                                            // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
-                                            Text(MainScreenItems
-                                                        .recentlyViewdItems[1]
-                                                    ["type"] ??
-                                                "NaN".toString()),
-                                            Text(
-                                              "${productController.totalData[1]["price"]} USD",
-                                              style: TextStyle(
-                                                  fontSize: 20.sp,
-                                                  fontWeight: FontWeight.bold),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 130,
+                                        height: 140,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                              20.sp,
                                             ),
-                                          ],
+                                          ),
+                                          child: Container(
+                                            child: CachedNetworkImage(
+                                              imageUrl: productController
+                                                  .totalData[1]["images"][0]["src"],
+                                              progressIndicatorBuilder: (context,
+                                                      url, downloadProgress) =>
+                                                  CircularProgressIndicator(
+                                                      color: AppColors.mainColor,
+                                                      value: downloadProgress
+                                                          .progress),
+                                              errorWidget: (context, url, error) =>
+                                                  Icon(Icons.error),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: SizedBox(
+                                          width: 160,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 40.h,
+                                                child: Text(productController.totalData[1]
+                                                        ["name"]
+                                                    .toString(),overflow: TextOverflow.fade,),
+                                              ),
+                                              // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                              Text(MainScreenItems
+                                                          .recentlyViewdItems[1]
+                                                      ["type"] ??
+                                                  "NaN".toString()),
+                                              Text(
+                                                "${productController.totalData[1]["price"]} USD",
+                                                style: TextStyle(
+                                                    fontSize: 20.sp,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               // Container(
@@ -596,7 +616,7 @@ class HomeScreen2 extends StatelessWidget {
                                                               downloadProgress
                                                                   .progress,
                                                           color:
-                                                              Colors.redAccent,
+                                                          AppColors.mainColor,
                                                         ),
                                                         errorWidget: (context,
                                                                 url, error) =>
@@ -740,7 +760,7 @@ class HomeScreen2 extends StatelessWidget {
                                                               CircularProgressIndicator(
                                                         value: downloadProgress
                                                             .progress,
-                                                        color: Colors.redAccent,
+                                                        color: AppColors.mainColor,
                                                       ),
                                                       errorWidget: (context,
                                                               url, error) =>

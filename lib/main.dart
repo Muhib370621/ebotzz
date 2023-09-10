@@ -2,6 +2,7 @@
 
 import 'package:ebotzz/core/routes/appRoutes.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/firebase_options.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,12 +35,12 @@ class MyApp extends StatelessWidget {
             fontFamily: 'JossefinSans',
             appBarTheme: AppBarTheme(color: blackColor, centerTitle: true),
           colorScheme: ThemeData().colorScheme.copyWith(
-            primary: Colors.redAccent,
+            primary: AppColors.mainColor,
             secondary: Colors.white,
           ),
         ),
         getPages: AppRoutes.routes,
-        initialRoute: RouteNames.loginScreen,
+        initialRoute: RouteNames.splashScreen,
       ),
       child: SignUPScreen(),
       designSize: Size(393, 851),
