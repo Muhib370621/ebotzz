@@ -7,7 +7,7 @@ class NewOnboarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body:
-      InkWell(
+      GestureDetector(
         onTap: (){
           Get.to(()=> LoginScreen(),  transition: Transition.fade,
             duration: Duration(seconds: 2),);

@@ -12,6 +12,7 @@ class OrderStatusScreen extends StatelessWidget {
     final ProductController productController = Get.put(ProductController());
     TextEditingController controller = TextEditingController();
     return Scaffold(
+      backgroundColor: Colors.grey.shade800,
       appBar: AppBar(
         title: Text("Order Status"),
         backgroundColor: Colors.black45,
@@ -21,6 +22,7 @@ class OrderStatusScreen extends StatelessWidget {
 
           SizedBox(height: 20.h,),
           CustomInputField(controller:controller ,label: "search item"),
+          10.verticalSpace,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
@@ -77,10 +79,10 @@ class OrderStatusScreen extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(10),
-                        height: 75.h,
+                        height: 85.h,
                         width: 350.w,
                         decoration: BoxDecoration(
-                          color: Colors.black12,
+                          color: Colors.white,
                           borderRadius: BorderRadius.all(
                             Radius.circular(
                               15,
@@ -132,7 +134,7 @@ class OrderStatusScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 5.h,
+                        height: 10.h,
                       ),
                     ],
                   ),

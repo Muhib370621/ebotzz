@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
+import 'package:ebotzz/models/productApiModel.dart' as prodAPI;
+import 'package:ebotzz/services/currentItem.dart';
 import 'package:ebotzz/services/mainScreenItems.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
@@ -20,15 +25,15 @@ class HomeScreen2 extends StatelessWidget {
     TextEditingController controller3 = TextEditingController();
     TextEditingController controller4 = TextEditingController();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.shade800,
       body: Obx(() {
         return SafeArea(
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: productController.isLoading.value == true
                 ? Padding(
-                  padding: const EdgeInsets.only(top: 28.0),
-                  child: Center(
+                    padding: const EdgeInsets.only(top: 28.0),
+                    child: Center(
                       child: CircularProgressIndicator(
                         color: AppColors.mainColor,
                       ),
@@ -36,7 +41,7 @@ class HomeScreen2 extends StatelessWidget {
                       //   "assets/json/loadingAnimation.json",
                       // ),
                     ),
-                )
+                  )
                 : productController.totalData.isEmpty
                     ? Center(
                         child: Lottie.asset(
@@ -122,7 +127,7 @@ class HomeScreen2 extends StatelessWidget {
                                     child: const Center(
                                       child: Text(
                                         "Categories",
-                                        style: TextStyle(color: Colors.black),
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                     )),
                               ),
@@ -132,401 +137,838 @@ class HomeScreen2 extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 24,
-                              ),
-                              Text(
-                                "Your Recently Viewed Items",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w900),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              InkWell(
-                                child: Container(
-                                  color: Colors.white,
-                                  width: 160,
-                                  height: 250,
-                                  // color: Colors.pink,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 130,
-                                        height: 140,
-                                        child: ClipRRect(
+                          Container(
+                            color: Colors.grey.shade900,
+                            child: Column(
+                              children: [
+                                15.verticalSpace,
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 24,
+                                    ),
+                                    Text(
+                                      "Your Recently Viewed Items",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w900),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        productController.total.value =
+                                            double.parse(productController
+                                                .totalData[0]["price"]);
+                                        Get.to(DashboardProductDetailScreen(
+                                            products: ProductModel(
+                                          id: productController.totalData[0]
+                                              ["id"],
+                                          title: productController.totalData[0]
+                                              ["name"],
+                                          description: productController
+                                              .totalData[0]["description"],
+                                          price: double.parse(productController
+                                              .totalData[0]["price"]),
+                                          quantity: 1,
+                                          img: productController.totalData[0]
+                                              ["images"][0]["src"],
+                                        )));
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(
-                                              20.sp,
+                                              20,
                                             ),
                                           ),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                productController.totalData[0]
-                                                    ["images"][0]["src"],
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                CircularProgressIndicator(
-                                                    color: AppColors.mainColor,
-                                                    value: downloadProgress
-                                                        .progress),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Icon(Icons.error),
-                                          ),
                                         ),
-                                      ),
-                                      // Image(
-                                      //   image: NetworkImage(
-                                      //      ),
-                                      //   fit: BoxFit.cover,
-                                      // )),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: SizedBox(
-                                          width: 120,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: 40.h,
-                                                child: Text(productController
-                                                    .totalData[0]["name"]
-                                                    .toString(),
-                                                  overflow: TextOverflow.fade,
+                                        width: 160,
+                                        height: 200,
+                                        // color: Colors.pink,
+                                        child: Stack(
+                                          // crossAxisAlignment:
+                                          //     CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: 160,
+                                              height: 140,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(
+                                                    20.sp,
+                                                  ),
+                                                ),
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.fill,
+                                                  imageUrl: productController
+                                                          .totalData[0]
+                                                      ["images"][0]["src"],
+                                                  progressIndicatorBuilder: (context,
+                                                          url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                          color: AppColors
+                                                              .mainColor,
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(Icons.error),
                                                 ),
                                               ),
-                                              // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
-                                              Text(MainScreenItems
-                                                          .recentlyViewdItems[0]
-                                                      ["type"] ??
-                                                  "NaN".toString()),
-                                              Text(
-                                                "${productController.totalData[0]["price"]} USD",
-                                                style: TextStyle(
-                                                    fontSize: 20.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                onTap: () {
-                                  productController.total.value = double.parse(
-                                      productController.totalData[0]["price"]);
-                                  Get.to(DashboardProductDetailScreen(
-                                      products: ProductModel(
-                                    id: productController.totalData[0]["id"],
-                                    title: productController.totalData[0]
-                                        ["name"],
-                                    description: productController.totalData[0]
-                                        ["description"],
-                                    price: double.parse(productController
-                                        .totalData[0]["price"]),
-                                    quantity: 1,
-                                    img: productController.totalData[0]
-                                        ["images"][0]["src"],
-                                  )));
-                                },
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  productController.total.value = double.parse(
-                                      productController.totalData[1]["price"]);
-                                  Get.to(DashboardProductDetailScreen(
-                                      products: ProductModel(
-                                        id: productController.totalData[1]["id"],
-                                        title: productController.totalData[1]
-                                        ["name"],
-                                        description: productController.totalData[1]
-                                        ["description"],
-                                        price: double.parse(productController
-                                            .totalData[1]["price"]),
-                                        quantity: 1,
-                                        img: productController.totalData[1]
-                                        ["images"][0]["src"],
-                                      )));
-                                },
-                                child: Container(
-                                  color: Colors.white,
-                                  width: 160,
-                                  height: 250,
+                                            ),
+                                            // Image(
+                                            //   image: NetworkImage(
+                                            //      ),
+                                            //   fit: BoxFit.cover,
+                                            // )),
+                                            Positioned(
+                                              // top: 0,
+                                              bottom: 0,
+                                              right: 0,
+                                              left: 0,
+                                              child: Container(
+                                                // height: 80,
+                                                width: 90,
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 5,
+                                                  vertical: 2,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.mainColor,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft: Radius.circular(
+                                                      15,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(
+                                                      15,
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 40.h,
+                                                          width: 100,
+                                                          child: Text(
+                                                            productController
+                                                                .totalData[0]
+                                                                    ["name"]
+                                                                .toString(),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .fade,
+                                                            style: TextStyle(
+                                                              fontSize: 15.sp,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                                        // Text(MainScreenItems
+                                                        //             .recentlyViewdItems[0]
+                                                        //         ["type"] ??
+                                                        //     "NaN".toString()),
+                                                        Text(
+                                                          "${productController.totalData[0]["price"]} USD",
+                                                          style: TextStyle(
+                                                            fontSize: 20.sp,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    5.horizontalSpace,
+                                                    Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                      child: Center(
+                                                        child: IconButton(
+                                                          padding:
+                                                              EdgeInsets.all(1),
+                                                          icon: Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                          onPressed: () {
+                                                            ProductController
+                                                                controller =
+                                                                Get.put(
+                                                                    ProductController());
+                                                            var prod =
+                                                                productController
+                                                                    .totalData[0];
+                                                            log("=============? " +
+                                                                prod.toString());
+                                                            var productModel = ProductModel(
+                                                                id: (prod[
+                                                                    "id"]),
+                                                                title: prod[
+                                                                    "name"],
+                                                                description: prod[
+                                                                    "description"],
+                                                                price: double
+                                                                    .parse(prod[
+                                                                        "price"]),
+                                                                img: prod[
+                                                                        "images"]
+                                                                    [0]["src"]);
+                                                            controller.addToCart(
+                                                                productModel);
+                                                            productController
+                                                                    .cartScreenTotal
+                                                                    .value +=
+                                                                productController
+                                                                    .total
+                                                                    .value;
+                                                            var item = CurrentItem(
+                                                                title:
+                                                                    productController
+                                                                        .total
+                                                                        .value,
+                                                                quantity:
+                                                                    productController
+                                                                        .quantity
+                                                                        .value);
+                                                            controller
+                                                                .cartScreenItems
+                                                                .add(item);
 
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 130,
-                                        height: 140,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(
-                                              20.sp,
-                                            ),
-                                          ),
-                                          child: Container(
-                                            child: CachedNetworkImage(
-                                              imageUrl: productController
-                                                  .totalData[1]["images"][0]["src"],
-                                              progressIndicatorBuilder: (context,
-                                                      url, downloadProgress) =>
-                                                  CircularProgressIndicator(
-                                                      color: AppColors.mainColor,
-                                                      value: downloadProgress
-                                                          .progress),
-                                              errorWidget: (context, url, error) =>
-                                                  Icon(Icons.error),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: SizedBox(
-                                          width: 160,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: 40.h,
-                                                child: Text(productController.totalData[1]
-                                                        ["name"]
-                                                    .toString(),overflow: TextOverflow.fade,),
-                                              ),
-                                              // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
-                                              Text(MainScreenItems
-                                                          .recentlyViewdItems[1]
-                                                      ["type"] ??
-                                                  "NaN".toString()),
-                                              Text(
-                                                "${productController.totalData[1]["price"]} USD",
-                                                style: TextStyle(
-                                                    fontSize: 20.sp,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // Container(
-                              //   color: Colors.white,
-                              //   width: 160,
-                              //   height: 250,
-                              //   // color: Colors.pink,
-                              //   child: InkWell(
-                              //     child: Column(
-                              //       crossAxisAlignment:
-                              //           CrossAxisAlignment.start,
-                              //       children: [
-                              //         SizedBox(
-                              //             width: 120,
-                              //             height: 140,
-                              //             child: Image.network(
-                              //               productController.totalData[1]
-                              //                   ["images"][0]["src"],
-                              //               fit: BoxFit.cover,
-                              //             )),
-                              //         Text(productController.totalData[1]
-                              //                 ["name"]
-                              //             .toString()),
-                              //         Text(productController.totalData[1]
-                              //                 ["type"]
-                              //             .toString()),
-                              //         Text(
-                              //           productController.totalData[1]["price"]
-                              //                   .toString() +
-                              //               " USD",
-                              //           style: TextStyle(
-                              //               fontSize: 20.sp,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //     onTap: () {
-                              //       productController.total.value =
-                              //           double.parse(productController
-                              //               .totalData[1]["price"]);
-                              //       Get.to(DashboardProductDetailScreen(
-                              //           products: ProductModel(
-                              //         id: productController.totalData[1]["id"],
-                              //         title: productController.totalData[1]
-                              //             ["name"],
-                              //         description: productController
-                              //             .totalData[0]["description"],
-                              //         price: double.parse(productController
-                              //             .totalData[1]["price"]),
-                              //         quantity: 1,
-                              //         img: productController.totalData[1]
-                              //             ["images"][0]["src"],
-                              //       )));
-                              //     },
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 30.h,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Text(
-                              "Hot Deals",
-                              style: TextStyle(
-                                  fontSize: 22.sp, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 15),
-                            child: Text(
-                              "Recommended for you",
-                              style: TextStyle(
-                                  color: Colors.grey.shade800,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.sp),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(10, (index) {
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  child: InkWell(
-                                    child: Container(
-                                      width: 200,
-                                      height: 290,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border:
-                                              Border.all(color: Colors.grey)),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 150,
-                                            width: 200,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Image(
-                                                image: NetworkImage(
-                                                    productController
-                                                            .totalData[2]
-                                                        ["images"][0]["src"]),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 5),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  productController
-                                                      .totalData[index + 2]
-                                                          ["name"]
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      fontSize: 18.sp,
-                                                      color:
-                                                          Colors.grey.shade800,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                            Get.to(CartScreen(
+                                                              products:
+                                                                  productModel,
+                                                            ));
+                                                          },
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                                Text(
-                                                    productController
-                                                        .totalData[index + 2]
-                                                            ["type"]
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        fontSize: 16.sp,
-                                                        color: Colors
-                                                            .grey.shade800,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                Text(
-                                                    "price : ${productController.totalData[index + 2]["price"]}" +
-                                                        " USD ",
-                                                    style: TextStyle(
-                                                        fontSize: 18.sp,
-                                                        color: Colors
-                                                            .grey.shade800,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                              ],
+                                              ),
                                             ),
-                                          )
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    onTap: () {
-                                      productController.total.value =
-                                          double.parse(productController
-                                              .totalData[index + 2]["price"]);
-                                      Get.to(DashboardProductDetailScreen(
-                                          products: ProductModel(
-                                        id: productController
-                                            .totalData[index + 2]["id"],
-                                        title: productController
-                                            .totalData[index + 2]["name"],
-                                        description: productController
-                                                .totalData[index + 2]
-                                            ["description"],
-                                        price: double.parse(productController
-                                            .totalData[index + 2]["price"]),
-                                        quantity: 1,
-                                        img: productController
-                                                .totalData[index + 2]["images"]
-                                            [0]["src"],
-                                      )));
-                                    },
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        productController.total.value =
+                                            double.parse(productController
+                                                .totalData[1]["price"]);
+                                        Get.to(
+                                          DashboardProductDetailScreen(
+                                            products: ProductModel(
+                                              id: productController.totalData[1]
+                                                  ["id"],
+                                              title: productController
+                                                  .totalData[1]["name"],
+                                              description: productController
+                                                  .totalData[1]["description"],
+                                              price: double.parse(
+                                                  productController.totalData[1]
+                                                      ["price"]),
+                                              quantity: 1,
+                                              img:
+                                                  productController.totalData[1]
+                                                      ["images"][0]["src"],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                              20,
+                                            ),
+                                          ),
+                                        ),
+                                        width: 160,
+                                        // height: 210,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: 160,
+                                              height: 125,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(
+                                                    20.sp,
+                                                  ),
+                                                ),
+                                                child: Container(
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: productController
+                                                            .totalData[1]
+                                                        ["images"][0]["src"],
+                                                    progressIndicatorBuilder: (context,
+                                                            url,
+                                                            downloadProgress) =>
+                                                        CircularProgressIndicator(
+                                                            color: AppColors
+                                                                .mainColor,
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Icon(Icons.error),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              // top: 0,
+                                              bottom: 1,
+                                              right: 0,
+                                              left: 0,
+                                              child: Container(
+                                                // height: 80,
+                                                width: 160,
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 5,
+                                                  vertical: 2,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.mainColor,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft: Radius.circular(
+                                                      15,
+                                                    ),
+                                                    bottomRight:
+                                                        Radius.circular(
+                                                      15,
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 40.h,
+                                                          width: 100,
+                                                          child: Text(
+                                                            productController
+                                                                .totalData[1]
+                                                                    ["name"]
+                                                                .toString(),
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .fade,
+                                                            style: TextStyle(
+                                                              fontSize: 15.sp,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                                        // Text(MainScreenItems
+                                                        //             .recentlyViewdItems[0]
+                                                        //         ["type"] ??
+                                                        //     "NaN".toString()),
+                                                        Text(
+                                                          "${productController.totalData[1]["price"]} USD",
+                                                          style: TextStyle(
+                                                            fontSize: 20.sp,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    5.horizontalSpace,
+                                                    Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black,
+                                                          shape:
+                                                              BoxShape.circle),
+                                                      child: Center(
+                                                        child: IconButton(
+                                                          padding:
+                                                              EdgeInsets.all(1),
+                                                          icon: Icon(
+                                                            Icons.add,
+                                                            color: Colors.white,
+                                                          ),
+                                                          onPressed: () {
+                                                            ProductController
+                                                                controller =
+                                                                Get.put(
+                                                                    ProductController());
+                                                            var prod =
+                                                                productController
+                                                                    .totalData[1];
+                                                            log("=============? " +
+                                                                prod.toString());
+                                                            var productModel = ProductModel(
+                                                                id: (prod[
+                                                                    "id"]),
+                                                                title: prod[
+                                                                    "name"],
+                                                                description: prod[
+                                                                    "description"],
+                                                                price: double
+                                                                    .parse(prod[
+                                                                        "price"]),
+                                                                img: prod[
+                                                                        "images"]
+                                                                    [0]["src"]);
+                                                            controller.addToCart(
+                                                                productModel);
+                                                            productController
+                                                                    .cartScreenTotal
+                                                                    .value +=
+                                                                productController
+                                                                    .total
+                                                                    .value;
+                                                            var item = CurrentItem(
+                                                                title:
+                                                                    productController
+                                                                        .total
+                                                                        .value,
+                                                                quantity:
+                                                                    productController
+                                                                        .quantity
+                                                                        .value);
+                                                            controller
+                                                                .cartScreenItems
+                                                                .add(item);
+
+                                                            Get.to(CartScreen(
+                                                              products:
+                                                                  productModel,
+                                                            ));
+                                                          },
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                            // Padding(
+                                            //   padding:
+                                            //       const EdgeInsets.only(left: 8.0),
+                                            //   child: SizedBox(
+                                            //     width: 160,
+                                            //     child: Column(
+                                            //       crossAxisAlignment:
+                                            //           CrossAxisAlignment.start,
+                                            //       children: [
+                                            //         SizedBox(
+                                            //           height: 40.h,
+                                            //           child: Text(
+                                            //             productController.totalData[1]
+                                            //                     ["name"]
+                                            //                 .toString(),
+                                            //             overflow: TextOverflow.fade,
+                                            //           ),
+                                            //         ),
+                                            //         // Text(MainScreenItems.recentlyViewdItems[0]["name"].toString()),
+                                            //         Text(MainScreenItems
+                                            //                     .recentlyViewdItems[1]
+                                            //                 ["type"] ??
+                                            //             "NaN".toString()),
+                                            //         Text(
+                                            //           "${productController.totalData[1]["price"]} USD",
+                                            //           style: TextStyle(
+                                            //               fontSize: 20.sp,
+                                            //               fontWeight:
+                                            //                   FontWeight.bold),
+                                            //         ),
+                                            //       ],
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    // Container(
+                                    //   color: Colors.white,
+                                    //   width: 160,
+                                    //   height: 250,
+                                    //   // color: Colors.pink,
+                                    //   child: InkWell(
+                                    //     child: Column(
+                                    //       crossAxisAlignment:
+                                    //           CrossAxisAlignment.start,
+                                    //       children: [
+                                    //         SizedBox(
+                                    //             width: 120,
+                                    //             height: 140,
+                                    //             child: Image.network(
+                                    //               productController.totalData[1]
+                                    //                   ["images"][0]["src"],
+                                    //               fit: BoxFit.cover,
+                                    //             )),
+                                    //         Text(productController.totalData[1]
+                                    //                 ["name"]
+                                    //             .toString()),
+                                    //         Text(productController.totalData[1]
+                                    //                 ["type"]
+                                    //             .toString()),
+                                    //         Text(
+                                    //           productController.totalData[1]["price"]
+                                    //                   .toString() +
+                                    //               " USD",
+                                    //           style: TextStyle(
+                                    //               fontSize: 20.sp,
+                                    //               fontWeight: FontWeight.bold),
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //     onTap: () {
+                                    //       productController.total.value =
+                                    //           double.parse(productController
+                                    //               .totalData[1]["price"]);
+                                    //       Get.to(DashboardProductDetailScreen(
+                                    //           products: ProductModel(
+                                    //         id: productController.totalData[1]["id"],
+                                    //         title: productController.totalData[1]
+                                    //             ["name"],
+                                    //         description: productController
+                                    //             .totalData[0]["description"],
+                                    //         price: double.parse(productController
+                                    //             .totalData[1]["price"]),
+                                    //         quantity: 1,
+                                    //         img: productController.totalData[1]
+                                    //             ["images"][0]["src"],
+                                    //       )));
+                                    //     },
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                                20.verticalSpace
+                              ],
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 30.h,
+                          // ),
+                          Container(
+                            decoration:
+                                BoxDecoration(color: Colors.grey.shade900),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                10.verticalSpace,
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: Text(
+                                    "Hot Deals",
+                                    style: TextStyle(
+                                        fontSize: 22.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
                                   ),
-                                );
-                              }),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    "Recommended for you",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.sp),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(10, (index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: InkWell(
+                                          child: Container(
+                                            width: 221.w,
+                                            // height: 290,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              // border:
+                                              //     Border.all(color: Colors.grey)
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 150,
+                                                      width: 200,
+                                                      // decoration: BoxDecoration(
+                                                      //
+                                                      // ),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                  15,
+                                                                ),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                  15,
+                                                                )),
+                                                        child: Image(
+                                                          image: NetworkImage(
+                                                              productController
+                                                                          .totalData[3]
+                                                                      ["images"]
+                                                                  [0]["src"]),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 100,
+                                                      width: 218.w,
+                                                      padding:
+                                                          EdgeInsets.all(5),
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            AppColors.mainColor,
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  15),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  15),
+                                                        ),
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              SizedBox(
+                                                                height: 25,
+                                                                width: 140,
+                                                                child: Text(
+                                                                  productController
+                                                                      .totalData[
+                                                                          index +
+                                                                              2]
+                                                                          [
+                                                                          "name"]
+                                                                      .toString(),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        18.sp,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Text(
+                                                                  productController
+                                                                      .totalData[
+                                                                          index + 2]
+                                                                          [
+                                                                          "type"]
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          16.sp,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                              Text(
+                                                                  "price : ${productController.totalData[index + 2]["price"]}" +
+                                                                      " USD ",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          18.sp,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w900)),
+                                                            ],
+                                                          ),
+                                                          Container(
+                                                            height: 30,
+                                                            width: 30,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    shape: BoxShape
+                                                                        .circle),
+                                                            child: Center(
+                                                              child: IconButton(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(1),
+                                                                icon: Icon(
+                                                                  Icons.add,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                                onPressed: () {
+                                                                  ProductController
+                                                                      controller =
+                                                                      Get.put(
+                                                                          ProductController());
+                                                                  var prod =
+                                                                      productController
+                                                                              .totalData[
+                                                                          index +
+                                                                              2];
+                                                                  log("=============? " +
+                                                                      prod.toString());
+                                                                  var productModel = ProductModel(
+                                                                      id: (prod[
+                                                                          "id"]),
+                                                                      title: prod[
+                                                                          "name"],
+                                                                      description:
+                                                                          prod[
+                                                                              "description"],
+                                                                      price: double.parse(
+                                                                          prod[
+                                                                              "price"]),
+                                                                      img: prod["images"]
+                                                                              [
+                                                                              0]
+                                                                          [
+                                                                          "src"]);
+                                                                  controller
+                                                                      .addToCart(
+                                                                          productModel);
+                                                                  productController
+                                                                          .cartScreenTotal
+                                                                          .value +=
+                                                                      productController
+                                                                          .total
+                                                                          .value;
+                                                                  var item = CurrentItem(
+                                                                      title: productController
+                                                                          .total
+                                                                          .value,
+                                                                      quantity: productController
+                                                                          .quantity
+                                                                          .value);
+                                                                  controller
+                                                                      .cartScreenItems
+                                                                      .add(
+                                                                          item);
+
+                                                                  Get.to(
+                                                                      CartScreen(
+                                                                    products:
+                                                                        productModel,
+                                                                  ));
+                                                                },
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            productController.total.value =
+                                                double.parse(productController
+                                                        .totalData[index + 2]
+                                                    ["price"]);
+                                            Get.to(DashboardProductDetailScreen(
+                                                products: ProductModel(
+                                              id: productController
+                                                  .totalData[index + 2]["id"],
+                                              title: productController
+                                                  .totalData[index + 2]["name"],
+                                              description: productController
+                                                      .totalData[index + 2]
+                                                  ["description"],
+                                              price: double.parse(
+                                                  productController
+                                                          .totalData[index + 2]
+                                                      ["price"]),
+                                              quantity: 1,
+                                              img: productController
+                                                      .totalData[index + 2]
+                                                  ["images"][0]["src"],
+                                            )));
+                                          },
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ),
+                                20.verticalSpace,
+                              ],
                             ),
                           ),
 
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          // const SizedBox(
+                          //   height: 30,
+                          // ),
                           Container(
                             color: Colors.grey.shade300,
                             height: 170,
@@ -580,10 +1022,11 @@ class HomeScreen2 extends StatelessWidget {
                                             // width: 200,
                                             height: 280,
                                             decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                    color: Colors.grey)),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              // border: Border.all(
+                                              //     color: Colors.grey)
+                                            ),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -591,52 +1034,53 @@ class HomeScreen2 extends StatelessWidget {
                                                 SizedBox(
                                                   height: 150,
                                                   width: 200,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(
-                                                          20.sp,
-                                                        ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft: Radius.circular(
+                                                        20.sp,
                                                       ),
-                                                      child: CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: productController
-                                                                    .totalData[
-                                                                index + 40][
-                                                            "images"][0]["src"],
-                                                        progressIndicatorBuilder:
-                                                            (context, url,
-                                                                    downloadProgress) =>
-                                                                CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
-                                                          color:
-                                                          AppColors.mainColor,
-                                                        ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
-                                                            Icon(Icons.error),
+                                                      topRight: Radius.circular(
+                                                        20.sp,
                                                       ),
                                                     ),
-                                                    // Image(
-                                                    //   image: NetworkImage(
-                                                    //       productController
-                                                    //                   .totalData[
-                                                    //               index +
-                                                    //                   40]["images"]
-                                                    //           [0]["src"]),
-                                                    //   fit: BoxFit.cover,
-                                                    // ),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: productController
+                                                                  .totalData[
+                                                              index + 40]
+                                                          ["images"][0]["src"],
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                        color:
+                                                            AppColors.mainColor,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Icon(Icons.error),
+                                                    ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 5),
+                                                Container(
+                                                  padding: EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.mainColor,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(
+                                                        15,
+                                                      ),
+                                                      bottomRight:
+                                                          Radius.circular(
+                                                        15,
+                                                      ),
+                                                    ),
+                                                  ),
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -653,8 +1097,8 @@ class HomeScreen2 extends StatelessWidget {
                                                               TextOverflow.fade,
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
-                                                              color: Colors.grey
-                                                                  .shade800,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
@@ -667,8 +1111,8 @@ class HomeScreen2 extends StatelessWidget {
                                                               .toString(),
                                                           style: TextStyle(
                                                               fontSize: 16.sp,
-                                                              color: Colors.grey
-                                                                  .shade800,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold)),
@@ -677,8 +1121,8 @@ class HomeScreen2 extends StatelessWidget {
                                                               " USD ",
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
-                                                              color: Colors.grey
-                                                                  .shade800,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold)),
@@ -733,10 +1177,11 @@ class HomeScreen2 extends StatelessWidget {
                                             width: 200,
                                             height: 280,
                                             decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                border: Border.all(
-                                                    color: Colors.grey)),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              // border: Border.all(
+                                              //     color: Colors.grey)
+                                            ),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -744,10 +1189,16 @@ class HomeScreen2 extends StatelessWidget {
                                                 SizedBox(
                                                   height: 150,
                                                   width: 200,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      topLeft: Radius.circular(
+                                                        20.sp,
+                                                      ),
+                                                      topRight: Radius.circular(
+                                                        20.sp,
+                                                      ),
+                                                    ),
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.cover,
                                                       imageUrl: productController
@@ -760,34 +1211,39 @@ class HomeScreen2 extends StatelessWidget {
                                                               CircularProgressIndicator(
                                                         value: downloadProgress
                                                             .progress,
-                                                        color: AppColors.mainColor,
+                                                        color:
+                                                            AppColors.mainColor,
                                                       ),
                                                       errorWidget: (context,
                                                               url, error) =>
                                                           Icon(Icons.error),
                                                     ),
-                                                    // Image(
-                                                    //   image: NetworkImage(
-                                                    //       productController
-                                                    //                   .totalData[
-                                                    //               index +
-                                                    //                   45]["images"]
-                                                    //           [0]["src"]),
-                                                    //   fit: BoxFit.cover,
-                                                    // ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 5),
+                                                Container(
+                                                  padding: EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.mainColor,
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(
+                                                        15,
+                                                      ),
+                                                      bottomRight:
+                                                          Radius.circular(
+                                                        15,
+                                                      ),
+                                                    ),
+                                                  ),
                                                   child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
                                                       SizedBox(
-                                                        width:150.w ,
-                                                        height: 60.h,
+                                                        width: 190.w,
+                                                        height: 70.h,
                                                         child: Text(
                                                           productController
                                                               .totalData[index +
@@ -795,12 +1251,13 @@ class HomeScreen2 extends StatelessWidget {
                                                               .toString(),
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
-                                                              color: Colors
-                                                                  .grey.shade800,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
-                                                          overflow: TextOverflow.fade,
+                                                          overflow:
+                                                              TextOverflow.fade,
                                                         ),
                                                       ),
                                                       Text(
@@ -810,8 +1267,8 @@ class HomeScreen2 extends StatelessWidget {
                                                               .toString(),
                                                           style: TextStyle(
                                                               fontSize: 16.sp,
-                                                              color: Colors.grey
-                                                                  .shade800,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold)),
@@ -820,8 +1277,8 @@ class HomeScreen2 extends StatelessWidget {
                                                               " USD ",
                                                           style: TextStyle(
                                                               fontSize: 18.sp,
-                                                              color: Colors.grey
-                                                                  .shade800,
+                                                              color:
+                                                                  Colors.white,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold)),
@@ -875,7 +1332,7 @@ class HomeScreen2 extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 24.sp,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                    color: Colors.white),
                               )),
                           SizedBox(
                             height: 10.h,
@@ -890,10 +1347,11 @@ class HomeScreen2 extends StatelessWidget {
                                       const EdgeInsets.symmetric(horizontal: 5),
                                   child: Container(
                                     width: 200,
-                                    height: 300,
+                                    height: 250,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        border: Border.all(color: Colors.grey)),
+                                      borderRadius: BorderRadius.circular(20),
+                                      // border: Border.all(color: Colors.grey)
+                                    ),
                                     child: InkWell(
                                       child: Column(
                                         crossAxisAlignment:
@@ -901,32 +1359,71 @@ class HomeScreen2 extends StatelessWidget {
                                         children: [
                                           SizedBox(
                                             height: 150,
-                                            width: 200,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Image.network(
-                                                  productController
-                                                          .totalData[index + 40]
-                                                      ["images"][0]["src"]),
+                                            width: 182,
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(
+                                                  20.sp,
+                                                ),
+                                                topRight: Radius.circular(
+                                                  20.sp,
+                                                ),
+                                              ),
+
+                                              child: CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl:productController
+                                                  .totalData[index + 40]
+                                              ["images"][0]["src"],
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                  downloadProgress) =>
+                                                  CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    color:
+                                                    AppColors.mainColor,
+                                                  ),
+                                              errorWidget: (context,
+                                                  url, error) =>
+                                                  Icon(Icons.error),
+                                            ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 5),
+                                          Container(
+
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.mainColor,
+                                              borderRadius:
+                                              BorderRadius.only(
+                                                bottomLeft:
+                                                Radius.circular(
+                                                  15,
+                                                ),
+                                                bottomRight:
+                                                Radius.circular(
+                                                  15,
+                                                ),
+                                              ),
+                                            ),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  productController
-                                                      .totalData[index + 40]
-                                                          ["name"]
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                      fontSize: 18.sp,
-                                                      color:
-                                                          Colors.grey.shade800,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                SizedBox(
+                                                  height: 25,
+                                                  child: Text(
+                                                    productController
+                                                        .totalData[index + 40]
+                                                            ["name"]
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 18.sp,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
                                                 Text(
                                                     productController
@@ -935,8 +1432,7 @@ class HomeScreen2 extends StatelessWidget {
                                                         .toString(),
                                                     style: TextStyle(
                                                         fontSize: 16.sp,
-                                                        color: Colors
-                                                            .grey.shade800,
+                                                        color: Colors.white,
                                                         fontWeight:
                                                             FontWeight.bold)),
                                                 Text(
@@ -944,8 +1440,7 @@ class HomeScreen2 extends StatelessWidget {
                                                         " USD ",
                                                     style: TextStyle(
                                                         fontSize: 18.sp,
-                                                        color: Colors
-                                                            .grey.shade800,
+                                                        color: Colors.white,
                                                         fontWeight:
                                                             FontWeight.bold)),
                                               ],
@@ -993,7 +1488,7 @@ class HomeScreen2 extends StatelessWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24.sp,
-                                  color: Colors.black),
+                                  color: Colors.white),
                             ),
                           ),
                           SizedBox(
@@ -1008,7 +1503,11 @@ class HomeScreen2 extends StatelessWidget {
                                   width: 500,
                                   height: 200,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(2.sp,),),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                        2.sp,
+                                      ),
+                                    ),
                                     color: index % 2 == 0
                                         ? Colors.orange
                                         : index % 3 == 0
@@ -1050,7 +1549,10 @@ class HomeScreen2 extends StatelessWidget {
                           ),
                           Column(
                             children: [
-                              Text("Need help? Contact us "),
+                              Text(
+                                "Need help? Contact us ",
+                                style: TextStyle(color: Colors.white),
+                              ),
                               SizedBox(
                                 height: 300.h,
                                 width: 500.h,
@@ -1072,19 +1574,16 @@ class HomeScreen2 extends StatelessWidget {
                                       label: "Last name",
                                     ),
                                     10.verticalSpace,
-
                                     CustomInputField(
                                       controller: controller4,
                                       label: "Email aAddress",
                                     ),
                                     10.verticalSpace,
-
                                     CustomInputField(
                                       controller: controller4,
                                       label: "Your Message",
                                     ),
                                     10.verticalSpace,
-
                                     CustomActionButton(
                                       buttonText: "Submit",
                                       isIcon: false,
@@ -1102,7 +1601,6 @@ class HomeScreen2 extends StatelessWidget {
                                       isLoading: false,
                                     ),
                                     20.verticalSpace,
-
                                   ],
                                 ),
                               )

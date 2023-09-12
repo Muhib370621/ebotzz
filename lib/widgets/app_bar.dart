@@ -50,7 +50,7 @@ class CustomAppBar extends StatelessWidget {
           InkWell(
               onTap: (){
                 Get.to(()=>OrderStatusScreen());
-              },child: Icon(Icons.notifications_outlined,size: 28.sp,color: Colors.grey.shade800,)),
+              },child: Icon(Icons.notifications_outlined,size: 28.sp,color: Colors.grey.shade300,)),
           Spacer(),
           // InkWell(
           //   onTap: () {

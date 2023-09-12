@@ -25,13 +25,14 @@ class CustomInputField extends StatelessWidget {
         // autovalidateMode:
         // AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
+          hintStyle: TextStyle(color: Colors.white),
           focusColor: Colors.red,
           fillColor: Colors.red,
           alignLabelWithHint: true,
           suffixIcon: suffixIcon,
           contentPadding: EdgeInsets.only(left: 15,top: 5),
           labelText: label,
-          labelStyle: TextStyle(color: Colors.black45),
+          labelStyle: TextStyle(color: Colors.white),
           enabledBorder: textFieldStyle,
           focusedBorder: textFieldStyle,
           focusedErrorBorder: textFieldStyle,

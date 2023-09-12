@@ -10,12 +10,8 @@ class SplashScreen extends StatelessWidget {
   // final splashController = Get.put(SplashScreenController());
 
   Future<bool> dummyTimer() async {
-    await Future.delayed(const Duration(milliseconds: 1500),(){
-      Get.to(
-            () => NewOnboarding(),
-        transition: Transition.fade,
-        duration: Duration(seconds: 2),
-      );
+    await Future.delayed(const Duration(milliseconds: 2000),(){
+
     });
     // Get.toNamed('/loginScreen');
     return true;
@@ -30,29 +26,32 @@ class SplashScreen extends StatelessWidget {
           dummyTimer(),
         ]),
         builder: (BuildContext context, AsyncSnapshot<List<bool>> snapshot) {
-          // if (snapshot.hasData) {
-          //   if ((snapshot.data?[0] ?? true) == false) {
-          //     return  NewOnboarding();
-          //   } else {
-          //     return  NewOnboarding();
-          //   }
-          // }
+          if (snapshot.hasData) {
+            if ((snapshot.data?[0] ?? true) == false) {
+              // Get.to(
+              //       () => NewOnboarding(),
+              //   transition: Transition.fade,
+              //   duration: Duration(seconds: 2, ),
+              // );
+              return  NewOnboarding();
+            } else {
+              // Get.to(
+              //       () => NewOnboarding(),
+              //   transition: Transition.fade,
+              //   duration: Duration(seconds: 2, ),
+              // );
+              return  NewOnboarding();
+            }
+          }
           return Scaffold(
-            // backgroundColor: ,
+            backgroundColor: Colors.black,
             body: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [Colors.black, AppColors.mainColor],
-              )),
-              child: Center(
-                child: assetImage(
-                  'assets/images/splashIcon.png',
-                  height: 150,
-                  width: 150,
-                  // color: Colors.black
-                ),
+
+              child: assetImage(
+                'assets/images/1.png',
+                // height: 150,
+                // width: 150,
+                // color: Colors.black
               ),
             ),
           );
