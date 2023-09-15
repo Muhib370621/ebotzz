@@ -61,12 +61,13 @@ class CustomerServices {
     var response = await http.get(
       Uri.parse(url),
     );
+    final ProductController productController = Get.put(ProductController());
+    productController.totalCategoryData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
+    productController.isLoading.value = false;
     if (kDebugMode) {
       print("Called API: $url");
       // print("PHONE: $phone");
-      final ProductController productController = Get.put(ProductController());
-      productController.totalCategoryData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
-      productController.isLoading.value = false;
+
       print("Response Body of category product is : ${productController.totalCategoryData}");
     }
 
@@ -91,12 +92,13 @@ class CustomerServices {
     var response = await http.get(
       Uri.parse(url),
     );
+    final ProductController productController = Get.put(ProductController());
+    productController.totalOrderStatusData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
+    productController.isLoading.value = false;
     if (kDebugMode) {
       print("Called API: $url");
       // print("PHONE: $phone");
-      final ProductController productController = Get.put(ProductController());
-      productController.totalOrderStatusData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
-      productController.isLoading.value = false;
+
       print("Response Body: ${response.body}");
     }
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -120,12 +122,13 @@ class CustomerServices {
     var response = await http.get(
       Uri.parse(url),
     );
+    final ProductController productController = Get.put(ProductController());
+    productController.getOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
+    productController.isLoading.value = false;
     if (kDebugMode) {
       print("Called API: $url");
       // print("PHONE: $phone");
-      final ProductController productController = Get.put(ProductController());
-      productController.getOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
-      productController.isLoading.value = false;
+
       print("Response Body: ${response.body}");
     }
 
@@ -152,14 +155,15 @@ class CustomerServices {
         },
         Uri.parse(url)
     );
+    final ProductController productController = Get.put(ProductController());
+
+    productController.deleteOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
+    productController.isLoading.value = false;
     // debug mode
     if (kDebugMode) {
       print("Called API: $url");
       print("Status Code: ${response.statusCode}");
-      final ProductController productController = Get.put(ProductController());
 
-      productController.deleteOrderById.value =Map<String, dynamic>.from(json.decode(response.body));
-      productController.isLoading.value = false;
       print("Response Body of delete order by id is : ${response.body}");
       // print("HEADERS: $header");
     }
@@ -276,13 +280,12 @@ class CustomerServices {
       Uri.parse(url),
       body: data,
     );
-
+    ProductController productController = Get.put(ProductController());
+    productController.createProductResponse.value =Map<String, dynamic>.from(json.decode(response.body));
+    productController.isLoading.value = false;
     if (kDebugMode) {
       print("Called API: $url");
       print("Status Code: ${response.statusCode}");
-      ProductController productController = Get.put(ProductController());
-      productController.createProductResponse.value =Map<String, dynamic>.from(json.decode(response.body));
-      productController.isLoading.value = false;
       print("Response Body of create product is : ${response.body}");
     }
     if ((response.statusCode == 200 || response.statusCode == 201) ) {

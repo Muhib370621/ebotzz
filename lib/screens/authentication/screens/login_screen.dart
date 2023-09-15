@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
 import 'package:ebotzz/core/routes/routeNames.dart';
+import 'package:ebotzz/core/utils/appColors.dart';
+import 'package:ebotzz/screens/authentication/screens/newSignUpScreen.dart';
 import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/imports.dart';
 
@@ -13,7 +16,8 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin{
+class _LoginScreenState extends State<LoginScreen>
+    with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animation;
 
@@ -44,8 +48,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     super.dispose();
   }
 
-
   TextEditingController emailController = TextEditingController();
+  bool s3 = false;
 
   TextEditingController passwordController = TextEditingController();
 
@@ -61,37 +65,106 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
+        height: Get.height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.black, AppColors.mainColor],
+          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: size.height * 0.03,
+                height: size.height * 0.1,
               ),
-              assetImage(
-                'assets/images/logo1.png',
-                height: 150,
-                width: 150,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // SvgPicture.asset(
+                  //   "assets/images/blackLogo.svg",
+                  //   height: 95.h,
+                  // ),
+                  Text(
+                    "swapster",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                  height: 70,
-                  width: 200,
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
-                  // color: Colors.blue,
-                  child: Column(
-                    children: const [
-                      Text("Log In Now",
-                          textAlign: TextAlign.center, style: h1Style),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("Please login to continue",
-                          textAlign: TextAlign.center, style: h3Style),
-                    ],
-                  )),
+              // assetImage(
+              //   'assets/images/logo1.png',
+              //   height: 150,
+              //   width: 150,
+              // ),
+              // Container(
+              //     height: 80,
+              //     width: 200,
+              //     margin: EdgeInsets.symmetric(vertical: 10.0),
+              //     // color: Colors.blue,
+              //     child: Column(
+              //       children: const [
+              //         Text("Log In Now",
+              //             textAlign: TextAlign.center,
+              //             style: TextStyle(
+              //                 color: Colors.white,
+              //                 fontSize: 22,
+              //                 // color: Colors.black,
+              //                 // fontFamily: "Montserrat-VariableFont_wght.ttf",
+              //                 fontWeight: FontWeight.bold)),
+              //         SizedBox(
+              //           height: 10,
+              //         ),
+              //         Text("Please login to continue",
+              //             textAlign: TextAlign.center,
+              //             style: TextStyle(
+              //                 // fontFamily: "Montserrat-VariableFont_wght.ttf",
+              //                 fontSize: 12,
+              //                 color: Colors.white)),
+              //       ],
+              //     )),
               SizedBox(
                 height: 30,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Buyer",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  15.horizontalSpace,
+                  Switch(
+                    // activeColor: AppColors.mainColor,
+                    activeTrackColor: AppColors.mainColor,
+                    inactiveTrackColor: AppColors.mainColor,
+                    value: s3,
+                    onChanged: (bool value) {
+                      setState(() {
+                        s3 = value; //update value when sitch changed
+                      });
+                    },
+                  ),
+                  15.horizontalSpace,
+
+                  Text("Seller",style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.bold,
+                  ),),
+                ],
+              ),
+              20.verticalSpace,
+
               Form(
                   key: formKey,
                   child: Column(
@@ -115,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(16),
                               labelText: "Email",
-                              labelStyle: TextStyle(color: Colors.black45),
+                              labelStyle: TextStyle(color: Colors.white),
                               enabledBorder: textFieldStyle,
                               focusedBorder: textFieldStyle,
                               focusedErrorBorder: textFieldStyle,
@@ -140,20 +213,24 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(16),
                               labelText: "Password",
-                              labelStyle: TextStyle(color: Colors.black45),
+                              labelStyle: TextStyle(color: Colors.white),
                               suffixIcon: isVisible == false
                                   ? GestureDetector(
-                                      onTap: () {
-
-                                      },
-                                      child: Icon(Icons.visibility_off))
+                                      onTap: () {},
+                                      child: Icon(
+                                        Icons.visibility_off,
+                                        color: Colors.white,
+                                      ))
                                   : GestureDetector(
                                       onTap: () {
                                         // setState(() {
                                         //   isVisible = false;
                                         // });
                                       },
-                                      child: Icon(Icons.visibility)),
+                                      child: Icon(
+                                        Icons.visibility,
+                                        color: Colors.white,
+                                      )),
                               enabledBorder: textFieldStyle,
                               focusedBorder: textFieldStyle,
                               focusedErrorBorder: textFieldStyle,
@@ -167,6 +244,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           children: const [
                             Text(
                               "Forgot Password?",
+                              style: TextStyle(color: Colors.white),
                             ),
                           ],
                         ),
@@ -185,12 +263,16 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                 Icons.check,
                                 color: Colors.white,
                               ));
-                         Get.toNamed(RouteNames.bottomNav,);
+                          Get.toNamed(
+                            RouteNames.bottomNav,
+                          );
                         },
-                        isIcon: false, isLoading: false,
+                        isIcon: false,
+                        isLoading: false,
                       )
                     ],
                   )),
+              190.verticalSpace,
               SizedBox(
                   height: 40,
                   width: 230,
@@ -199,14 +281,16 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                     children: [
                       Text(
                         "Don't have an account?",
+                        style: TextStyle(color: Colors.white),
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.toNamed(RouteNames.signup);
+                            Get.to(()=> NewSignUp(),transition: Transition.fade,
+                              duration: Duration(seconds: 3),);
                           },
                           child: Text(
                             "Sign Up",
-                            style: TextStyle(color: redColor),
+                            style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
                           ))
                     ],
                   )),

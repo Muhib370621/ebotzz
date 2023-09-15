@@ -33,14 +33,14 @@ class SplashScreen extends StatelessWidget {
               //   transition: Transition.fade,
               //   duration: Duration(seconds: 2, ),
               // );
-              return  NewOnboarding();
+              return  LoginScreen();
             } else {
               // Get.to(
               //       () => NewOnboarding(),
               //   transition: Transition.fade,
               //   duration: Duration(seconds: 2, ),
               // );
-              return  NewOnboarding();
+              return  LoginScreen();
             }
           }
           return Scaffold(

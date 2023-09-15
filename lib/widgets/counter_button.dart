@@ -1,5 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
+import 'package:ebotzz/core/utils/appColors.dart';
+
 import '../utils/imports.dart';
 
 class CounterButton extends StatelessWidget {
@@ -18,17 +20,17 @@ class CounterButton extends StatelessWidget {
 
   Widget button(Icon icon, Function() onTap) {
     return RawMaterialButton(
-      constraints: BoxConstraints.tight(const Size(36, 36)),
+      constraints: BoxConstraints.tight(const Size(26, 26)),
       child: icon,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      fillColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      fillColor: AppColors.mainColor,
       onPressed: onTap,
     );
   }
 
   List<Widget> body() {
     return [
-      button(const Icon(Icons.remove), onDecrementSelected),
+      button(const Icon(Icons.remove,size: 15,color: Colors.white,), onDecrementSelected),
       // Text("Quantity"),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -37,7 +39,7 @@ class CounterButton extends StatelessWidget {
           style: h2Style.copyWith(fontSize: 15),
         ),
       ),
-      button(const Icon(Icons.add), onIncrementSelected),
+      button(const Icon(Icons.add,size: 15,color: Colors.white,), onIncrementSelected),
 
 
     ];
@@ -47,7 +49,7 @@ class CounterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return orientation == Axis.horizontal
         ? Row(mainAxisAlignment: MainAxisAlignment.end, children: body())
-        : Column(
+        : Row(
             children: body().reversed.toList(),
           );
   }

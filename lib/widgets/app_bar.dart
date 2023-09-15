@@ -2,6 +2,7 @@
 
 import 'package:ebotzz/screens/home_screen/orderStatusScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -45,7 +46,10 @@ class CustomAppBar extends StatelessWidget {
                     child: Icon(Icons.menu_rounded,size: 28.sp,),
                   ))),
           SizedBox(width: 100.w),
-          assetImage('assets/images/newTopLogo.jpg', width: 100.h, height: 50.w),
+          // assetImage('assets/images/newTopLogo.jpg', width: 100.h, height: 50.w),
+          SizedBox(
+            // child: SvgPicture.asset("assets/images/blackLogo.svg"),
+            width: 100.w,),
           SizedBox(width: 102 .w,),
           InkWell(
               onTap: (){

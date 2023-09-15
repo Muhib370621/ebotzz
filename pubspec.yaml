@@ -49,6 +49,7 @@ dependencies:
   firebase_storage: ^11.2.5
   flutter_svg: ^2.0.5
   firebase_core: ^2.15.0
+  intl: ^0.18.1
   cached_network_image: ^3.2.3
   http:
   fl_chart:

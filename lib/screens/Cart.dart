@@ -2,6 +2,7 @@
 // ignore: file_names
 // ignore_for_file: prefer_const_constructors, file_names, duplicate_ignore, must_be_immutable
 
+import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/screens/checkoutNewScreen.dart';
 import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
 import 'package:ebotzz/utils/imports.dart';
@@ -32,7 +33,7 @@ class CartScreen extends StatelessWidget {
       ),
       backgroundColor: whiteColor,
       elevation: 0,
-      title: const Text("Ebotzz Cart", style: h2Style),
+      title: const Text("Swapster Cart", style: h2Style),
       actions: [
         IconButton(
           splashRadius: 20.0,
@@ -67,12 +68,13 @@ class CartScreen extends StatelessWidget {
                     // side: BorderSide(color: Colors.red)
                   ))),
                   onPressed: () {
-                    Get.to(() => CheckOutNewScreen(product: products!));
+                    Get.to(() => CheckOutNewScreen(product: products?? ProductModel(id: 1, title: "Rolex"
+                        , description: "good", price: 22.2, img: "")));
                   },
                   child: Text(
-                    "Go to checkout",
+                    "CHECKOUT",
                     style: TextStyle(
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       fontSize: 18.sp
                     ),
                   )),
@@ -119,7 +121,7 @@ class CartScreen extends StatelessWidget {
           Get.to(HomeScreen2());
           controller.quantity.value = 1;
         },
-        backgroundColor: Colors.red.shade600,
+        backgroundColor: AppColors.mainColor,
         child: const Icon(Icons.arrow_back),
       ),
     ));
