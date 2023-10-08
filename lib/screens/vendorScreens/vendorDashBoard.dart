@@ -73,20 +73,17 @@ class VendorDashBoard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: DashboardHeading(icon: Icons.shopping_cart_outlined, label: "Orders")
-                  ),
+                  DashboardHeading(icon: Icons.shopping_cart_outlined, label: "Orders"),
                   SizedBox(height: 20.h,),
                   OrdersData(dataMap: DataMap,)
                 ],
               ),
               SizedBox(height: 30.h,),
+              DashboardHeading(icon: Icons.switch_camera, label: "Products"),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
-                    DashboardHeading(icon: Icons.switch_camera, label: "Products"),
                     SizedBox(height: 20.h,),
                     ProductsData(title: 'Total',amount:'2' ,),
                     Divider(),

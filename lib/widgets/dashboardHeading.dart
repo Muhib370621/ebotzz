@@ -9,7 +9,7 @@ class DashboardHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       height: 60.h,
-      width: 400,
+      // width: 400,
       color: Colors.black,
       child: Row(
         children: [

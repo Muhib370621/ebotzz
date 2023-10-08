@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
+import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/services/customerServices.dart';
+import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -47,23 +49,28 @@ class _NewSignUpState extends State<NewSignUp>
     super.dispose();
   }
 
-  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   bool s3 = false;
 
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController any1Controller = TextEditingController();
-  TextEditingController any2passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   bool loading = false;
 
   var formKey = GlobalKey<FormState>();
 
   bool isVisible = true;
+  bool isConfirmVisible = true;
 
   @override
   Widget build(BuildContext context) {
-    ProductController controller = Get.put(ProductController());
-    final size = MediaQuery.of(context).size;
+    // ProductController controller = Get.put(ProductController());
+    final SignUpController signUpController = Get.put(SignUpController());
+
+    final size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: Container(
         height: Get.height,
@@ -199,7 +206,9 @@ class _NewSignUpState extends State<NewSignUp>
                           child: SizedBox(
                             height: 55.h,
                             child: TextFormField(
-                              controller: emailController,
+                              controller: nameController,
+                              style: TextStyle(color: Colors.white),
+
                               // validator: (value) {
                               //   if (value!.isEmpty) {
                               //     return "Email is Required";
@@ -209,10 +218,10 @@ class _NewSignUpState extends State<NewSignUp>
                               //   }
                               // },
                               autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                              AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Text",
+                                labelText: "Enter Name",
                                 labelStyle: TextStyle(color: Colors.white),
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
@@ -227,7 +236,8 @@ class _NewSignUpState extends State<NewSignUp>
                           child: SizedBox(
                             height: 55.h,
                             child: TextFormField(
-                              controller: passwordController,
+                              controller: emailController,
+                              style: TextStyle(color: Colors.white),
                               // validator: (value) {
                               //   if (value!.isEmpty) {
                               //     return "Password is Required";
@@ -236,11 +246,11 @@ class _NewSignUpState extends State<NewSignUp>
                               //   }
                               // },
                               autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              obscureText: isVisible,
+                              AutovalidateMode.onUserInteraction,
+                              // obscureText: isVisible,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter text",
+                                labelText: "Enter Email",
                                 labelStyle: TextStyle(color: Colors.white),
                                 // suffixIcon: isVisible == false
                                 //     ? GestureDetector(
@@ -272,7 +282,9 @@ class _NewSignUpState extends State<NewSignUp>
                           child: SizedBox(
                             height: 55.h,
                             child: TextFormField(
-                              controller: any1Controller,
+                              controller: passwordController,
+                              style: TextStyle(color: Colors.white),
+
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Password is Required";
@@ -281,29 +293,34 @@ class _NewSignUpState extends State<NewSignUp>
                                 }
                               },
                               autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                              AutovalidateMode.onUserInteraction,
                               obscureText: isVisible,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Text",
+                                labelText: "Enter Password",
                                 labelStyle: TextStyle(color: Colors.white),
-                                // suffixIcon: isVisible == false
-                                //     ? GestureDetector(
-                                //     onTap: () {},
-                                //     child: Icon(
-                                //       Icons.visibility_off,
-                                //       color: Colors.white,
-                                //     ))
-                                //     : GestureDetector(
-                                //     onTap: () {
-                                //       // setState(() {
-                                //       //   isVisible = false;
-                                //       // });
-                                //     },
-                                //     child: Icon(
-                                //       Icons.visibility,
-                                //       color: Colors.white,
-                                //     )),
+                                suffixIcon: isVisible == false
+                                    ? GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isVisible = !isVisible;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.visibility_off,
+                                      color: Colors.white,
+                                    ))
+                                    : GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isVisible = !isVisible;
+                                      });
+                                      print(isVisible);
+                                    },
+                                    child: Icon(
+                                      Icons.visibility,
+                                      color: Colors.white,
+                                    )),
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
                                 focusedErrorBorder: textFieldStyle,
@@ -317,20 +334,47 @@ class _NewSignUpState extends State<NewSignUp>
                           child: SizedBox(
                             height: 55.h,
                             child: TextFormField(
-                              controller: any2passwordController,
+                              controller: confirmPasswordController,
+                              style: TextStyle(color: Colors.white),
+
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Password is Required";
                                 } else if (value.length <= 3) {
                                   return "Password should be greater than 3 latter";
                                 }
+                                else if (value != passwordController.text) {
+                                  return "Password doesn't match";
+                                }
                               },
                               autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              obscureText: isVisible,
+                              AutovalidateMode.onUserInteraction,
+                              obscureText: isConfirmVisible,
                               decoration: InputDecoration(
+                                suffixIcon: isConfirmVisible == false
+                                    ? GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isConfirmVisible = !isConfirmVisible;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.visibility_off,
+                                      color: Colors.white,
+                                    ))
+                                    : GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isConfirmVisible = !isConfirmVisible;
+                                      });
+                                      print(isConfirmVisible);
+                                    },
+                                    child: Icon(
+                                      Icons.visibility,
+                                      color: Colors.white,
+                                    )),
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Text",
+                                labelText: "Enter Confirm Password",
                                 labelStyle: TextStyle(color: Colors.white),
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
@@ -354,24 +398,28 @@ class _NewSignUpState extends State<NewSignUp>
                       SizedBox(
                         height: 20,
                       ),
-                      CustomActionButton(
-                        buttonText: "Sign Up",
-                        onTap: () {
-                          Get.snackbar("Successfully", "Signed Up",
-                              colorText: Colors.white,
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.green,
-                              icon: const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ));
-                          Get.toNamed(
-                            RouteNames.bottomNav,
-                          );
-                        },
-                        isIcon: false,
-                        isLoading: false,
-                      )
+                      Obx(() {
+                        return CustomActionButton(
+                          buttonText: "Sign Up",
+                          onTap: () {
+                            FirebaseServices().signUp(nameController.text,
+                                emailController.text, passwordController.text);
+                            // Get.snackbar("Successfully", "Signed Up",
+                            //     colorText: Colors.white,
+                            //     snackPosition: SnackPosition.BOTTOM,
+                            //     backgroundColor: Colors.green,
+                            //     icon: const Icon(
+                            //       Icons.check,
+                            //       color: Colors.white,
+                            //     ));
+                            // Get.toNamed(
+                            //   RouteNames.bottomNav,
+                            // );
+                          },
+                          isIcon: false,
+                          isLoading: signUpController.isLoading.value,
+                        );
+                      })
                     ],
                   )),
               // 190.verticalSpace,
@@ -388,7 +436,7 @@ class _NewSignUpState extends State<NewSignUp>
                       TextButton(
                           onPressed: () {
                             Get.to(
-                              () => LoginScreen(),
+                                  () => LoginScreen(),
                               transition: Transition.fade,
                               duration: Duration(seconds: 3),
                             );

@@ -4,12 +4,13 @@ import 'package:ebotzz/core/utils/app_extension.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/finializeTradeScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
+import 'package:ebotzz/widgets/counter_button.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen/HomeScreen2.dart';
 
-class TradeScreen extends StatelessWidget {
+class TradeScreen extends StatefulWidget {
   final ProductModel productOriginal;
   final ProductModel productOffered;
 
@@ -17,6 +18,11 @@ class TradeScreen extends StatelessWidget {
       {Key? key, required this.productOriginal, required this.productOffered})
       : super(key: key);
 
+  @override
+  State<TradeScreen> createState() => _TradeScreenState();
+}
+
+class _TradeScreenState extends State<TradeScreen> {
   @override
   Widget build(BuildContext context) {
     OfferController offerController = Get.put(OfferController());
@@ -115,108 +121,201 @@ class TradeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.redAccent.withOpacity(0.04),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          15,
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent.withOpacity(0.04),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            15,
+                          ),
                         ),
                       ),
-
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: SizedBox(
-                                height: 120.h,
-                                // width: 100.w,
-                                child: Image.network(
-                                  productOriginal.img,
-                                ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent.withOpacity(0.04),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              15,
+                            ),
+                          ),
+                          border: Border.all(
+                              color: Colors.grey.withOpacity(
+                                0.5,
                               ),
-                            ),
-                            const SizedBox(width: 5),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              width: 1.5.w),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                // Text(productOriginal.title.addOverFlow, style: h4Style),
-                                const SizedBox(height: 5),
-                                Text(
-                                    "${productOriginal.title.toString()}",
-                                    style: h2Style),
-                                const SizedBox(height: 10),
-                                Divider(
-                                  color: Colors.redAccent.withOpacity(0.5),
-                                  height: 30.h,
-                                  thickness: 2.w,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Price "),
-                                          Text(
-                                              "\$${productOriginal.price.toString()}")
-                                        ],
-                                      ),
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      //   children: [Text("Shipping"), Text("\$ 0")],
-                                      // ),
-                                      // Divider(
-                                      //   color: Colors.redAccent.withOpacity(0.05),
-                                      //   height: 40.h,
-                                      //   thickness: 2.w,
-                                      // ),
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      //   children: [
-                                      //     Text(
-                                      //       "Subtotal",
-                                      //       style: TextStyle(fontWeight: FontWeight.w900),
-                                      //     ),
-                                      //     Text(
-                                      //       "\$${productOriginal.price.toString()}",
-                                      //       style: TextStyle(fontWeight: FontWeight.w900),
-                                      //     )
-                                      //   ],
-                                      // ),
-                                      // 20.verticalSpace,
-                                      // Text("Order Total Calculated at Checkout"),
-                                    ],
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: Image.network(
+                                      widget.productOriginal.img,
+                                    ),
                                   ),
-                                )
-                                // Text("Quantity:"),
-                                // SizedBox(
-                                //   height: 5,
-                                // ),
-                                // Container(
-                                //   width: 30,
-                                //   height: 30,
-                                //   decoration: BoxDecoration(
-                                //       border: Border.all(color: Colors.grey.shade700),
-                                //       borderRadius: BorderRadius.circular(5)),
-                                //   child: Center(
-                                //       child: Text(productOriginal.quantity.toString()),
-                                // )
-                                // )
+                                ),
+                                const SizedBox(width: 5),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        5.verticalSpace,
+                                        Text(
+                                            widget.productOriginal.title
+                                                .addOverFlow,
+                                            style: TextStyle(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.bold)),
+                                        Text(
+                                            "\$${widget.productOriginal.price.toString()}")
+                                      ],
+                                    ),
+                                    // Text(
+                                    //     "\$${productController.cartScreenItems[index].title.toString()}",
+                                    //     style: h2Style),
+                                    const SizedBox(height: 10),
+                                    // Text("Quantity:"),
+                                    // SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    // Container(
+                                    //   width: 30,
+                                    //   height: 30,
+                                    //   decoration: BoxDecoration(
+                                    //       border: Border.all(color: Colors.grey.shade700),
+                                    //       borderRadius: BorderRadius.circular(5)),
+                                    //   child: Center(
+                                    //       child: Text(productController
+                                    //           .cartScreenItems[index].quantity
+                                    //           .toString())),
+                                    // )
+                                  ],
+                                ),
+                                // Spacer(),
+                                CounterButton(
+                                    orientation: Axis.vertical,
+                                    onIncrementSelected: () => {
+                                          setState(() {
+                                            productController.increaseItem(
+                                                widget.productOriginal);
+                                          })
+                                        },
+                                    onDecrementSelected: () => {
+                                          if (widget.productOriginal.quantity >
+                                              0)
+                                            {
+                                              setState(() {
+                                                productController.decreaseItem(
+                                                    widget.productOriginal);
+                                              })
+                                            }
+                                        },
+                                    label: widget.productOriginal.quantity)
+                                // counterButton(products)
                               ],
-                            ),
-                            // Spacer(),
-                            // counterButton(products)
+                            )
+                            // .fadeAnimation(0.4 * index),
                           ],
-                        ).fadeAnimation(0.4 * 2),
-
-                      ],
-                    ),
-                  ),
+                        ),
+                      )
+                      // Column(
+                      //   children: [
+                      //     Row(
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //       children: [
+                      //         ClipRRect(
+                      //           borderRadius: BorderRadius.circular(15.0),
+                      //           child: SizedBox(
+                      //             height: 120.h,
+                      //             // width: 100.w,
+                      //             child: Image.network(
+                      //               productOriginal.img,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         const SizedBox(width: 5),
+                      //         Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             // Text(productOriginal.title.addOverFlow, style: h4Style),
+                      //             const SizedBox(height: 5),
+                      //             Text(
+                      //                 "${productOriginal.title.toString()}",
+                      //                 style: h2Style),
+                      //             const SizedBox(height: 10),
+                      //             Divider(
+                      //               color: Colors.redAccent.withOpacity(0.5),
+                      //               height: 30.h,
+                      //               thickness: 2.w,
+                      //             ),
+                      //             Padding(
+                      //               padding: EdgeInsets.all(8),
+                      //               child: Column(
+                      //                 children: [
+                      //                   Row(
+                      //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //                     children: [
+                      //                       Text("Price "),
+                      //                       Text(
+                      //                           "\$${productOriginal.price.toString()}")
+                      //                     ],
+                      //                   ),
+                      //                   // Row(
+                      //                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //                   //   children: [Text("Shipping"), Text("\$ 0")],
+                      //                   // ),
+                      //                   // Divider(
+                      //                   //   color: Colors.redAccent.withOpacity(0.05),
+                      //                   //   height: 40.h,
+                      //                   //   thickness: 2.w,
+                      //                   // ),
+                      //                   // Row(
+                      //                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //                   //   children: [
+                      //                   //     Text(
+                      //                   //       "Subtotal",
+                      //                   //       style: TextStyle(fontWeight: FontWeight.w900),
+                      //                   //     ),
+                      //                   //     Text(
+                      //                   //       "\$${productOriginal.price.toString()}",
+                      //                   //       style: TextStyle(fontWeight: FontWeight.w900),
+                      //                   //     )
+                      //                   //   ],
+                      //                   // ),
+                      //                   // 20.verticalSpace,
+                      //                   // Text("Order Total Calculated at Checkout"),
+                      //                 ],
+                      //               ),
+                      //             )
+                      //             // Text("Quantity:"),
+                      //             // SizedBox(
+                      //             //   height: 5,
+                      //             // ),
+                      //             // Container(
+                      //             //   width: 30,
+                      //             //   height: 30,
+                      //             //   decoration: BoxDecoration(
+                      //             //       border: Border.all(color: Colors.grey.shade700),
+                      //             //       borderRadius: BorderRadius.circular(5)),
+                      //             //   child: Center(
+                      //             //       child: Text(productOriginal.quantity.toString()),
+                      //             // )
+                      //             // )
+                      //           ],
+                      //         ),
+                      //         // Spacer(),
+                      //         // counterButton(products)
+                      //       ],
+                      //     ).fadeAnimation(0.4 * 2),
+                      //
+                      //   ],
+                      // ),
+                      ),
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.only(left: 20.0, top: 15),
@@ -273,21 +372,22 @@ class TradeScreen extends StatelessWidget {
                           15,
                         ),
                       ),
-
+                      border: Border.all(
+                          color: Colors.grey.withOpacity(
+                            0.5,
+                          ),
+                          width: 1.5.w),
                     ),
                     child: Column(
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: SizedBox(
-                                height: 120.h,
-                                // width: 100.w,
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15.0),
                                 child: Image.network(
-                                  fit:BoxFit.cover,
-                                  productOffered.img,
+                                  widget.productOffered.img,
                                 ),
                               ),
                             ),
@@ -295,56 +395,23 @@ class TradeScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Text(productOriginal.title.addOverFlow, style: h4Style),
-                                const SizedBox(height: 5),
-                                Text(
-                                    "${productOffered.title.toString()}",
-                                    style: h2Style),
-                                const SizedBox(height: 10),
-                                Divider(
-                                  color: Colors.redAccent.withOpacity(0.5),
-                                  height: 30.h,
-                                  thickness: 2.w,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    5.verticalSpace,
+                                    Text(
+                                        widget.productOffered.title.addOverFlow,
+                                        style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold)),
+                                    Text(
+                                        "\$${widget.productOffered.price.toString()}")
+                                  ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Price "),
-                                          Text(
-                                              "\$${productOffered.price.toString()}")
-                                        ],
-                                      ),
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      //   children: [Text("Shipping"), Text("\$ 0")],
-                                      // ),
-                                      // Divider(
-                                      //   color: Colors.redAccent.withOpacity(0.05),
-                                      //   height: 40.h,
-                                      //   thickness: 2.w,
-                                      // ),
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      //   children: [
-                                      //     Text(
-                                      //       "Subtotal",
-                                      //       style: TextStyle(fontWeight: FontWeight.w900),
-                                      //     ),
-                                      //     Text(
-                                      //       "\$${productOriginal.price.toString()}",
-                                      //       style: TextStyle(fontWeight: FontWeight.w900),
-                                      //     )
-                                      //   ],
-                                      // ),
-                                      // 20.verticalSpace,
-                                      // Text("Order Total Calculated at Checkout"),
-                                    ],
-                                  ),
-                                )
+                                // Text(
+                                //     "\$${productController.cartScreenItems[index].title.toString()}",
+                                //     style: h2Style),
+                                const SizedBox(height: 10),
                                 // Text("Quantity:"),
                                 // SizedBox(
                                 //   height: 5,
@@ -356,20 +423,170 @@ class TradeScreen extends StatelessWidget {
                                 //       border: Border.all(color: Colors.grey.shade700),
                                 //       borderRadius: BorderRadius.circular(5)),
                                 //   child: Center(
-                                //       child: Text(productOriginal.quantity.toString()),
-                                // )
+                                //       child: Text(productController
+                                //           .cartScreenItems[index].quantity
+                                //           .toString())),
                                 // )
                               ],
                             ),
                             // Spacer(),
+                            CounterButton(
+                                orientation: Axis.vertical,
+                                onIncrementSelected: () => {
+                                      setState(() {
+                                        productController.calculateTotalPrice();
+
+                                        productController.increaseItem(
+                                            widget.productOffered);
+                                      })
+                                    },
+                                onDecrementSelected: () => {
+                                      if (widget.productOffered.quantity > 0)
+                                        {
+                                          setState(() {
+                                            productController
+                                                .calculateTotalPrice();
+                                            productController.decreaseItem(
+                                                widget.productOffered);
+                                          })
+                                        }
+                                    },
+                                label: widget.productOffered.quantity)
                             // counterButton(products)
                           ],
-                        ).fadeAnimation(0.4 * 2),
-
+                        )
+                        // .fadeAnimation(0.4 * index),
                       ],
                     ),
                   ),
                 ),
+                30.verticalSpace,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Payment Details",
+                        style: h2Style,
+                      ),
+                      10.verticalSpace,
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        // height: 100.h,
+                        decoration: BoxDecoration(
+                          color: AppColors.mainColor.withOpacity(
+                            0.02,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              15,
+                            ),
+                          ),
+                          border: Border.all(
+                              color: Colors.grey.withOpacity(
+                                0.5,
+                              ),
+                              width: 1.2.w),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Sub Total",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                                Text(
+                                  "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Shipping",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                                Text(
+                                  "\$ 0",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Payment Method",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                                Text(
+                                  "Master Card",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            10.verticalSpace,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total Payout",
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total Payout",
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "\$ 0",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
 
                 // Padding(
                 //   padding: const EdgeInsets.only(left: 20.0, top: 15),
@@ -409,53 +626,58 @@ class TradeScreen extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
-
+                ,
                 SizedBox(
                   height: 20.h,
                 ),
-                Divider(color: Colors.grey.withOpacity(0.2),thickness: 2.h,),
-                ((productOriginal.price - productOffered.price) > 0)
-                    ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Amount to pay is ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 17.sp),
-                      ),
-                      Text(
-                        "\$${(productOriginal.price - productOffered.price).toStringAsFixed(2)}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 17.sp),
-                      ),
-                    ],
-                  ),
-                )
-                    : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("The amount to be received is ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.sp)),
-                      Text(
-                        (productOriginal.price == productOffered.price)
-                            ? "\$0  "
-                            : " \$" +
-                            (productOriginal.price -
-                                productOffered.price)
-                                .toStringAsFixed(2)
-                                .substring(1),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.sp),
-                      )
-                    ],
-                  ),
+                Divider(
+                  color: Colors.grey.withOpacity(0.2),
+                  thickness: 2.h,
                 ),
+                ((widget.productOriginal.price - widget.productOffered.price) >
+                        0)
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Amount to pay is ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 17.sp),
+                            ),
+                            Text(
+                              "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price).toStringAsFixed(2)}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 17.sp),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("The amount to be received is ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.sp)),
+                            Text(
+                              (widget.productOriginal.price ==
+                                      widget.productOffered.price)
+                                  ? "\$0  "
+                                  : " \$" +
+                                      (widget.productOriginal.price -
+                                              widget.productOffered.price)
+                                          .toStringAsFixed(2)
+                                          .substring(1),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20.sp),
+                            )
+                          ],
+                        ),
+                      ),
 
                 // SizedBox(
                 //   height: 15.h,
@@ -709,7 +931,6 @@ class TradeScreen extends StatelessWidget {
                 ),
                 Divider(),
 
-
                 Divider(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -760,24 +981,24 @@ class TradeScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Obx(() => SizedBox(
-                    height: 45.h,
-                    width: Get.width*0.9,
-                    child: CustomActionButton(
+                        height: 45.h,
+                        width: Get.width * 0.9,
+                        child: CustomActionButton(
                           buttonText:
                               "Pay with ${offerController.paymentName.value}",
                           isLoading: false,
                           isIcon: false,
                           color: AppColors.mainColor,
                           onTap: () {
-                            var amount =
-                                (productOriginal.price - productOffered.price);
+                            var amount = (widget.productOriginal.price -
+                                widget.productOffered.price);
                             print(amount.toString());
                             Get.to(FinalizeTradeScreen(
                               amount: amount,
                             ));
                           },
                         ),
-                  )),
+                      )),
                 ),
                 SizedBox(
                   height: 20.h,

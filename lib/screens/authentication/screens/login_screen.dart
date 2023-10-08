@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
+import 'package:ebotzz/controllers/login_controller.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/screens/authentication/screens/newSignUpScreen.dart';
 import 'package:ebotzz/services/customerServices.dart';
+import 'package:ebotzz/services/firebaseServices.dart';
+import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,6 +23,8 @@ class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animation;
+
+  // bool isLoading=false;
 
   @override
   void initState() {
@@ -61,8 +66,14 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
+    final LoginController loginController = Get.put(LoginController());
     ProductController controller = Get.put(ProductController());
-    final size = MediaQuery.of(context).size;
+    // controller.inital()
+
+
+    final size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: Container(
         height: Get.height,
@@ -155,12 +166,14 @@ class _LoginScreenState extends State<LoginScreen>
                     },
                   ),
                   15.horizontalSpace,
-
-                  Text("Seller",style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                  ),),
+                  Text(
+                    "Seller",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
               20.verticalSpace,
@@ -175,6 +188,7 @@ class _LoginScreenState extends State<LoginScreen>
                           ),
                           child: TextFormField(
                             controller: emailController,
+                            style: TextStyle(color: Colors.white),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Email is Required";
@@ -184,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen>
                               }
                             },
                             autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(16),
                               labelText: "Email",
@@ -199,6 +213,7 @@ class _LoginScreenState extends State<LoginScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
                           child: TextFormField(
+                            style: TextStyle(color: Colors.white),
                             controller: passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -208,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen>
                               }
                             },
                             autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            AutovalidateMode.onUserInteraction,
                             obscureText: isVisible,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(16),
@@ -216,21 +231,25 @@ class _LoginScreenState extends State<LoginScreen>
                               labelStyle: TextStyle(color: Colors.white),
                               suffixIcon: isVisible == false
                                   ? GestureDetector(
-                                      onTap: () {},
-                                      child: Icon(
-                                        Icons.visibility_off,
-                                        color: Colors.white,
-                                      ))
+                                  onTap: () {
+                                    setState(() {
+                                      isVisible = true;
+                                    });
+                                  },
+                                  child: Icon(
+                                    Icons.visibility_off,
+                                    color: Colors.white,
+                                  ))
                                   : GestureDetector(
-                                      onTap: () {
-                                        // setState(() {
-                                        //   isVisible = false;
-                                        // });
-                                      },
-                                      child: Icon(
-                                        Icons.visibility,
-                                        color: Colors.white,
-                                      )),
+                                  onTap: () {
+                                    setState(() {
+                                      isVisible = false;
+                                    });
+                                  },
+                                  child: Icon(
+                                    Icons.visibility,
+                                    color: Colors.white,
+                                  )),
                               enabledBorder: textFieldStyle,
                               focusedBorder: textFieldStyle,
                               focusedErrorBorder: textFieldStyle,
@@ -252,24 +271,38 @@ class _LoginScreenState extends State<LoginScreen>
                       SizedBox(
                         height: 20,
                       ),
-                      CustomActionButton(
-                        buttonText: "Login",
-                        onTap: () {
-                          Get.snackbar("Successfully", "Login Successfully!",
-                              colorText: Colors.white,
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.green,
-                              icon: const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ));
-                          Get.toNamed(
-                            RouteNames.bottomNav,
-                          );
-                        },
-                        isIcon: false,
-                        isLoading: false,
-                      )
+                      Obx(() {
+                        return CustomActionButton(
+                          buttonText: "Login",
+                          onTap: () async {
+                           await controller.inital();
+                            // setState(() {
+                            //   isLoading = true;
+                            //
+                            // });
+                            // bool isEmailValid(String email) {
+                            // Define a regular expression pattern for a valid email address
+                            final RegExp regex = RegExp(
+                              r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
+                            );
+                            if (!regex.hasMatch(emailController.text)) {
+                              Prompts.showError("OOps", "Enter valid Email");
+                            } else {
+                              FirebaseServices().signIn(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                              // Get.toNamed(RouteNames.bottomNav);
+                            }
+                            // setState(() {
+                            //   isLoading = false;
+                            //
+                            // });
+                          },
+                          isIcon: false,
+                          isLoading: loginController.isLoading.value,
+                        );
+                      })
                     ],
                   )),
               190.verticalSpace,
@@ -285,12 +318,17 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.to(()=> NewSignUp(),transition: Transition.fade,
-                              duration: Duration(seconds: 3),);
+                            Get.to(
+                                  () => NewSignUp(),
+                              transition: Transition.fade,
+                              duration: Duration(seconds: 3),
+                            );
                           },
                           child: Text(
                             "Sign Up",
-                            style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ))
                     ],
                   )),

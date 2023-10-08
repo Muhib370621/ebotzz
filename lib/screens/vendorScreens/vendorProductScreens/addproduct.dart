@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
+import 'package:ebotzz/models/productModel.dart';
 import 'package:ebotzz/services/customerServices.dart';
+import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
@@ -42,7 +44,7 @@ class _AddProductState extends State<AddProduct> {
     //     .toString();
     imageUrl = await referenceImageToUpload.getDownloadURL();
 
-    setState(()  {
+    setState(() {
       selectedImages.add(File(image.path));
       imagePaths.add(imageUrl!);
       // riggerController.uploadImage(
@@ -357,13 +359,23 @@ class _AddProductState extends State<AddProduct> {
                         onTap: () async {
                           print("tapped");
                           print(controllerName.text);
-                          await CustomerServices().createProduct(
-                              controllerName.text,
-                              controllerType.text,
-                              controllerRegularPrice.text,
-                              controllerDescription.text,
-                              controllerShortDescription.text,
-                              imagePaths);
+                          if (imageUrl == "" || imageUrl == null) {
+                            Prompts.showError("Oops", "Picture is Necessary");
+                          } else {
+                            FirebaseServices().addProduct(FirebaseProduct(
+                                productImage: imageUrl??"",
+                                productName:controllerName.text,
+                                productType: controllerType.text,
+                                productDescription: controllerDescription.text,
+                                shortDescription: controllerShortDescription.text, productPrice: controllerRegularPrice.text));
+                          }
+                          // await CustomerServices().createProduct(
+                          //     controllerName.text,
+                          //     controllerType.text,
+                          //     controllerRegularPrice.text,
+                          //     controllerDescription.text,
+                          //     controllerShortDescription.text,
+                          //     imagePaths);
                           // await productController.createProduct(
                           //     controllerName.text,
                           //     controllerType.text,
