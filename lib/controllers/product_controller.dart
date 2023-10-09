@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
+import 'package:ebotzz/models/productModel.dart';
 import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';
@@ -26,7 +27,7 @@ class ProductController extends GetxController {
   var cartScreenTotal=0.0.obs;
 
   var cartScreenItems=[].obs;
-
+ RxList<FirebaseProduct> firebaseProductList = <FirebaseProduct> [].obs;
 
 
 

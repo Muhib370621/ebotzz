@@ -5,6 +5,7 @@ import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
 import 'package:ebotzz/models/signUpModel.dart';
 import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
+import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/services/urlSchemes.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';
@@ -39,6 +40,7 @@ class CustomerServices {
     }
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+      FirebaseServices().getProducts();
       productController.totalData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
 
       productController.isLoading.value = false;

@@ -274,8 +274,8 @@ class _LoginScreenState extends State<LoginScreen>
                       Obx(() {
                         return CustomActionButton(
                           buttonText: "Login",
-                          onTap: () async {
-                           await controller.inital();
+                          onTap: ()  {
+                           // await controller.inital();
                             // setState(() {
                             //   isLoading = true;
                             //
