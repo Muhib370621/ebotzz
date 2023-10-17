@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: child,
         theme: ThemeData(
-            fontFamily: 'JossefinSans',
+            fontFamily: 'inter',
             appBarTheme: AppBarTheme(color: blackColor, centerTitle: true),
           colorScheme: ThemeData().colorScheme.copyWith(
             primary: AppColors.mainColor,

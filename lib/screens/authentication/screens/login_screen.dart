@@ -79,9 +79,9 @@ class _LoginScreenState extends State<LoginScreen>
         height: Get.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.black, AppColors.mainColor],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.black,Colors.black87, AppColors.mainColor],
           ),
         ),
         child: SingleChildScrollView(

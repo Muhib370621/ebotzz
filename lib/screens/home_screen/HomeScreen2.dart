@@ -254,7 +254,6 @@ class HomeScreen2 extends StatelessWidget {
                                         ),
                                         SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
-
                                           child: Row(
                                             children: [
                                               Row(
@@ -326,7 +325,7 @@ class HomeScreen2 extends StatelessWidget {
                                                                       padding: EdgeInsets
                                                                           .symmetric(
                                                                         horizontal: 5,
-                                                                        // vertical: ,
+                                                                        vertical: 5,
                                                                       ),
                                                                       decoration:
                                                                       BoxDecoration(
@@ -381,7 +380,7 @@ class HomeScreen2 extends StatelessWidget {
                                                                                   //         ["type"] ??
                                                                                   //     "NaN".toString()),
                                                                                   Text(
-                                                                                    "\$ ${productController.firebaseProductList[index].productPrice}",
+                                                                                    "\$ ${double.parse(productController.firebaseProductList[index].productPrice)}",
                                                                                     style:
                                                                                     TextStyle(
                                                                                       fontSize:
@@ -635,7 +634,7 @@ class HomeScreen2 extends StatelessWidget {
                                                               padding: EdgeInsets
                                                                   .symmetric(
                                                                 horizontal: 5,
-                                                                // vertical: ,
+                                                                vertical: 5,
                                                               ),
                                                               decoration:
                                                                   BoxDecoration(
@@ -895,7 +894,7 @@ class HomeScreen2 extends StatelessWidget {
                                                               padding: EdgeInsets
                                                                   .symmetric(
                                                                 horizontal: 5,
-                                                                vertical: 2,
+                                                                vertical: 5,
                                                               ),
                                                               decoration:
                                                                   BoxDecoration(
@@ -1157,7 +1156,7 @@ class HomeScreen2 extends StatelessWidget {
                                                               padding: EdgeInsets
                                                                   .symmetric(
                                                                 horizontal: 5,
-                                                                vertical: 2,
+                                                                vertical: 5,
                                                               ),
                                                               decoration:
                                                                   BoxDecoration(
@@ -1461,7 +1460,7 @@ class HomeScreen2 extends StatelessWidget {
                                               return Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 5),
+                                                        horizontal: 5,vertical: 5),
                                                 child: InkWell(
                                                   onTap: () {
                                                     productController
@@ -1525,7 +1524,7 @@ class HomeScreen2 extends StatelessWidget {
                                                             padding: EdgeInsets
                                                                 .symmetric(
                                                               horizontal: 5,
-                                                              // vertical: ,
+                                                              vertical: 5,
                                                             ),
                                                             decoration:
                                                             BoxDecoration(
@@ -1772,7 +1771,7 @@ class HomeScreen2 extends StatelessWidget {
                                               return Padding(
                                                 padding:
                                                 const EdgeInsets.symmetric(
-                                                    horizontal: 5),
+                                                    horizontal: 5,vertical: 5),
                                                 child: InkWell(
                                                   onTap: () {
                                                     productController
@@ -1836,7 +1835,7 @@ class HomeScreen2 extends StatelessWidget {
                                                             padding: EdgeInsets
                                                                 .symmetric(
                                                               horizontal: 5,
-                                                              // vertical: ,
+                                                              vertical:5 ,
                                                             ),
                                                             decoration:
                                                             BoxDecoration(
@@ -2701,7 +2700,7 @@ class HomeScreen2 extends StatelessWidget {
                                               return Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 5),
+                                                        horizontal: 5,vertical: 5),
                                                 child: Container(
                                                   width: 200,
                                                   height: 250,

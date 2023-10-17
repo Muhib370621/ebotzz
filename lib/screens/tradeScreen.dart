@@ -149,10 +149,14 @@ class _TradeScreenState extends State<TradeScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: Image.network(
-                                      widget.productOriginal.img,
+                                  child: SizedBox(
+                                    height: 0.18.sh,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      child: Image.network(
+                                        widget.productOriginal.img,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -384,10 +388,14 @@ class _TradeScreenState extends State<TradeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15.0),
-                                child: Image.network(
-                                  widget.productOffered.img,
+                              child: SizedBox(
+                                height: 0.18.sh,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  child: Image.network(
+                                    widget.productOffered.img,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             ),
