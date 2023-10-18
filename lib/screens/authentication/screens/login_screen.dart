@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen>
                           ),
                           child: TextFormField(
                             controller: emailController,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Email is Required";
@@ -200,9 +200,11 @@ class _LoginScreenState extends State<LoginScreen>
                             autovalidateMode:
                             AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
                               contentPadding: EdgeInsets.all(16),
-                              labelText: "Email",
-                              labelStyle: TextStyle(color: Colors.white),
+                              hintText: "Email",
+                              hintStyle: TextStyle(color: Colors.black45),
                               enabledBorder: textFieldStyle,
                               focusedBorder: textFieldStyle,
                               focusedErrorBorder: textFieldStyle,
@@ -213,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             controller: passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -227,8 +229,8 @@ class _LoginScreenState extends State<LoginScreen>
                             obscureText: isVisible,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.all(16),
-                              labelText: "Password",
-                              labelStyle: TextStyle(color: Colors.white),
+                              hintText: "Password",
+                              hintStyle: TextStyle(color: Colors.black45),
                               suffixIcon: isVisible == false
                                   ? GestureDetector(
                                   onTap: () {
@@ -238,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   },
                                   child: Icon(
                                     Icons.visibility_off,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ))
                                   : GestureDetector(
                                   onTap: () {
@@ -248,8 +250,10 @@ class _LoginScreenState extends State<LoginScreen>
                                   },
                                   child: Icon(
                                     Icons.visibility,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   )),
+                              fillColor: Colors.white,
+                              filled: true,
                               enabledBorder: textFieldStyle,
                               focusedBorder: textFieldStyle,
                               focusedErrorBorder: textFieldStyle,

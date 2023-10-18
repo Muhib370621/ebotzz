@@ -186,7 +186,7 @@ class HomeScreen2 extends StatelessWidget {
 
                             Container(
                               decoration: BoxDecoration(
-                                color: AppColors.mainColor,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(
                                     15,
@@ -199,9 +199,9 @@ class HomeScreen2 extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 40.h,
+                                    height: 10.h,
                                     decoration: BoxDecoration(
-                                        color: AppColors.mainColor,borderRadius: BorderRadius.only(
+                                        color: Colors.white,borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(
                                         15,
                                       ),
@@ -211,7 +211,7 @@ class HomeScreen2 extends StatelessWidget {
                                     ),),
                                   ),
                                   Container(
-                                    color: Colors.grey.shade900,
+                                    color: Colors.white,
                                     child: Column(
                                       children: [
                                         15.verticalSpace,
@@ -227,7 +227,7 @@ class HomeScreen2 extends StatelessWidget {
                                                   // "Your Recently Viewed Items",
                                                   "Trades",
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                       fontSize: 18.sp,
                                                       fontWeight: FontWeight.w900),
                                                 ),
@@ -1418,7 +1418,7 @@ class HomeScreen2 extends StatelessWidget {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.grey.shade900),
+                                        color: Colors.white),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -1433,7 +1433,7 @@ class HomeScreen2 extends StatelessWidget {
                                             style: TextStyle(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.white),
+                                                color: Colors.black),
                                           ),
                                         ),
                                         // const SizedBox(
@@ -1729,7 +1729,7 @@ class HomeScreen2 extends StatelessWidget {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                        color: Colors.grey.shade900),
+                                        color: Colors.white),
                                     child: Column(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
@@ -1744,7 +1744,7 @@ class HomeScreen2 extends StatelessWidget {
                                             style: TextStyle(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.white),
+                                                color: Colors.black),
                                           ),
                                         ),
                                         // const SizedBox(
@@ -2265,7 +2265,7 @@ class HomeScreen2 extends StatelessWidget {
                                     height: 30.h,
                                   ),
                                   Container(
-                                    color: Colors.grey.shade900,
+                                    color: Colors.white,
                                     child: Column(
                                       children: [
                                         10.verticalSpace,
@@ -2281,7 +2281,7 @@ class HomeScreen2 extends StatelessWidget {
                                                 "Hot Products",
                                                 style: TextStyle(
                                                     fontSize: 24.sp,
-                                                    color: Colors.white),
+                                                    color: Colors.black),
                                               ),
                                               Padding(
                                                 padding:
@@ -2292,18 +2292,18 @@ class HomeScreen2 extends StatelessWidget {
                                                     Expanded(
                                                         child: Divider(
                                                       thickness: 2,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                     )),
                                                     IconButton(
                                                         onPressed: () {},
                                                         icon: Icon(
                                                           Icons.handyman,
-                                                          color: Colors.white,
+                                                          color: Colors.black,
                                                         )),
                                                     Expanded(
                                                         child: Divider(
                                                       thickness: 2,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                     )),
                                                   ],
                                                 ),
@@ -2676,7 +2676,7 @@ class HomeScreen2 extends StatelessWidget {
                                     height: 30.h,
                                   ),
                                   Container(
-                                    color: Colors.grey.shade900,
+                                    color: Colors.white,
                                     child: Column(
                                       children: [
                                         10.verticalSpace,
@@ -2687,7 +2687,7 @@ class HomeScreen2 extends StatelessWidget {
                                               style: TextStyle(
                                                   fontSize: 24.sp,
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
+                                                  color: Colors.black),
                                             )),
                                         SizedBox(
                                           height: 10.h,
@@ -2886,7 +2886,7 @@ class HomeScreen2 extends StatelessWidget {
                                     height: 40.h,
                                   ),
                                   Container(
-                                    color: Colors.grey.shade900,
+                                    color: Colors.white,
                                     child: Column(
                                       children: [
                                         10.verticalSpace,
@@ -2897,7 +2897,7 @@ class HomeScreen2 extends StatelessWidget {
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 24.sp,
-                                                color: Colors.white),
+                                                color: Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -2960,7 +2960,7 @@ class HomeScreen2 extends StatelessWidget {
                                           children: [
                                             Text(
                                               "Need help? Contact us ",
-                                              style: TextStyle(color: Colors.white),
+                                              style: TextStyle(color: Colors.black),
                                             ),
                                             SizedBox(
                                               height: 300.h,
@@ -2970,21 +2970,22 @@ class HomeScreen2 extends StatelessWidget {
                                             ),
                                             Container(
                                               width: 400.w,
-                                              decoration: BoxDecoration(
+                                              padding: EdgeInsets.all(15.sp),                                                  decoration: BoxDecoration(
+                                                  color:Colors.grey.shade900,
                                                   borderRadius:
-                                                      BorderRadius.circular(20)),
+                                                      BorderRadius.circular(5)),
                                               child: Column(
                                                 children: [
                                                   CustomInputField(
                                                     controller: controller2,
                                                     label: "First name",
-                                                    isblack: true,
+                                                    isblack: false,
                                                   ),
                                                   10.verticalSpace,
                                                   CustomInputField(
                                                     controller: controller3,
                                                     label: "Last name",
-                                                    isblack: true,
+                                                    isblack: false,
 
                                                   ),
                                                   10.verticalSpace,

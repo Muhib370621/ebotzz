@@ -207,7 +207,7 @@ class _NewSignUpState extends State<NewSignUp>
                             height: 55.h,
                             child: TextFormField(
                               controller: nameController,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
 
                               // validator: (value) {
                               //   if (value!.isEmpty) {
@@ -221,8 +221,10 @@ class _NewSignUpState extends State<NewSignUp>
                               AutovalidateMode.onUserInteraction,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Name",
-                                labelStyle: TextStyle(color: Colors.white),
+                                hintText: "Enter Name",
+                                helperStyle: TextStyle(color: Colors.black45),
+                                filled: true,
+                                fillColor: Colors.white,
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
                                 focusedErrorBorder: textFieldStyle,
@@ -237,7 +239,7 @@ class _NewSignUpState extends State<NewSignUp>
                             height: 55.h,
                             child: TextFormField(
                               controller: emailController,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                               // validator: (value) {
                               //   if (value!.isEmpty) {
                               //     return "Password is Required";
@@ -250,8 +252,8 @@ class _NewSignUpState extends State<NewSignUp>
                               // obscureText: isVisible,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Email",
-                                labelStyle: TextStyle(color: Colors.white),
+                                hintText: "Enter Email",
+                                hintStyle: TextStyle(color: Colors.black45),
                                 // suffixIcon: isVisible == false
                                 //     ? GestureDetector(
                                 //         onTap: () {},
@@ -269,6 +271,8 @@ class _NewSignUpState extends State<NewSignUp>
                                 //           Icons.visibility,
                                 //           color: Colors.white,
                                 //         )),
+                                filled: true,
+                                fillColor: Colors.white,
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
                                 focusedErrorBorder: textFieldStyle,
@@ -283,7 +287,7 @@ class _NewSignUpState extends State<NewSignUp>
                             height: 55.h,
                             child: TextFormField(
                               controller: passwordController,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
 
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -296,9 +300,11 @@ class _NewSignUpState extends State<NewSignUp>
                               AutovalidateMode.onUserInteraction,
                               obscureText: isVisible,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Password",
-                                labelStyle: TextStyle(color: Colors.white),
+                                hintText: "Enter Password",
+                                hintStyle: TextStyle(color: Colors.black45),
                                 suffixIcon: isVisible == false
                                     ? GestureDetector(
                                     onTap: () {
@@ -308,7 +314,7 @@ class _NewSignUpState extends State<NewSignUp>
                                     },
                                     child: Icon(
                                       Icons.visibility_off,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ))
                                     : GestureDetector(
                                     onTap: () {
@@ -319,7 +325,7 @@ class _NewSignUpState extends State<NewSignUp>
                                     },
                                     child: Icon(
                                       Icons.visibility,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     )),
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
@@ -335,7 +341,7 @@ class _NewSignUpState extends State<NewSignUp>
                             height: 55.h,
                             child: TextFormField(
                               controller: confirmPasswordController,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
 
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -360,7 +366,7 @@ class _NewSignUpState extends State<NewSignUp>
                                     },
                                     child: Icon(
                                       Icons.visibility_off,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ))
                                     : GestureDetector(
                                     onTap: () {
@@ -371,15 +377,17 @@ class _NewSignUpState extends State<NewSignUp>
                                     },
                                     child: Icon(
                                       Icons.visibility,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     )),
                                 contentPadding: EdgeInsets.all(16),
-                                labelText: "Enter Confirm Password",
-                                labelStyle: TextStyle(color: Colors.white),
+                                hintText: "Enter Confirm Password",
+                                hintStyle: TextStyle(color: Colors.black),
                                 enabledBorder: textFieldStyle,
                                 focusedBorder: textFieldStyle,
                                 focusedErrorBorder: textFieldStyle,
                                 errorBorder: errorTextFieldStyle,
+                                filled: true,
+                                fillColor: Colors.white,
                               ),
                             ),
                           )),
