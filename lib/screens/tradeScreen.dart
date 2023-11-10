@@ -7,6 +7,7 @@ import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/counter_button.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'home_screen/HomeScreen2.dart';
 
@@ -114,7 +115,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15, left: 20),
                   child: Text(
-                    "Original product",
+                  "Trade Up Product/Wanted",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
@@ -143,87 +144,81 @@ class _TradeScreenState extends State<TradeScreen> {
                               ),
                               width: 1.5.w),
                         ),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 0.18.sh,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      child: Image.network(
-                                        widget.productOriginal.img,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
+                            SizedBox(
+                              height: 0.15.sh,
+                              width: 0.3.sw,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15.0),
+                                child: Image.network(
+                                  widget.productOriginal.img,
+                                  fit: BoxFit.fill,
                                 ),
-                                const SizedBox(width: 5),
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        5.verticalSpace,
-                                        Text(
-                                            widget.productOriginal.title
-                                                .addOverFlow,
-                                            style: TextStyle(
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.bold)),
-                                        Text(
-                                            "\$${widget.productOriginal.price.toString()}")
-                                      ],
-                                    ),
-                                    // Text(
-                                    //     "\$${productController.cartScreenItems[index].title.toString()}",
-                                    //     style: h2Style),
-                                    const SizedBox(height: 10),
-                                    // Text("Quantity:"),
-                                    // SizedBox(
-                                    //   height: 5,
-                                    // ),
-                                    // Container(
-                                    //   width: 30,
-                                    //   height: 30,
-                                    //   decoration: BoxDecoration(
-                                    //       border: Border.all(color: Colors.grey.shade700),
-                                    //       borderRadius: BorderRadius.circular(5)),
-                                    //   child: Center(
-                                    //       child: Text(productController
-                                    //           .cartScreenItems[index].quantity
-                                    //           .toString())),
-                                    // )
+                                    5.verticalSpace,
+                                    Text(
+                                        widget.productOriginal.title
+                                            .addOverFlow,
+                                        style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.bold)),
+                                    Text(
+                                        "\$${widget.productOriginal.price.toString()}")
                                   ],
                                 ),
-                                // Spacer(),
-                                CounterButton(
-                                    orientation: Axis.vertical,
-                                    onIncrementSelected: () => {
+                                // Text(
+                                //     "\$${productController.cartScreenItems[index].title.toString()}",
+                                //     style: h2Style),
+                                const SizedBox(height: 10),
+                                // Text("Quantity:"),
+                                // SizedBox(
+                                //   height: 5,
+                                // ),
+                                // Container(
+                                //   width: 30,
+                                //   height: 30,
+                                //   decoration: BoxDecoration(
+                                //       border: Border.all(color: Colors.grey.shade700),
+                                //       borderRadius: BorderRadius.circular(5)),
+                                //   child: Center(
+                                //       child: Text(productController
+                                //           .cartScreenItems[index].quantity
+                                //           .toString())),
+                                // )
+                              ],
+                            ),
+                            // Spacer(),
+                            CounterButton(
+                                orientation: Axis.vertical,
+                                onIncrementSelected: () => {
+                                      setState(() {
+                                        productController.increaseItem(
+                                            widget.productOriginal);
+                                      })
+                                    },
+                                onDecrementSelected: () => {
+                                      if (widget.productOriginal.quantity >
+                                          0)
+                                        {
                                           setState(() {
-                                            productController.increaseItem(
+                                            productController.decreaseItem(
                                                 widget.productOriginal);
                                           })
-                                        },
-                                    onDecrementSelected: () => {
-                                          if (widget.productOriginal.quantity >
-                                              0)
-                                            {
-                                              setState(() {
-                                                productController.decreaseItem(
-                                                    widget.productOriginal);
-                                              })
-                                            }
-                                        },
-                                    label: widget.productOriginal.quantity)
-                                // counterButton(products)
-                              ],
-                            )
-                            // .fadeAnimation(0.4 * index),
+                                        }
+                                    },
+                                label: widget.productOriginal.quantity)
+                            // counterButton(products)
                           ],
                         ),
                       )
@@ -362,7 +357,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15, left: 20),
                   child: Text(
-                    "Offered product:",
+                    "Trade in Product/Offered",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
@@ -382,88 +377,82 @@ class _TradeScreenState extends State<TradeScreen> {
                           ),
                           width: 1.5.w),
                     ),
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                              child: SizedBox(
-                                height: 0.18.sh,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  child: Image.network(
-                                    widget.productOffered.img,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
+                        SizedBox(
+                          height: 0.15.sh,
+                          width: 0.3.sw,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.network(
+                              widget.productOffered.img,
+                              fit: BoxFit.fill,
                             ),
-                            const SizedBox(width: 5),
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    5.verticalSpace,
-                                    Text(
-                                        widget.productOffered.title.addOverFlow,
-                                        style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold)),
-                                    Text(
-                                        "\$${widget.productOffered.price.toString()}")
-                                  ],
-                                ),
-                                // Text(
-                                //     "\$${productController.cartScreenItems[index].title.toString()}",
-                                //     style: h2Style),
-                                const SizedBox(height: 10),
-                                // Text("Quantity:"),
-                                // SizedBox(
-                                //   height: 5,
-                                // ),
-                                // Container(
-                                //   width: 30,
-                                //   height: 30,
-                                //   decoration: BoxDecoration(
-                                //       border: Border.all(color: Colors.grey.shade700),
-                                //       borderRadius: BorderRadius.circular(5)),
-                                //   child: Center(
-                                //       child: Text(productController
-                                //           .cartScreenItems[index].quantity
-                                //           .toString())),
-                                // )
+                                5.verticalSpace,
+                                Text(
+                                    widget.productOffered.title.addOverFlow,
+                                    style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.bold)),
+                                Text(
+                                    "\$${widget.productOffered.price.toString()}")
                               ],
                             ),
-                            // Spacer(),
-                            CounterButton(
-                                orientation: Axis.vertical,
-                                onIncrementSelected: () => {
-                                      setState(() {
-                                        productController.calculateTotalPrice();
+                            // Text(
+                            //     "\$${productController.cartScreenItems[index].title.toString()}",
+                            //     style: h2Style),
+                            const SizedBox(height: 10),
+                            // Text("Quantity:"),
+                            // SizedBox(
+                            //   height: 5,
+                            // ),
+                            // Container(
+                            //   width: 30,
+                            //   height: 30,
+                            //   decoration: BoxDecoration(
+                            //       border: Border.all(color: Colors.grey.shade700),
+                            //       borderRadius: BorderRadius.circular(5)),
+                            //   child: Center(
+                            //       child: Text(productController
+                            //           .cartScreenItems[index].quantity
+                            //           .toString())),
+                            // )
+                          ],
+                        ),
+                        // Spacer(),
+                        CounterButton(
+                            orientation: Axis.vertical,
+                            onIncrementSelected: () => {
+                                  setState(() {
+                                    productController.calculateTotalPrice();
 
-                                        productController.increaseItem(
+                                    productController.increaseItem(
+                                        widget.productOffered);
+                                  })
+                                },
+                            onDecrementSelected: () => {
+                                  if (widget.productOffered.quantity > 0)
+                                    {
+                                      setState(() {
+                                        productController
+                                            .calculateTotalPrice();
+                                        productController.decreaseItem(
                                             widget.productOffered);
                                       })
-                                    },
-                                onDecrementSelected: () => {
-                                      if (widget.productOffered.quantity > 0)
-                                        {
-                                          setState(() {
-                                            productController
-                                                .calculateTotalPrice();
-                                            productController.decreaseItem(
-                                                widget.productOffered);
-                                          })
-                                        }
-                                    },
-                                label: widget.productOffered.quantity)
-                            // counterButton(products)
-                          ],
-                        )
-                        // .fadeAnimation(0.4 * index),
+                                    }
+                                },
+                            label: widget.productOffered.quantity)
+                        // counterButton(products)
                       ],
                     ),
                   ),
@@ -555,14 +544,14 @@ class _TradeScreenState extends State<TradeScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Total Payout",
+                                  "Balance Due",
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2)}",
+                                  NumberFormat.compact().format("\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2)}"),
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
@@ -574,14 +563,14 @@ class _TradeScreenState extends State<TradeScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Total Payout",
+                                  "Deposit Held until delivery",
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  "\$ 0",
+                                  NumberFormat.compact().format("\$${(widget.productOriginal.price * widget.productOriginal.quantity)- ((widget.productOriginal.price * widget.productOriginal.quantity) - (widget.productOffered.price * widget.productOffered.quantity))}"),
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     // fontWeight: FontWeight.bold,
@@ -650,12 +639,12 @@ class _TradeScreenState extends State<TradeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Amount to pay is ",
+                              "Total Due with deposits",
                               style: TextStyle(
                                   fontWeight: FontWeight.w900, fontSize: 17.sp),
                             ),
                             Text(
-                              "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price).toStringAsFixed(2)}",
+                              NumberFormat.compact().format("\$${((widget.productOriginal.price * widget.productOriginal.quantity)).toStringAsFixed(2)}"),
                               style: TextStyle(
                                   fontWeight: FontWeight.w900, fontSize: 17.sp),
                             ),
