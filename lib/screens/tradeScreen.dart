@@ -498,7 +498,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2)}",
+                                  "\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2).toString().replaceAllMapped(
+                                    new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                        (Match match) => '${match[1]},',
+                                  )}",
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                   ),
@@ -551,7 +554,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  NumberFormat.compact().format("\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toStringAsFixed(2)}"),
+                                  ("\$${((widget.productOriginal.price * widget.productOriginal.quantity) - widget.productOffered.price * widget.productOffered.quantity).toString().replaceAllMapped(
+                                    new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                        (Match match) => '${match[1]},',
+                                  )}"),
                                   style: TextStyle(
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
@@ -570,7 +576,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  NumberFormat.compact().format("\$${(widget.productOriginal.price * widget.productOriginal.quantity)- ((widget.productOriginal.price * widget.productOriginal.quantity) - (widget.productOffered.price * widget.productOffered.quantity))}"),
+                                  ("\$${(widget.productOriginal.price * widget.productOriginal.quantity)- ((widget.productOriginal.price * widget.productOriginal.quantity) - (widget.productOffered.price * widget.productOffered.quantity))}").toString().replaceAllMapped(
+                                  new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                      (Match match) => '${match[1]},',
+                                ),
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     // fontWeight: FontWeight.bold,
@@ -593,7 +602,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 //           child: Container(
                 //         width: 60,
                 //         height: 70,
-                //         child: Image.network(productOffered.img),
+                //         chiNumberFormat.compact().formatld: Image.network(productOffered.img),
                 //       )),
                 //       Expanded(
                 //           child: Column(
@@ -644,7 +653,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                   fontWeight: FontWeight.w900, fontSize: 17.sp),
                             ),
                             Text(
-                              NumberFormat.compact().format("\$${((widget.productOriginal.price * widget.productOriginal.quantity)).toStringAsFixed(2)}"),
+                              ("\$${((widget.productOriginal.price * widget.productOriginal.quantity)).toStringAsFixed(2).toString().replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                    (Match match) => '${match[1]},',
+                              )}"),
                               style: TextStyle(
                                   fontWeight: FontWeight.w900, fontSize: 17.sp),
                             ),
