@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:ebotzz/controllers/userController.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/models/productModel.dart';
 import 'package:ebotzz/services/customerServices.dart';
@@ -147,6 +149,7 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.put(UserController());
     ProductController productController = Get.put(ProductController());
     TextEditingController controllerName = TextEditingController();
     TextEditingController controller = TextEditingController();
@@ -362,18 +365,20 @@ class _AddProductState extends State<AddProduct> {
                           if (imageUrl == "" || imageUrl == null) {
                             Prompts.showError("Oops", "Picture is Necessary");
                           } else if (!controllerRegularPrice.text
-                              .contains("12345678990")) {
+                              .contains("1234567890")) {
+                            log(controllerRegularPrice.text.toString());
                             Prompts.showError(
                                 "Data Type Error", "Price must be an Integer");
                           } else {
                             FirebaseServices().addProduct(FirebaseProduct(
-                                productImage: imageUrl ?? "",
-                                productName: controllerName.text,
-                                productType: controllerType.text,
-                                productDescription: controllerDescription.text,
-                                shortDescription:
-                                    controllerShortDescription.text,
-                                productPrice: controllerRegularPrice.text));
+                              productImage: imageUrl ?? "",
+                              productName: controllerName.text,
+                              productType: controllerType.text,
+                              productDescription: controllerDescription.text,
+                              shortDescription: controllerShortDescription.text,
+                              productPrice: controllerRegularPrice.text,
+                              userModel: userController.userModel.value,
+                            ));
                           }
                           // await CustomerServices().createProduct(
                           //     controllerName.text,

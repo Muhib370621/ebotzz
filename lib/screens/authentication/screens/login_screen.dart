@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:ebotzz/controllers/login_controller.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
@@ -54,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   TextEditingController emailController = TextEditingController();
-  bool s3 = false;
+  // bool s3 = false;
 
   TextEditingController passwordController = TextEditingController();
 
@@ -155,13 +157,15 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                   15.horizontalSpace,
                   Switch(
+                    inactiveThumbColor: Colors.white,
                     // activeColor: AppColors.mainColor,
                     activeTrackColor: AppColors.mainColor,
                     inactiveTrackColor: AppColors.mainColor,
-                    value: s3,
+                    value: loginController.isSeller.value,
                     onChanged: (bool value) {
                       setState(() {
-                        s3 = value; //update value when sitch changed
+                        loginController.isSeller.value = value;
+                        log(loginController.isSeller.value.toString());//update value when sitch changed
                       });
                     },
                   ),

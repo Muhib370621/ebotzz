@@ -25,7 +25,9 @@ class ProductListView extends StatelessWidget {
         width: 120,
         height: 120,
       ),
-    ).fadeAnimation(0.4);
+    );
+        // .fadeAnimation(0.4);
+
   }
 
   Widget _listViewItem(ProductModel products, int index) {
@@ -43,7 +45,7 @@ class ProductListView extends StatelessWidget {
           // maxLines: 2,
           //  overflow: TextOverflow.ellipsis,
         )
-            .fadeAnimation(0.8),
+            // .fadeAnimation(0.8),
       ],
     )
         : Row(
@@ -56,14 +58,17 @@ class ProductListView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(products.title, style: h4Style).fadeAnimation(0.8),
+                Text(products.title, style: h4Style)
+                    // .fadeAnimation(0.8),
+                ,
                 const SizedBox(height: 5),
                 Text(
                   products.description,
                   style: h4Style.copyWith(fontSize: 12),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                ).fadeAnimation(1.4)
+                )
+                    // .fadeAnimation(1.4)
               ],
             ),
           ),

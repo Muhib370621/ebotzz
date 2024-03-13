@@ -264,7 +264,7 @@ class HomeScreen2 extends StatelessWidget {
                                                   ),
                                                   SizedBox(
                                                       // width: 0.5.sw,
-                                                      height: 0.18.sh,
+                                                      height: 0.22.sh,
                                                     child: ListView.builder(
                                                         scrollDirection: Axis.horizontal,
                                                         itemCount: productController.firebaseProductList.length,
@@ -1464,6 +1464,8 @@ class HomeScreen2 extends StatelessWidget {
                                                         horizontal: 5),
                                                 child: InkWell(
                                                   onTap: () {
+                                                    log(  productController
+                                                        .totalData.toString());
                                                     productController
                                                         .total.value =
                                                         double.parse(

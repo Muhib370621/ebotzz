@@ -22,15 +22,15 @@ class CartScreen extends StatelessWidget {
 
   PreferredSizeWidget _appBar() {
     return AppBar(
-      leading: IconButton(
-        onPressed: () {
-          Get.back();
-        },
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ),
-      ),
+      // leading: IconButton(
+      //   onPressed: () {
+      //     Get.back();
+      //   },
+      //   icon: Icon(
+      //     Icons.arrow_back,
+      //     color: Colors.black,
+      //   ),
+      // ),
       backgroundColor: whiteColor,
       elevation: 0,
       title: const Text("Swapster Cart", style: h2Style),
@@ -118,7 +118,7 @@ class CartScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(HomeScreen2());
+          Get.back();
           controller.quantity.value = 1;
         },
         backgroundColor: AppColors.mainColor,

@@ -808,7 +808,8 @@ class DashboardProductDetailScreen extends StatelessWidget {
                       }),
                     )
                   ],
-                ).fadeAnimation(1.0)
+                )
+                    // .fadeAnimation(1.0)
               ],
             ),
           ),
@@ -848,7 +849,8 @@ class DashboardProductDetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
                         textAlign: TextAlign.end,
-                      ).fadeAnimation(0.6),
+                      )
+                          // .fadeAnimation(0.6),
                     ),
                   ],
                 ),
@@ -867,7 +869,8 @@ class DashboardProductDetailScreen extends StatelessWidget {
                         color: Colors.grey.shade700,
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp),
-                  ).fadeAnimation(0.8),
+                  ),
+                      // .fadeAnimation(0.8),
                   SizedBox(
                     height: 3.5.h,
                   ),
@@ -887,7 +890,9 @@ class DashboardProductDetailScreen extends StatelessWidget {
                             color: Colors.grey.shade700,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.sp),
-                      ).fadeAnimation(0.8)),
+                      )
+                      // .fadeAnimation(0.8)
+                  ),
                 ],
               ),
               const SizedBox(height: 20),

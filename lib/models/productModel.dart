@@ -1,3 +1,5 @@
+import 'package:ebotzz/models/userModel.dart';
+
 class FirebaseProduct {
   final String productImage;
   final String productName;
@@ -5,6 +7,7 @@ class FirebaseProduct {
   final String productType;
   final String productDescription;
   final String shortDescription;
+  final UserModel userModel;
 
   FirebaseProduct({
     required this.productImage,
@@ -13,5 +16,6 @@ class FirebaseProduct {
     required this.productType,
     required this.productDescription,
     required this.shortDescription,
+    required this.userModel,
   });
 }

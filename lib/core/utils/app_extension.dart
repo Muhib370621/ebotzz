@@ -27,9 +27,9 @@ extension IterableExtension<T> on Iterable<T> {
   }
 }
 
-extension WidgetExtension on Widget{
-  Widget fadeAnimation(double delay){
-    return FadeInAnimation(delay: delay, child: this);
-  }
-}
+// extension WidgetExtension on Widget{
+//   Widget fadeAnimation(double delay){
+//     return FadeInAnimation(delay: delay, child: this);
+//   }
+// }
 
