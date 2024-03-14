@@ -47,7 +47,7 @@ class AppRoutes {
     // bottom navigation screens
     GetPage(
       name: RouteNames.cartScreen,
-      page: () =>  CartScreen(),
+      page: () =>  CartScreen(index: 0,),
     ),
     GetPage(
       name: RouteNames.homeScreen,

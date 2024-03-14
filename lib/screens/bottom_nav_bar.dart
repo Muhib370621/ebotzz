@@ -17,7 +17,7 @@ class BottomNavBar extends StatelessWidget {
 
   final screens = [
     HomeScreen2(),
-    CartScreen(),
+    CartScreen(index: 0,),
     WishlistScreen(),
     TradingOfferScreen(),
   ];

@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:ebotzz/models/orderModel.dart';
 import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
 import 'package:ebotzz/models/productModel.dart';
@@ -28,6 +29,10 @@ class ProductController extends GetxController {
 
   var cartScreenItems=[].obs;
  RxList<FirebaseProduct> firebaseProductList = <FirebaseProduct> [].obs;
+ RxList<OrderModel> firebaseUserPendingOrderList = <OrderModel> [].obs;
+ RxList<OrderModel> firebaseUserAcceptedOrderList = <OrderModel> [].obs;
+ RxList<OrderModel> firebaseVendorAcceptedOrderList = <OrderModel> [].obs;
+ RxList<OrderModel> firebaseVendorPendingOrderList = <OrderModel> [].obs;
 
 
 

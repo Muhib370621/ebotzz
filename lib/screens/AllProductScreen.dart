@@ -33,7 +33,7 @@ class AllProductScreen extends StatelessWidget {
         PageRouteBuilder(
           transitionDuration: const Duration(seconds: 1),
           pageBuilder: (_, __, ___) =>
-              DashboardProductDetailScreen(products: product),
+              DashboardProductDetailScreen(products: product, index: 0,),
         ),
       );
     }

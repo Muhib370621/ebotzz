@@ -19,10 +19,11 @@ import '../tradeScreen.dart';
 
 class DashboardProductDetailScreen extends StatelessWidget {
   final ProductModel products;
+  final int index;
   TradingController tradingController = Get.put(TradingController());
   final ProductController productController = Get.put(ProductController());
 
-  DashboardProductDetailScreen({Key? key, required this.products})
+  DashboardProductDetailScreen({Key? key, required this.products, required this.index})
       : super(key: key);
 
   PreferredSizeWidget _appBar(BuildContext context) {
@@ -373,6 +374,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
 
                                                                         Get.to(
                                                                             CartScreen(
+                                                                              index: index,
                                                                           products:
                                                                               productModel,
                                                                         ));
@@ -625,6 +627,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
 
                                                                         Get.to(
                                                                             CartScreen(
+                                                                              index: index,
                                                                           products:
                                                                               productModel,
                                                                         ));
@@ -775,6 +778,7 @@ class DashboardProductDetailScreen extends StatelessWidget {
                         controller.cartScreenItems.add(item);
 
                         Get.to(CartScreen(
+                          index: index,
                           products: products,
                         ));
                       },

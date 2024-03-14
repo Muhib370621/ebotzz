@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ebotzz/controllers/userController.dart';
+import 'package:ebotzz/models/orderModel.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/createOrderScreen.dart';
+import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/utils/constants.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
@@ -10,7 +15,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CheckOutNewScreen extends StatelessWidget {
-  CheckOutNewScreen({super.key, required this.product});
+  CheckOutNewScreen({super.key, required this.product, required this.index});
+  final int index;
 
   ProductModel product;
 
@@ -35,6 +41,9 @@ class CheckOutNewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = Get.put(UserController());
+
+    log("index is"+index.toString());
     ProductController productController = Get.put(ProductController());
     return Scaffold(
       appBar: _appBar(),
@@ -209,8 +218,7 @@ class CheckOutNewScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "\$" +
-                                      productController
-                                          .cartScreenItems[index].title
+                                    product.price
                                           .toString(),
                                   style: TextStyle(
                                       color: Colors.black,
@@ -517,14 +525,25 @@ class CheckOutNewScreen extends StatelessWidget {
                                     // side: BorderSide(color: Colors.red)
                                   ))),
                           onPressed: () {
-                            var amount = (product.price - product.price);
-                                  print(amount.toString());
-                                  Get.to(CreateOrderScreen(
-                                    product: product,
-                                  ));
+                            FirebaseServices().placeOrder(OrderModel(
+                              orderID: DateTime.now().millisecond.toString(),
+                              orderStatus: "Pending",
+                              orderTimeStamp: DateTime.now().toString(),
+                              totalPrice: product.price.toString(),
+                              buyerEmail: userController.userModel.value.email.toString(),
+                              sellerEmail: productController.firebaseProductList[index].userModel.email.toString(),
+                              orderedProducts: product
+                            ));
+
+                            // var amount = (product.price - product.price);
+                            //       print(amount.toString());
+                            //       Get.to(CreateOrderScreen(
+                            //         product: product,
+                            //       ));
                           },
                           child: Text(
-                            "Pay with Paypal",
+                            "Place Order",
+                            // "Pay with Paypal",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 18.sp

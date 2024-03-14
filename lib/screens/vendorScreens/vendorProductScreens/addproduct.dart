@@ -364,12 +364,14 @@ class _AddProductState extends State<AddProduct> {
                           print(controllerName.text);
                           if (imageUrl == "" || imageUrl == null) {
                             Prompts.showError("Oops", "Picture is Necessary");
-                          } else if (!controllerRegularPrice.text
-                              .contains("1234567890")) {
-                            log(controllerRegularPrice.text.toString());
-                            Prompts.showError(
-                                "Data Type Error", "Price must be an Integer");
-                          } else {
+                          }
+                          // else if (!controllerRegularPrice.text
+                          //     .contains("1234567890")) {
+                          //   log(controllerRegularPrice.text.toString());
+                          //   Prompts.showError(
+                          //       "Data Type Error", "Price must be an Integer");
+                          // } 
+                          else {
                             FirebaseServices().addProduct(FirebaseProduct(
                               productImage: imageUrl ?? "",
                               productName: controllerName.text,

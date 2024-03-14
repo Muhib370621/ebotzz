@@ -6,6 +6,8 @@ import 'package:ebotzz/controllers/product_controller.dart';
 import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/controllers/userController.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
+import 'package:ebotzz/models/orderModel.dart';
+import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/models/userModel.dart';
 import 'package:ebotzz/screens/bottom_nav_bar.dart';
 import 'package:ebotzz/utils/prompts.dart';
@@ -89,6 +91,9 @@ class FirebaseServices {
                 name: data["userName"].toString(),
                 role: data["role"].toString(),
                 userID: data["userID"].toString());
+
+            log("==================User Model" +
+                userController.userModel.value.name.toString());
             Prompts.showSuccess("Success", "Successfully Logged In");
             Get.to(() => BottomNavBar());
             loginController.isLoading.value = false;
@@ -118,6 +123,8 @@ class FirebaseServices {
   }
 
   Future<void> addProduct(FirebaseProduct product) async {
+    final UserController userController = Get.put(UserController());
+
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     try {
@@ -128,9 +135,67 @@ class FirebaseServices {
         'productType': product.productType,
         'productDescription': product.productDescription,
         'shortDescription': product.shortDescription,
-        'user': product.userModel
+        'user': {
+          userController.userModel.value.userID,
+          userController.userModel.value.name,
+          userController.userModel.value.email,
+          userController.userModel.value.role,
+        }
       });
+      log("------------------------------" + product.userModel.name.toString());
       Prompts.showSuccess("Success", "Product Added");
+      Get.offAll(() => BottomNavBar());
+      print('Product added to Firestore.');
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        Prompts.showError("Oops", e.message.toString());
+      }
+      print('Error adding product to Firestore: $e');
+    }
+  }
+
+  Future<void> placeOrder(OrderModel order) async {
+    // final UserController userController = Get.put(UserController());
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    try {
+      // DocumentReference orderRef = FirebaseFirestore.instance.collection('orders').doc();
+
+      await firestore.collection('orders').add({
+        'orderID': order.orderID,
+        'buyerEmail': order.buyerEmail,
+        'sellerEmail': order.sellerEmail,
+        'orderStatus': order.orderStatus,
+        'totalPrice': order.totalPrice,
+        'orderDateTime': order.orderTimeStamp,
+        'orderProducts': [
+          {
+            'ID': order.orderedProducts?.id.toString(),
+            'title': order.orderedProducts?.title,
+            'price': order.orderedProducts?.price.toString(),
+            'qty': order.orderedProducts?.quantity.toString(),
+            'img': order.orderedProducts?.img.toString(),
+            'isFav': order.orderedProducts?.isFavorite.toString(),
+            'description': order.orderedProducts?.description,
+          }
+        ]
+      });
+
+      // await orderRef.update();
+      // 'productType': product.productType,
+      // 'productDescription': product.productDescription,
+      // 'shortDescription': product.shortDescription,
+      // 'user':{
+      //   userController.userModel.value.userID,
+      //   userController.userModel.value.name,
+      //   userController.userModel.value.email,
+      //   userController.userModel.value.role,
+      //
+      // }
+      // });
+      // log("------------------------------"+product.userModel.name.toString());
+      Prompts.showSuccess("Success", "Order Placed Successfully");
       Get.offAll(() => BottomNavBar());
       print('Product added to Firestore.');
     } catch (e) {
@@ -147,9 +212,10 @@ class FirebaseServices {
         await firestore.collection('products').get();
 
     // final List<FirebaseProduct> products = [];
-
+    log("-----------------getting fiebase projects");
     querySnapshot.docs.forEach((doc) {
       final data = doc.data() as Map<String, dynamic>;
+      log("-------data" + data.toString());
       final map = {
         "productImage": data['productImage'],
         "productName": data['productName'],
@@ -159,12 +225,17 @@ class FirebaseServices {
         "productPrice": data["productPrice"],
       };
       final product = FirebaseProduct(
-        productImage: data['productImage'],
-        productName: data['productName'],
+        productImage: data['productImage'].toString(),
+        productName: data['productName'].toString(),
         productType: data['productType'],
         productDescription: data['productDescription'],
         shortDescription: data['shortDescription'],
-        productPrice: data["productPrice"], userModel: UserModel(),
+        productPrice: data["productPrice"],
+        userModel: UserModel(
+            name: data["user"][1].toString(),
+            userID: data["user"][0],
+            role: data["user"][3],
+            email: data["user"][2]),
       );
       // productController.totalData.add(map);
       productController.firebaseProductList.add(product);
@@ -174,4 +245,199 @@ class FirebaseServices {
 
     return productController.firebaseProductList;
   }
+
+  Future<List<OrderModel>> getUserPendingOrders() async {
+    productController.firebaseUserPendingOrderList.clear();
+    final UserController userController = Get.put(UserController());
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final QuerySnapshot querySnapshot = await firestore
+        .collection('orders')
+        .where('buyerEmail',
+            isEqualTo: userController.userModel.value.email.toString())
+        .where('orderStatus', isEqualTo: 'Pending')
+        .get();
+
+    // final List<FirebaseProduct> products = [];
+    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
+    querySnapshot.docs.forEach((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      //   log("-------data" + data.toString());
+      final product = OrderModel(
+        orderTimeStamp: data['orderDateTime'],
+        orderID: data['orderID'],
+        buyerEmail: data['buyerEmail'],
+        sellerEmail: data['sellerEmail'],
+        totalPrice: data['totalPrice'],
+        orderStatus: data['orderStatus'],
+        orderedProducts: ProductModel(
+            id: int.parse(data['orderProducts'][0]['ID']),
+            title: data['orderProducts'][0]['title'],
+            description: data['orderProducts'][0]['description'],
+            price: double.parse(data['orderProducts'][0]['price']),
+            img: data['orderProducts'][0]['img'],
+            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+      );
+      //   // productController.totalData.add(map);
+      productController.firebaseUserPendingOrderList.add(product);
+      // });
+      log("pending orders firebase" +
+          productController.firebaseUserPendingOrderList.length.toString());
+    });
+    return productController.firebaseUserPendingOrderList.value;
+  }
+  Future<List<OrderModel>> getUserAcceptedOrders() async {
+    productController.firebaseUserAcceptedOrderList.clear();
+    final UserController userController = Get.put(UserController());
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final QuerySnapshot querySnapshot = await firestore
+        .collection('orders')
+        .where('buyerEmail',
+            isEqualTo: userController.userModel.value.email.toString())
+        .where('orderStatus', isEqualTo: 'Accepted')
+        .get();
+
+    // final List<FirebaseProduct> products = [];
+    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
+    querySnapshot.docs.forEach((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      //   log("-------data" + data.toString());
+      final product = OrderModel(
+        orderTimeStamp: data['orderDateTime'],
+        orderID: data['orderID'],
+        buyerEmail: data['buyerEmail'],
+        sellerEmail: data['sellerEmail'],
+        totalPrice: data['totalPrice'],
+        orderStatus: data['orderStatus'],
+        orderedProducts: ProductModel(
+            id: int.parse(data['orderProducts'][0]['ID']),
+            title: data['orderProducts'][0]['title'],
+            description: data['orderProducts'][0]['description'],
+            price: double.parse(data['orderProducts'][0]['price']),
+            img: data['orderProducts'][0]['img'],
+            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+      );
+      //   // productController.totalData.add(map);
+      productController.firebaseUserAcceptedOrderList.add(product);
+      // });
+      log("pending orders firebase" +
+          productController.firebaseUserAcceptedOrderList.length.toString());
+    });
+    return productController.firebaseUserAcceptedOrderList.value;
+  }
+
+  Future<List<OrderModel>> getVendorPendingOrders() async {
+    productController.firebaseVendorPendingOrderList.clear();
+    final UserController userController = Get.put(UserController());
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final QuerySnapshot querySnapshot = await firestore
+        .collection('orders')
+        .where('sellerEmail',
+        isEqualTo: userController.userModel.value.email.toString())
+        .where('orderStatus', isEqualTo: 'Pending')
+        .get();
+
+    // final List<FirebaseProduct> products = [];
+    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
+    querySnapshot.docs.forEach((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      //   log("-------data" + data.toString());
+      final product = OrderModel(
+        orderTimeStamp: data['orderDateTime'],
+        orderID: data['orderID'],
+        buyerEmail: data['buyerEmail'],
+        sellerEmail: data['sellerEmail'],
+        totalPrice: data['totalPrice'],
+        orderStatus: data['orderStatus'],
+        orderedProducts: ProductModel(
+            id: int.parse(data['orderProducts'][0]['ID']),
+            title: data['orderProducts'][0]['title'],
+            description: data['orderProducts'][0]['description'],
+            price: double.parse(data['orderProducts'][0]['price']),
+            img: data['orderProducts'][0]['img'],
+            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+      );
+      //   // productController.totalData.add(map);
+      productController.firebaseVendorPendingOrderList.add(product);
+      // });
+      log("pending orders firebase" +
+          productController.firebaseVendorPendingOrderList.length.toString());
+    });
+    return productController.firebaseVendorPendingOrderList.value;
+  }
+  Future<List<OrderModel>> getVendorAcceptedOrders() async {
+    productController.firebaseVendorAcceptedOrderList.clear();
+    final UserController userController = Get.put(UserController());
+
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final QuerySnapshot querySnapshot = await firestore
+        .collection('orders')
+        .where('sellerEmail',
+        isEqualTo: userController.userModel.value.email.toString())
+        .where('orderStatus', isEqualTo: 'Accepted')
+        .get();
+
+    // final List<FirebaseProduct> products = [];
+    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
+    querySnapshot.docs.forEach((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      //   log("-------data" + data.toString());
+      final product = OrderModel(
+        orderTimeStamp: data['orderDateTime'],
+        orderID: data['orderID'],
+        buyerEmail: data['buyerEmail'],
+        sellerEmail: data['sellerEmail'],
+        totalPrice: data['totalPrice'],
+        orderStatus: data['orderStatus'],
+        orderedProducts: ProductModel(
+            id: int.parse(data['orderProducts'][0]['ID']),
+            title: data['orderProducts'][0]['title'],
+            description: data['orderProducts'][0]['description'],
+            price: double.parse(data['orderProducts'][0]['price']),
+            img: data['orderProducts'][0]['img'],
+            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+      );
+      //   // productController.totalData.add(map);
+      productController.firebaseVendorAcceptedOrderList.add(product);
+      // });
+      log("pending orders firebase" +
+          productController.firebaseVendorAcceptedOrderList.length.toString());
+    });
+    return productController.firebaseVendorAcceptedOrderList.value;
+  }
+
+  Future<void> changeOrderStatusToAccepted(String orderID) async {
+    try {
+      // Query for the order document where email matches
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('orders')
+          .where('orderID', isEqualTo: orderID)
+          .get();
+
+      // Iterate through the documents and update each one
+      for (DocumentSnapshot doc in querySnapshot.docs) {
+        // Get reference to the order document
+        DocumentReference orderRef = FirebaseFirestore.instance.collection('orders').doc(doc.id);
+
+        // Update the order document with the new status
+        await orderRef.update({
+          'orderStatus': "Accepted",
+        });
+        Get.back();
+
+        Prompts.showSuccess("Success", "Accepted Order#$orderID");
+
+        print('Order status updated successfully!');
+      }
+    } catch (e) {
+      // Handle errors
+      print('Error updating order status: $e');
+    }
+  }
+
 }

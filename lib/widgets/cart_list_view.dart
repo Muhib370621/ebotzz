@@ -27,7 +27,7 @@ class _CartListViewState extends State<CartListView> {
 
   calculateTotalPrice(){
     for (var i=0; i<widget.cartProduct.length;i++){
-      totalPrice += widget.cartProduct[i].price;
+      totalPrice += (widget.cartProduct[i].price*widget.cartProduct[i].quantity);
     }
     setState(() {
     });

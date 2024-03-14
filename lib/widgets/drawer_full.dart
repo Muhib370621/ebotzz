@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:ebotzz/screens/AllProductScreen.dart';
+import 'package:ebotzz/screens/yourOrdersScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
 
 import '../screens/vendorScreens/vendorDashBoard.dart';
@@ -91,6 +92,20 @@ class DrawerScreen extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
+
+            ),
+            title: Text(
+              'Your Orders',
+              style: TextStyle(color: Colors.black),
+            ),
+            onTap: () {
+              Get.to(() => YourOrdersScreen());
+            },
+          ),
+          ListTile(
+            leading: Icon(
               Icons.sell,
               color: Colors.black,
 
@@ -103,6 +118,7 @@ class DrawerScreen extends StatelessWidget {
               Get.to(() => VendorDashBoard());
             },
           ),
+
           ListTile(
             leading: Icon(
               Icons.logout,

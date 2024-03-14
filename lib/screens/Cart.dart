@@ -15,8 +15,9 @@ import 'createOrderScreen.dart';
 
 class CartScreen extends StatelessWidget {
   final ProductModel? products;
+  final int index;
 
-  CartScreen({super.key, this.products});
+  CartScreen({super.key, this.products, required this.index});
 
   ProductController controller = Get.put(ProductController());
 
@@ -69,7 +70,7 @@ class CartScreen extends StatelessWidget {
                   ))),
                   onPressed: () {
                     Get.to(() => CheckOutNewScreen(product: products?? ProductModel(id: 1, title: "Rolex"
-                        , description: "good", price: 22.2, img: "")));
+                        , description: "good", price: 22.2, img: ""), index: index,));
                   },
                   child: Text(
                     "CHECKOUT",
