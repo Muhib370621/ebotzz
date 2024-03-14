@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/userController.dart';
+import 'package:ebotzz/core/utils/global.dart';
 import 'package:ebotzz/models/orderModel.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/createOrderScreen.dart';
@@ -530,7 +531,7 @@ class CheckOutNewScreen extends StatelessWidget {
                               orderStatus: "Pending",
                               orderTimeStamp: DateTime.now().toString(),
                               totalPrice: product.price.toString(),
-                              buyerEmail: userController.userModel.value.email.toString(),
+                              buyerEmail: globalUserModel.email.toString(),
                               sellerEmail: productController.firebaseProductList[index].userModel.email.toString(),
                               orderedProducts: product
                             ));

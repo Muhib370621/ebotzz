@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ebotzz/controllers/userController.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
+import 'package:ebotzz/core/utils/global.dart';
 import 'package:ebotzz/models/productModel.dart';
 import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/services/firebaseServices.dart';
@@ -379,7 +380,7 @@ class _AddProductState extends State<AddProduct> {
                               productDescription: controllerDescription.text,
                               shortDescription: controllerShortDescription.text,
                               productPrice: controllerRegularPrice.text,
-                              userModel: userController.userModel.value,
+                              userModel:globalUserModel,
                             ));
                           }
                           // await CustomerServices().createProduct(

@@ -6,6 +6,7 @@ import 'package:ebotzz/controllers/product_controller.dart';
 import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/controllers/userController.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
+import 'package:ebotzz/core/utils/global.dart';
 import 'package:ebotzz/models/orderModel.dart';
 import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/models/userModel.dart';
@@ -86,14 +87,14 @@ class FirebaseServices {
           String selectedRole =
               loginController.isSeller.value ? 'Seller' : 'Buyer';
           if (data["role"] == selectedRole) {
-            userController.userModel.value = UserModel(
+            globalUserModel = UserModel(
                 email: data["email"].toString(),
                 name: data["userName"].toString(),
                 role: data["role"].toString(),
                 userID: data["userID"].toString());
 
             log("==================User Model" +
-                userController.userModel.value.name.toString());
+                globalUserModel.name.toString());
             Prompts.showSuccess("Success", "Successfully Logged In");
             Get.to(() => BottomNavBar());
             loginController.isLoading.value = false;
@@ -136,10 +137,10 @@ class FirebaseServices {
         'productDescription': product.productDescription,
         'shortDescription': product.shortDescription,
         'user': {
-          userController.userModel.value.userID,
-          userController.userModel.value.name,
-          userController.userModel.value.email,
-          userController.userModel.value.role,
+          globalUserModel.userID,
+          globalUserModel.name,
+          globalUserModel.email,
+          globalUserModel.role,
         }
       });
       log("------------------------------" + product.userModel.name.toString());
@@ -254,12 +255,12 @@ class FirebaseServices {
     final QuerySnapshot querySnapshot = await firestore
         .collection('orders')
         .where('buyerEmail',
-            isEqualTo: userController.userModel.value.email.toString())
+            isEqualTo: globalUserModel.email.toString())
         .where('orderStatus', isEqualTo: 'Pending')
         .get();
 
     // final List<FirebaseProduct> products = [];
-    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+globalUserModel.email.toString());
     log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
     querySnapshot.docs.forEach((doc) {
       final data = doc.data() as Map<String, dynamic>;
@@ -295,12 +296,12 @@ class FirebaseServices {
     final QuerySnapshot querySnapshot = await firestore
         .collection('orders')
         .where('buyerEmail',
-            isEqualTo: userController.userModel.value.email.toString())
+            isEqualTo: globalUserModel.email.toString())
         .where('orderStatus', isEqualTo: 'Accepted')
         .get();
 
     // final List<FirebaseProduct> products = [];
-    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+globalUserModel.email.toString());
     log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
     querySnapshot.docs.forEach((doc) {
       final data = doc.data() as Map<String, dynamic>;
@@ -337,12 +338,12 @@ class FirebaseServices {
     final QuerySnapshot querySnapshot = await firestore
         .collection('orders')
         .where('sellerEmail',
-        isEqualTo: userController.userModel.value.email.toString())
+        isEqualTo: globalUserModel.email.toString())
         .where('orderStatus', isEqualTo: 'Pending')
         .get();
 
     // final List<FirebaseProduct> products = [];
-    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+globalUserModel.email.toString());
     log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
     querySnapshot.docs.forEach((doc) {
       final data = doc.data() as Map<String, dynamic>;
@@ -378,12 +379,12 @@ class FirebaseServices {
     final QuerySnapshot querySnapshot = await firestore
         .collection('orders')
         .where('sellerEmail',
-        isEqualTo: userController.userModel.value.email.toString())
+        isEqualTo: globalUserModel.email.toString())
         .where('orderStatus', isEqualTo: 'Accepted')
         .get();
 
     // final List<FirebaseProduct> products = [];
-    log("-----------------getting orders projects"+userController.userModel.value.email.toString());
+    log("-----------------getting orders projects"+globalUserModel.email.toString());
     log("-----------------getting orders projects"+querySnapshot.docs.length.toString());
     querySnapshot.docs.forEach((doc) {
       final data = doc.data() as Map<String, dynamic>;
