@@ -96,6 +96,7 @@ class FirebaseServices {
             log("==================User Model" +
                 globalUserModel.name.toString());
             Prompts.showSuccess("Success", "Successfully Logged In");
+            await FirebaseServices().getProducts();
             Get.to(() => BottomNavBar());
             loginController.isLoading.value = false;
           } else {
@@ -197,7 +198,7 @@ class FirebaseServices {
       // });
       // log("------------------------------"+product.userModel.name.toString());
       Prompts.showSuccess("Success", "Order Placed Successfully");
-      Get.offAll(() => BottomNavBar());
+      Get.close(2);
       print('Product added to Firestore.');
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -240,6 +241,7 @@ class FirebaseServices {
       );
       // productController.totalData.add(map);
       productController.firebaseProductList.add(product);
+      productController.firebaseProductList.removeWhere((element) => element.userModel.userID==globalUserModel.userID);
     });
     log("product firebase" +
         productController.firebaseProductList.length.toString());

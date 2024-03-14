@@ -40,7 +40,6 @@ class CustomerServices {
     }
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      FirebaseServices().getProducts();
       productController.totalData.value=List<Map<String, dynamic>>.from(json.decode(response.body));
 
       productController.isLoading.value = false;

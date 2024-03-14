@@ -7,6 +7,7 @@ import 'package:ebotzz/widgets/customInput.dart';
 import 'package:ebotzz/widgets/vendorWidgets/vendorTabBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class VendorOrders extends StatefulWidget {
   const VendorOrders({Key? key}) : super(key: key);
@@ -100,12 +101,16 @@ class _VendorOrdersState extends State<VendorOrders>
                                   fontWeight: FontWeight.bold,
                                 ),
                               ).paddingOnly(top: 0.35.sh)
-                            : ListView.builder(
+                            : ListView.separated(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 15.r, horizontal: 15.r),
                                 shrinkWrap: true,
                                 itemCount: productcontroller
                                     .firebaseVendorPendingOrderList.length,
+                            separatorBuilder: (BuildContext context, int index) {
+                              // Add a SizedBox to act as the separator with desired height
+                              return SizedBox(height: 10.h); // Adjust height as needed
+                            },
                                 itemBuilder: (context, index) {
                                   return Container(
                                     // height: 0.1.sh,
@@ -173,7 +178,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                       .orderedProducts!
                                                       .title,
                                                   style: TextStyle(
-                                                    fontSize: 26.r,
+                                                    fontSize: 22.sp,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -182,7 +187,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                     Text(
                                                       "Order #",
                                                       style: TextStyle(
-                                                        fontSize: 20.r,
+                                                        fontSize: 18.sp,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -194,7 +199,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                           .orderID
                                                           .toString(),
                                                       style: TextStyle(
-                                                        fontSize: 18.r,
+                                                        fontSize: 16.sp,
                                                         // fontWeight: FontWeight.bold,
                                                       ),
                                                     ),
@@ -205,7 +210,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                     Text(
                                                       "Order Date ",
                                                       style: TextStyle(
-                                                        fontSize: 20.r,
+                                                        fontSize: 18.sp,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -218,7 +223,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                           .toString()
                                                           .substring(0, 10),
                                                       style: TextStyle(
-                                                        fontSize: 18.r,
+                                                        fontSize: 16.sp,
                                                         // fontWeight: FontWeight.bold,
                                                       ),
                                                     ),
@@ -228,19 +233,19 @@ class _VendorOrdersState extends State<VendorOrders>
                                             ).paddingSymmetric(
                                                 horizontal: 15.r,
                                                 vertical: 10.r),
-                                            Row(
+                                            Column(
                                               children: [
                                                 Text(
                                                   "Amount ",
                                                   style: TextStyle(
-                                                    fontSize: 20.r,
+                                                    fontSize: 18.sp,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                                 Text(
                                                   "\$${productcontroller.firebaseVendorPendingOrderList[index].totalPrice.toString()}",
                                                   style: TextStyle(
-                                                    fontSize: 18.r,
+                                                    fontSize: 16.sp,
                                                     // fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -316,12 +321,16 @@ class _VendorOrdersState extends State<VendorOrders>
                                   fontWeight: FontWeight.bold,
                                 ),
                               ).paddingOnly(top: 0.35.sh)
-                            : ListView.builder(
+                            : ListView.separated(
                                 padding: EdgeInsets.symmetric(
                                     vertical: 15.r, horizontal: 15.r),
                                 shrinkWrap: true,
                                 itemCount: productcontroller
                                     .firebaseVendorAcceptedOrderList.length,
+                            separatorBuilder: (BuildContext context, int index) {
+                              // Add a SizedBox to act as the separator with desired height
+                              return SizedBox(height: 10.h); // Adjust height as needed
+                            },
                                 itemBuilder: (context, index) {
                                   return Container(
                                     // height: 0.1.sh,
@@ -389,7 +398,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                       .orderedProducts!
                                                       .title,
                                                   style: TextStyle(
-                                                    fontSize: 26.r,
+                                                    fontSize: 22.sp,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -398,7 +407,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                     Text(
                                                       "Order #",
                                                       style: TextStyle(
-                                                        fontSize: 20.r,
+                                                        fontSize: 18.sp,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -410,7 +419,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                           .orderID
                                                           .toString(),
                                                       style: TextStyle(
-                                                        fontSize: 18.r,
+                                                        fontSize: 16.sp,
                                                         // fontWeight: FontWeight.bold,
                                                       ),
                                                     ),
@@ -421,7 +430,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                     Text(
                                                       "Order Date ",
                                                       style: TextStyle(
-                                                        fontSize: 20.r,
+                                                        fontSize: 18.sp,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -434,7 +443,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                                           .toString()
                                                           .substring(0, 10),
                                                       style: TextStyle(
-                                                        fontSize: 18.r,
+                                                        fontSize: 16.sp,
                                                         // fontWeight: FontWeight.bold,
                                                       ),
                                                     ),
@@ -444,19 +453,20 @@ class _VendorOrdersState extends State<VendorOrders>
                                             ).paddingSymmetric(
                                                 horizontal: 15.r,
                                                 vertical: 10.r),
-                                            Row(
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   "Amount ",
                                                   style: TextStyle(
-                                                    fontSize: 20.r,
+                                                    fontSize: 18.sp,
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                                 Text(
                                                   "\$${productcontroller.firebaseVendorAcceptedOrderList[index].totalPrice.toString()}",
                                                   style: TextStyle(
-                                                    fontSize: 18.r,
+                                                    fontSize: 16.sp,
                                                     // fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -478,7 +488,7 @@ class _VendorOrdersState extends State<VendorOrders>
                                               "Order Accepted",
                                               style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 20.r,
+                                                fontSize: 20.sp,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             )

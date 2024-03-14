@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/utils/imports.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class YourOrdersScreen extends StatefulWidget {
   const YourOrdersScreen({super.key});
@@ -75,11 +77,15 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                   ),
                 ).paddingOnly(top: 0.35.sh)
                     :
-                ListView.builder(
+                ListView.separated(
                     padding:
                         EdgeInsets.symmetric(vertical: 15.r, horizontal: 15.r),
                     shrinkWrap: true,
                     itemCount: controller.firebaseUserPendingOrderList.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      // Add a SizedBox to act as the separator with desired height
+                      return SizedBox(height: 10.h); // Adjust height as needed
+                    },
                     itemBuilder: (context, index) {
                       return Container(
                         // height: 0.1.sh,
@@ -135,7 +141,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                                   controller.firebaseUserPendingOrderList[index]
                                       .orderedProducts!.title,
                                   style: TextStyle(
-                                    fontSize: 26.r,
+                                    fontSize: 22.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -144,7 +150,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                                     Text(
                                       "Order #",
                                       style: TextStyle(
-                                        fontSize: 20.r,
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -154,7 +160,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                                           .orderID
                                           .toString(),
                                       style: TextStyle(
-                                        fontSize: 18.r,
+                                        fontSize: 16.sp,
                                         // fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -165,7 +171,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                                     Text(
                                       "Order Date ",
                                       style: TextStyle(
-                                        fontSize: 20.r,
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -176,7 +182,7 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                                           .toString()
                                           .substring(0, 10),
                                       style: TextStyle(
-                                        fontSize: 18.r,
+                                        fontSize: 16.sp,
                                         // fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -185,19 +191,20 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                               ],
                             ).paddingSymmetric(
                                 horizontal: 15.r, vertical: 10.r),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "Amount ",
                                   style: TextStyle(
-                                    fontSize: 20.r,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
                                   "\$${controller.firebaseUserPendingOrderList[index].totalPrice.toString()}",
                                   style: TextStyle(
-                                    fontSize: 18.r,
+                                    fontSize: 16.sp,
                                     // fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -221,12 +228,16 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                           fontWeight: FontWeight.bold,
                         ),
                       ).paddingOnly(top: 0.35.sh)
-                    : ListView.builder(
+                    : ListView.separated(
                         padding: EdgeInsets.symmetric(
                             vertical: 15.r, horizontal: 15.r),
                         shrinkWrap: true,
                         itemCount:
                             controller.firebaseUserAcceptedOrderList.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      // Add a SizedBox to act as the separator with desired height
+                      return SizedBox(height: 15.h); // Adjust height as needed
+                    },
                         itemBuilder: (context, index) {
                           return Container(
                             // height: 0.1.sh,
@@ -246,114 +257,121 @@ class _YourOrdersScreenState extends State<YourOrdersScreen>
                                 ),
                               ],
                             ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            child: Column(
                               children: [
-                                SizedBox(
-                                  height: 0.1.sh,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                        20.r,
-                                      ),
-                                    ),
-                                    child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: controller
-                                          .firebaseUserAcceptedOrderList[index]
-                                          .orderedProducts!
-                                          .img
-                                          .toString(),
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              CircularProgressIndicator(
-                                        value: downloadProgress.progress,
-                                        color: Colors.red.shade600,
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
-                                    ),
-                                  ),
-                                ).paddingOnly(bottom: 10.r, top: 10.r),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      controller
-                                          .firebaseUserAcceptedOrderList[index]
-                                          .orderedProducts!
-                                          .title,
-                                      style: TextStyle(
-                                        fontSize: 26.r,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Order #",
-                                          style: TextStyle(
-                                            fontSize: 20.r,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          controller
-                                              .firebaseUserAcceptedOrderList[
-                                                  index]
-                                              .orderID
-                                              .toString(),
-                                          style: TextStyle(
-                                            fontSize: 18.r,
-                                            // fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Order Date ",
-                                          style: TextStyle(
-                                            fontSize: 20.r,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          controller
-                                              .firebaseUserAcceptedOrderList[
-                                                  index]
-                                              .orderTimeStamp
-                                              .toString()
-                                              .substring(0, 10),
-                                          style: TextStyle(
-                                            fontSize: 18.r,
-                                            // fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ).paddingSymmetric(
-                                    horizontal: 15.r, vertical: 10.r),
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text(
-                                      "Amount ",
-                                      style: TextStyle(
-                                        fontSize: 20.r,
-                                        fontWeight: FontWeight.bold,
+                                    SizedBox(
+                                      height: 0.1.sh,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            20.r,
+                                          ),
+                                        ),
+                                        child: CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: controller
+                                              .firebaseUserAcceptedOrderList[index]
+                                              .orderedProducts!
+                                              .img
+                                              .toString(),
+                                          progressIndicatorBuilder:
+                                              (context, url, downloadProgress) =>
+                                                  CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                            color: Colors.red.shade600,
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "\$${controller.firebaseUserAcceptedOrderList[index].totalPrice.toString()}",
-                                      style: TextStyle(
-                                        fontSize: 18.r,
-                                        // fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                                    ).paddingOnly(bottom: 10.r, top: 10.r),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          controller
+                                              .firebaseUserAcceptedOrderList[index]
+                                              .orderedProducts!
+                                              .title,
+                                          style: TextStyle(
+                                            fontSize: 22.sp,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Order #",
+                                              style: TextStyle(
+                                                fontSize: 18.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              controller
+                                                  .firebaseUserAcceptedOrderList[
+                                                      index]
+                                                  .orderID
+                                                  .toString(),
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                // fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Order Date ",
+                                              style: TextStyle(
+                                                fontSize: 18.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              controller
+                                                  .firebaseUserAcceptedOrderList[
+                                                      index]
+                                                  .orderTimeStamp
+                                                  .toString()
+                                                  .substring(0, 10),
+                                              style: TextStyle(
+                                                fontSize: 16.sp,
+                                                // fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ).paddingSymmetric(
+                                        horizontal: 15.r, vertical: 10.r),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Amount ",
+                                          style: TextStyle(
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          "\$${controller.firebaseUserAcceptedOrderList[index].totalPrice.toString()}",
+                                          style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.bold,
+                                            decoration: TextDecoration.underline
+                                          ),
+
+                                        ),
+                                      ],
+                                    ).paddingOnly(bottom: 10.r, top: 10.r),
                                   ],
-                                ).paddingOnly(bottom: 10.r, top: 10.r),
+                                ),
                               ],
                             ),
                           );
