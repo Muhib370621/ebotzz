@@ -5,7 +5,6 @@ import 'package:ebotzz/controllers/login_controller.dart';
 import 'package:ebotzz/controllers/product_controller.dart';
 import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/controllers/userController.dart';
-import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/global.dart';
 import 'package:ebotzz/models/orderModel.dart';
 import 'package:ebotzz/models/product.dart';
@@ -280,7 +279,7 @@ class FirebaseServices {
             description: data['orderProducts'][0]['description'],
             price: double.parse(data['orderProducts'][0]['price']),
             img: data['orderProducts'][0]['img'],
-            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+            isFavorite: data['orderProducts'][0]['isFav'].toString().toLowerCase() as bool),
       );
       //   // productController.totalData.add(map);
       productController.firebaseUserPendingOrderList.add(product);
@@ -321,7 +320,7 @@ class FirebaseServices {
             description: data['orderProducts'][0]['description'],
             price: double.parse(data['orderProducts'][0]['price']),
             img: data['orderProducts'][0]['img'],
-            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+            isFavorite: data['orderProducts'][0]['isFav'].toString().toLowerCase() as bool),
       );
       //   // productController.totalData.add(map);
       productController.firebaseUserAcceptedOrderList.add(product);
@@ -363,7 +362,7 @@ class FirebaseServices {
             description: data['orderProducts'][0]['description'],
             price: double.parse(data['orderProducts'][0]['price']),
             img: data['orderProducts'][0]['img'],
-            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+            isFavorite: data['orderProducts'][0]['isFav'].toString().toLowerCase() as bool),
       );
       //   // productController.totalData.add(map);
       productController.firebaseVendorPendingOrderList.add(product);
@@ -404,7 +403,7 @@ class FirebaseServices {
             description: data['orderProducts'][0]['description'],
             price: double.parse(data['orderProducts'][0]['price']),
             img: data['orderProducts'][0]['img'],
-            isFavorite: bool.parse(data['orderProducts'][0]['isFav'])),
+            isFavorite: data['orderProducts'][0]['isFav'].toString().toLowerCase() as bool),
       );
       //   // productController.totalData.add(map);
       productController.firebaseVendorAcceptedOrderList.add(product);
