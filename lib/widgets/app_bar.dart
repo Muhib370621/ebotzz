@@ -2,7 +2,6 @@
 
 import 'package:ebotzz/screens/home_screen/orderStatusScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({

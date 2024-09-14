@@ -1,10 +1,7 @@
-import 'package:ebotzz/controllers/product_controller.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/bidDetail.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class BidsScreen extends StatelessWidget {
   const BidsScreen({Key? key}) : super(key: key);

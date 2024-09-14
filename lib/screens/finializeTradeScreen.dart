@@ -1,8 +1,5 @@
 import 'package:ebotzz/utils/imports.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-import '../controllers/product_controller.dart';
 import '../widgets/customActionButton.dart';
 import '../widgets/customInput.dart';
 

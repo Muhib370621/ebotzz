@@ -3,14 +3,11 @@
 import 'dart:developer';
 
 import 'package:ebotzz/controllers/login_controller.dart';
-import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/screens/authentication/screens/newSignUpScreen.dart';
-import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/imports.dart';
 

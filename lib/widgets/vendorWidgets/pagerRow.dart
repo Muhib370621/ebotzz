@@ -1,6 +1,5 @@
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/vendorWidgets/pager.dart';
-import 'package:flutter/material.dart';
 
 class PagerRow extends StatelessWidget {
   const PagerRow({

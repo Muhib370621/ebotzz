@@ -2,10 +2,8 @@ import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:flutter/material.dart';
 
 import '../../core/utils/appColors.dart';
-import 'addAuctionScreen.dart';
 
 class AuctionScreen extends StatelessWidget {
   const AuctionScreen({Key? key}) : super(key: key);

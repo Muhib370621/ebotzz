@@ -4,16 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/userController.dart';
 import 'package:ebotzz/core/utils/global.dart';
 import 'package:ebotzz/models/orderModel.dart';
-import 'package:ebotzz/models/product.dart';
-import 'package:ebotzz/screens/createOrderScreen.dart';
 import 'package:ebotzz/services/firebaseServices.dart';
-import 'package:ebotzz/utils/constants.dart';
 import 'package:ebotzz/utils/imports.dart';
-import 'package:ebotzz/widgets/customActionButton.dart';
-import 'package:ebotzz/widgets/textswidget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class CheckOutNewScreen extends StatelessWidget {
   CheckOutNewScreen({super.key, required this.product, required this.index});

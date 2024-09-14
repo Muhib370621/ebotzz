@@ -1,7 +1,5 @@
 // ignore_for_file: camel_case_types
 
-import 'package:ebotzz/core/utils/appColors.dart';
-import 'package:ebotzz/screens/splash_screen/newOnborading.dart';
 import 'package:ebotzz/utils/imports.dart';
 
 class SplashScreen extends StatelessWidget {

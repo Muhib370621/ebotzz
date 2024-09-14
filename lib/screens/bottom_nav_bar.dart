@@ -1,7 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
 import 'package:ebotzz/controllers/bottom_navigation_controller.dart';
-import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/services.dart';

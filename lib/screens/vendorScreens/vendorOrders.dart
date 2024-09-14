@@ -4,10 +4,6 @@ import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:ebotzz/widgets/vendorWidgets/vendorTabBar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class VendorOrders extends StatefulWidget {
   const VendorOrders({Key? key}) : super(key: key);

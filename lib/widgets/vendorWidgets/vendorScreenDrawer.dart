@@ -1,13 +1,5 @@
 import 'package:ebotzz/core/routes/routeNames.dart';
-import 'package:ebotzz/screens/vendorScreens/auctionScreen.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorAnalytics.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorOrders.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorProducts.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorSetting.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorWithdraw.dart';
 import 'package:ebotzz/utils/imports.dart';
-
-import '../../screens/vendorScreens/vendorDashBoard.dart';
 
 
 

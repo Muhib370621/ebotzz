@@ -1,24 +1,14 @@
 
 import 'package:ebotzz/core/routes/routeNames.dart';
-import 'package:ebotzz/screens/Cart.dart';
-import 'package:ebotzz/screens/authentication/screens/login_screen.dart';
-import 'package:ebotzz/screens/authentication/screens/signup_screen.dart';
 import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
-import 'package:ebotzz/screens/home_screen/product_detail_screen.dart';
 import 'package:ebotzz/screens/splash_screen/splash_screen.dart';
-import 'package:ebotzz/screens/trading_offers.dart';
 import 'package:ebotzz/screens/vendorScreens/auctionScreen.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorDashBoard.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorOrders.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorProducts.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorSetting.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorWithdraw.dart';
-import 'package:ebotzz/screens/wishlist.dart';
-// import 'package:ebotzz/screens/signupTabView.dart';
-// import 'package:ebotzz/screens/onBoarding/signup.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
 
-import '../../screens/bottom_nav_bar.dart';
 import '../../screens/vendorScreens/addAuctionScreen.dart';
 import '../../utils/imports.dart';
 

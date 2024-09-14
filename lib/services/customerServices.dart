@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
+
 import 'package:ebotzz/models/orderStatusModel.dart';
 import 'package:ebotzz/models/productApiModel.dart';
-import 'package:ebotzz/models/signUpModel.dart';
 import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
-import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/services/urlSchemes.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:flutter/foundation.dart';

@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, avoid_unnecessary_containers, body_might_complete_normally_nullable, deprecated_member_use
 
 import 'package:ebotzz/controllers/signUpController.dart';
-import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
-import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/imports.dart';
 

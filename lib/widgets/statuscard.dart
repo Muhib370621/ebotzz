@@ -1,11 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
-
 import 'package:ebotzz/utils/imports.dart';
-
 class StatusCard extends StatelessWidget {
   StatusCard({required this.statuscode});
   int statuscode;
-
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,6 +1,4 @@
 import 'package:ebotzz/utils/imports.dart';
-import 'package:ebotzz/widgets/textswidget.dart';
-import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
   final TextEditingController controller;

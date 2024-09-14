@@ -1,10 +1,6 @@
 import 'package:ebotzz/controllers/offerController.dart';
-import 'package:ebotzz/utils/constants.dart';
 import 'package:ebotzz/utils/prompts.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:ebotzz/widgets/custombutton.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/imports.dart';
 
@@ -185,8 +181,8 @@ class MakeAnOfferPopup extends StatelessWidget {
                         )
                         : Text(
                             "Send",
-                            style: Get.textTheme.bodyText1!
-                                .copyWith(color: whiteColor, fontSize: 16.sp),
+                            // style: Get.textTheme.bodyText1!
+                            //     .copyWith(color: whiteColor, fontSize: 16.sp),
                           ),
                   ),
                 ),

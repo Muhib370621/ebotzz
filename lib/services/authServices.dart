@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:ebotzz/models/errorModel.dart';
 import 'package:ebotzz/models/signUpModel.dart';
 import 'package:ebotzz/services/urlSchemes.dart';

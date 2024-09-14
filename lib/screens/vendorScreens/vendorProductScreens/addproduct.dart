@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -6,7 +5,6 @@ import 'package:ebotzz/controllers/userController.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/core/utils/global.dart';
 import 'package:ebotzz/models/productModel.dart';
-import 'package:ebotzz/services/customerServices.dart';
 import 'package:ebotzz/services/firebaseServices.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/utils/prompts.dart';

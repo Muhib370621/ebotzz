@@ -1,12 +1,10 @@
 import 'package:ebotzz/controllers/offerController.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/core/utils/app_extension.dart';
-import 'package:ebotzz/models/product.dart';
 import 'package:ebotzz/screens/finializeTradeScreen.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/counter_button.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
-import 'package:flutter/material.dart';
 
 import 'home_screen/HomeScreen2.dart';
 

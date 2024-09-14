@@ -1,7 +1,6 @@
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/vendorWidgets/pagerRow.dart';
-import 'package:flutter/material.dart';
 
 class ImportScreen extends StatelessWidget {
   const ImportScreen({Key? key}) : super(key: key);

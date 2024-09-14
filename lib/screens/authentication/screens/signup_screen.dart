@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable, avoid_unnecessary_containers, prefer_const_constructors, body_might_complete_normally_nullable, sized_box_for_whitespace, deprecated_member_use
 
-import 'package:ebotzz/core/routes/appRoutes.dart';
 import 'package:ebotzz/core/routes/routeNames.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -1,13 +1,7 @@
-import 'package:ebotzz/screens/onBoarding/simpleSignupView.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorBuyScreen.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorProductScreens/addproduct.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorProductScreens/export.dart';
 import 'package:ebotzz/screens/vendorScreens/vendorProductScreens/import.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorWithdraw.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorSignupView.dart';
-import 'package:ebotzz/screens/vendorScreens/vendorTradeScreen.dart';
 
-import '../../screens/vendorScreens/vendorDashBoard.dart';
 import '../../utils/imports.dart';
 
 

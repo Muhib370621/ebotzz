@@ -4,14 +4,11 @@
 
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/screens/checkoutNewScreen.dart';
-import 'package:ebotzz/screens/home_screen/HomeScreen2.dart';
 import 'package:ebotzz/utils/imports.dart';
 
-import '../widgets/bottom_bar.dart';
 import '../widgets/cart_list_view.dart';
 import '../widgets/counter_button.dart';
 import '../widgets/empty_widget.dart';
-import 'createOrderScreen.dart';
 
 class CartScreen extends StatelessWidget {
   final ProductModel? products;

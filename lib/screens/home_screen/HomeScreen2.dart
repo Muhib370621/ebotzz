@@ -1,19 +1,12 @@
-import 'dart:convert';
 import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ebotzz/controllers/signUpController.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
-import 'package:ebotzz/models/productApiModel.dart' as prodAPI;
-import 'package:ebotzz/screens/home_screen/viewMoreProductScreen.dart';
 import 'package:ebotzz/services/currentItem.dart';
-import 'package:ebotzz/services/mainScreenItems.dart';
 import 'package:ebotzz/utils/imports.dart';
 import 'package:ebotzz/widgets/customActionButton.dart';
 import 'package:ebotzz/widgets/customInput.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-
-import '../tradeScreen.dart';
 
 class HomeScreen2 extends StatelessWidget {
   const HomeScreen2({Key? key}) : super(key: key);

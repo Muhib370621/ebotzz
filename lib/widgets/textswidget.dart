@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import '../utils/imports.dart';
 
 class BoldText extends StatelessWidget {

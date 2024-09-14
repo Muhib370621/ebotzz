@@ -1,7 +1,5 @@
 import 'package:ebotzz/core/utils/appColors.dart';
 import 'package:ebotzz/utils/imports.dart';
-import 'package:ebotzz/widgets/customActionButton.dart';
-import 'package:flutter/material.dart';
 
 class VendorWithdraw extends StatelessWidget {
   const VendorWithdraw({Key? key}) : super(key: key);

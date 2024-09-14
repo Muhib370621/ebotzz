@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class CustomLineChart extends StatelessWidget {
   CustomLineChart({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return LineChart(

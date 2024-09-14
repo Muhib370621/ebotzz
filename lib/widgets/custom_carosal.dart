@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ebotzz/utils/imports.dart';
+// export 'package:carousel_slider/carousel_slider.dart';
+
 
 class CustomCarosal extends StatelessWidget {
   const CustomCarosal({

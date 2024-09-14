@@ -28,7 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: Get.textTheme.bodyText1!
+            style: Get.textTheme.bodySmall!
                 .copyWith(color: whiteColor, fontSize: 16.sp),
           ),
         ),

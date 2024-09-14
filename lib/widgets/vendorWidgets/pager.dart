@@ -1,5 +1,4 @@
 import 'package:ebotzz/utils/imports.dart';
-import 'package:flutter/material.dart';
 class Pager extends StatelessWidget {
   const Pager({Key? key, required this.fillColor}) : super(key: key);
   final Color fillColor;

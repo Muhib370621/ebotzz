@@ -5,10 +5,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ebotzz/controllers/tradingcontroller.dart';
 import 'package:ebotzz/core/utils/appColors.dart';
-import 'package:ebotzz/core/utils/app_extension.dart';
-import 'package:ebotzz/models/yourproduct.dart';
 import 'package:ebotzz/utils/prompts.dart';
-import 'package:ebotzz/widgets/customActionButton.dart';
 
 import '../../services/currentItem.dart';
 import '../../utils/imports.dart';
